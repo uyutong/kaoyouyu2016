@@ -1,0 +1,81 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/tab/me_home"> 我的</a>
+    <h1 class="title">商城</h1>
+</div>
+
+<div class="bar bar-subheader row dc-tab">
+    <div class="col col-50" ng-class="{'active':!f,'':f}" ng-click="f=false;">
+        <div class="text-center">商城</div>
+    </div>
+    <div class="col col-50" ng-class="{'active':f,'':!f}" ng-click="f=true;">
+        <div class="text-center">我的订单</div>
+    </div>
+</div>
+
+
+
+<ion-content class="has-header has-subheader">
+
+    <div ng-show="!f">
+        <div class="padding-top padding-left padding-right" ng-click="productItem($index);" ng-repeat="product in products">
+            <div class="product">
+                <img ng-src="{{product.image}}" />
+                <div class="padding">
+                    <h4>{{product.product_name}}</h4>
+                    <div class="price">
+                        <div class="left">￥{{product.price}}</div>
+                        <div class="right">已有{{product.buyNum}}人购买</div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="row row-line">
+                        <div class="col">产品介绍</div>
+                        <div class="col col-75">{{product.usage}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="f">
+        <div class="text-center" ng-show="!orders">
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>您尚未购买任何神器，去发现吧！</p>
+        </div>
+
+        <div ng-show="orders">
+            <div class="padding-top padding-horizontal" ng-repeat="order in orders">
+                <div class="cart">
+                    <div class="padding-vertical c444">
+                        <div class="row">
+                            <div class="col text-right">订单号：</div>
+                            <div class="col col-67">{{order.orderid}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">产品名称：</div>
+                            <div class="col col-67">{{order.product_name}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">购买时间：</div>
+                            <div class="col col-67">{{order.pay_time}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">产品价格：</div>
+                            <div class="col col-67">{{order.money}}元</div>
+                        </div>
+
+                        <div class="assertive dc-right-bottom" ng-show="!order.express_company">未邮寄</div>
+
+                        <div class="assertive dc-right-bottom2" ng-show="order.express_company">已邮寄</div>
+                        <button class="button button-outline button-small button-assertive dc-right-bottom3" ng-click="openOrder(order)" ng-show="order.express_company">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</ion-content>

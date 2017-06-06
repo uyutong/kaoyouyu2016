@@ -1,0 +1,28 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <h1 class="title">微信公众号</h1>
+</div>
+
+<ion-content class="has-header">
+    <div class="card padding" ng-repeat="item in wx">
+
+        <div class="text-center">
+            {{item.title}}
+        </div>
+        <div class="text-center">
+            微信公众号：{{item.number}}
+        </div>
+
+        <div class="text-center">
+            <img ng-src="{{item.img}}" width="80%" on-hold="saveImg();" />
+        </div>
+
+        <div class="text-center energized">
+            {{item.desc}}
+        </div>
+
+    </div>
+   
+    <div style="width:0px; height:0px; overflow:hidden">
+        <canvas id="myCanvas1"></canvas>
+    </div>
+</ion-content>

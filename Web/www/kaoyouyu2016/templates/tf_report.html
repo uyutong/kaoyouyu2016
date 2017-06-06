@@ -1,0 +1,135 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/tab/tf_home"> 返回</a>
+    <h1 class="title">{{name}}</h1>
+</div>
+
+<ion-content class="has-header background-white">
+    <div ng-if="id=='listening'">
+        <div class="list background-blue">
+            <div class="padding"></div>
+            <h4 class="text-center">预测分<span class="energized" style="font-size:2.2em">{{$root.TL_Report.score}}</span><span style="font-size:2.2em">/</span>总分{{$root.TL_Report.sectionFull}}</h4>
+            <div class="row text-center padding-vertical">
+                <div class="col">
+                    正确率<br />{{$root.TL_Report.accuracy*100/$root.TL_Report.item_num | number:0}}%
+                </div>
+                <div class="col">
+                    答题总量<br />{{$root.TL_Report.item_num}}
+                </div>
+                <div class="col">
+                    累计时间<br />{{$root.TL_Report.tra_time/60 | number:0}}min
+                </div>
+                <div class="col">
+                    所处区域<br /><span class="red">{{$root.TL_Report.vocname}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="padding-horizontal padding-bottom text-left"><span class="green">正确</span>/练习（道）</div>
+            <div class="cycle-green">细节理解<br /><span class="green">{{$root.TL_Report.skill2_correct}}</span>/{{$root.TL_Report.skill2_num}}</div>
+            <div class="cycle-green">篇章理解<br /><span class="green">{{$root.TL_Report.skill3_correct}}</span>/{{$root.TL_Report.skill3_num}}</div>
+            <div class="cycle-green">推理分析<br /><span class="green">{{$root.TL_Report.skill4_correct}}</span>/{{$root.TL_Report.skill4_num}}</div>
+        </div>
+    </div>
+
+    <div ng-if="id=='reading'">
+        <div class="list background-blue">
+            <div class="padding"></div>
+            <h4 class="text-center">预测分<span class="energized" style="font-size:2.2em">{{$root.YD_Report.score}}</span><span style="font-size:2.2em">/</span>总分{{$root.YD_Report.sectionFull}}</h4>
+            <div class="row text-center padding-vertical">
+                <div class="col">
+                    正确率<br />{{$root.YD_Report.accuracy*100/$root.YD_Report.item_num | number:0}}%
+                </div>
+                <div class="col">
+                    答题总量<br />{{$root.YD_Report.item_num}}
+                </div>
+                <div class="col">
+                    累计时间<br />{{$root.YD_Report.tra_time/60 | number:0}}min
+                </div>
+                <div class="col">
+                    所处区域<br /><span class="red">{{$root.YD_Report.vocname}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="padding-horizontal padding-bottom text-left"><span class="green">正确</span>/练习（道）</div>
+            <div class="cycle-green">细节理解<br /><span class="green">{{$root.YD_Report.skill1_correct}}</span>/{{$root.YD_Report.skill1_num}}</div>
+            <div class="cycle-green">篇章理解<br /><span class="green">{{$root.YD_Report.skill2_correct}}</span>/{{$root.YD_Report.skill2_num}}</div>
+            <div class="cycle-green">推理分析<br /><span class="green">{{$root.YD_Report.skill3_correct}}</span>/{{$root.YD_Report.skill3_num}}</div>
+            <div class="cycle-green">综合训练<br /><span class="green">{{$root.YD_Report.skill4_correct}}</span>/{{$root.YD_Report.skill4_num}}</div>
+        </div>
+    </div>
+
+    <div ng-if="id=='translation'">
+        <div class="list background-blue">
+            <div class="padding"></div>
+            <h4 class="text-center">预测分<span class="energized" style="font-size:2.2em">{{$root.FY_Report.score}}</span><span style="font-size:2.2em">/</span>总分{{$root.FY_Report.sectionFull}}</h4>
+            <div class="row text-center padding-vertical">
+                <div class="col">
+                    正确率<br />{{$root.FY_Report.accuracy*100/$root.FY_Report.item_num | number:0}}%
+                </div>
+                <div class="col">
+                    答题总量<br />{{$root.FY_Report.item_num}}
+                </div>
+                <div class="col">
+                    累计时间<br />{{$root.FY_Report.tra_time/60 | number:0}}min
+                </div>
+                <div class="col">
+                    所处区域<br /><span class="red">{{$root.FY_Report.vocname}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="padding-horizontal padding-bottom text-left"><span class="green">正确</span>/练习（道）</div>
+            <div class="cycle-green">词汇翻译<br /><span class="green">{{$root.FY_Report.skill1_correct}}</span>/{{$root.FY_Report.skill1_num}}</div>
+            <div class="cycle-green">句子翻译<br /><span class="green">{{$root.FY_Report.skill2_correct}}</span>/{{$root.FY_Report.skill2_num}}</div>
+            <div class="cycle-green">原文理解<br /><span class="green">{{$root.FY_Report.skill3_correct}}</span>/{{$root.FY_Report.skill3_num}}</div>
+            
+        </div>
+    </div>
+
+    <div ng-if="id=='writing'">
+        <div class="list background-blue">
+            <div class="padding"></div>
+            <h4 class="text-center">预测分<span class="energized" style="font-size:2.2em">{{$root.XZ_Report.score}}</span><span style="font-size:2.2em">/</span>总分{{$root.XZ_Report.sectionFull}}</h4>
+            <div class="row text-center padding-vertical">
+                <div class="col">
+                    正确率<br />{{$root.XZ_Report.accuracy*100/$root.XZ_Report.item_num | number:0}}%
+                </div>
+                <div class="col">
+                    答题总量<br />{{$root.XZ_Report.item_num}}
+                </div>
+                <div class="col">
+                    累计时间<br />{{$root.XZ_Report.tra_time/60 | number:0}}min
+                </div>
+                <div class="col">
+                    所处区域<br /><span class="red">{{$root.XZ_Report.vocname}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="padding-horizontal padding-bottom text-left"><span class="green">正确</span>/练习（道）</div>
+            <div class="cycle-green">语法使用<br /><span class="green">{{$root.XZ_Report.skill1_correct}}</span>/{{$root.XZ_Report.skill1_num}}</div>
+            <div class="cycle-green">表述能力<br /><span class="green">{{$root.XZ_Report.skill2_correct}}</span>/{{$root.XZ_Report.skill2_num}}</div>
+            <div class="cycle-green">阅读能力<br /><span class="green">{{$root.XZ_Report.skill3_correct}}</span>/{{$root.XZ_Report.skill3_num}}</div>
+            <div class="cycle-green">文章结构<br /><span class="green">{{$root.XZ_Report.skill4_correct}}</span>/{{$root.XZ_Report.skill4_num}}</div>
+        </div>
+    </div>
+
+    <div class="padding"></div>
+
+    <div class="text-center background-gray">
+        <div class="padding">
+            <div class="padding">
+                <button class="button button-balanced button-block button-round " ng-click="continue();">继续练习</button>
+            </div>
+
+            <div class="text-center" id="report_chart" style="height:220px;"></div>
+
+        </div>
+    </div>
+
+</ion-content>

@@ -1,0 +1,69 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/me_product"> 神器</a>
+    <h1 class="title">确认订单</h1>
+</div>
+
+
+
+<div class="content has-header" style="background-color:#EFEFF4; height:100%;">
+    <div class="padding-top padding-left padding-right">
+        <div class="cart">
+            <div class="item">
+                <img src="img/product-1.png" />
+                <b>收货地址</b>
+            </div>
+            <div class="item" ng-click="address();" ng-if="!$root.myAddress.addrid">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="img/product-2.png" />
+                <b>添加收货地址</b>
+            </div>
+
+            <div class="padding-vertical c444" style="position:relative;" ng-click="address();" ng-if="$root.myAddress.addrid">
+                <div class="row">
+                    <div class="col text-right">收货人：</div>
+                    <div class="col col-75">{{$root.myAddress.user_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">手机：</div>
+                    <div class="col col-75">{{$root.myAddress.mobile}}</div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">地址：</div>
+                    <div class="col col-75">{{$root.myAddress.province_name}}{{$root.myAddress.city_name}}{{$root.myAddress.count_region_name}}{{$root.myAddress.address}}</div>
+                </div>
+
+                <i class="icon ion-ios-arrow-right" style="position:absolute; right:10px; top:45px; font-size:28px; color:#999;"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="padding-top padding-left padding-right">
+        <div class="cart">
+            <div class="item">
+                <img src="img/product-3.png" />
+                <b>订单详情</b>
+            </div>
+            
+            <div class="padding-vertical c444">
+                <div class="row">
+                    <div class="col text-right">产品名称：</div>
+                    <div class="col col-67">{{product.product_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">运费：</div>
+                    <div class="col col-67">{{product.freight}}元</div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">支付金额：</div>
+                    <div class="col col-67">{{product.price}}元</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="padding text-center">
+        <a class="button button-calm" style=" background-color:#00C100; width:100%; border:none; min-height:initial;" ng-click="checkout();">微信支付</a>
+    </div>
+
+</div>

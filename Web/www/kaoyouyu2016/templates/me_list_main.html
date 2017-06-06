@@ -1,0 +1,39 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/tab/me_home"> {{me_list.title}}</a>
+</div>
+
+<ion-content class="has-header">
+    <div class="list">
+        <div class="item item-icon-right" ng-click="mainList(0);">
+            听力
+            <span class="item-note">
+                {{me_list.data[0].count}}
+            </span>
+            <i class="icon ion-ios-arrow-right"></i>
+        </div>
+
+        <div class="item item-icon-right" ng-click="mainList(1);">
+            阅读
+            <span class="item-note">
+                {{me_list.data[1].count}}
+            </span>
+            <i class="icon ion-ios-arrow-right"></i>
+        </div>
+
+        <div class="item item-icon-right" ng-click="mainList(2);">
+            写作
+            <span class="item-note">
+                {{me_list.data[2].count}}
+            </span>
+            <i class="icon ion-ios-arrow-right"></i>
+        </div>
+
+        <div class="item item-icon-right" ng-click="mainList(3);">
+            翻译
+            <span class="item-note">
+                {{me_list.data[3].count}}
+            </span>
+            <i class="icon ion-ios-arrow-right"></i>
+        </div>
+    </div>
+</ion-content>

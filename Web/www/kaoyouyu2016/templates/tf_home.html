@@ -1,0 +1,40 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <h1 class="title">烤鱿鱼</h1>
+</div>
+
+<ion-content class="has-header  index-bg">
+    <div class="padding text-center">
+        <img src="img/logo.png" width="100" />
+    </div>
+
+    <div class="padding text-center">
+        <img src="img/猴哥~_03.png" width="236" />
+    </div>
+
+    <div class="padding text-center">
+        <div class="padding">
+            <!--<button class="button button-yellow" ng-if="!stat.listening" ng-click="first('listening');"><img src="img/erji_3x_03.png" width="22" /> 听力智能诊断</button>-->
+            <button class="button button-white" ng-if="!stat.listening" ng-click="first('listening');"><img src="img/tingli_lv_3x_03.png" width="22" /> 听力智能练习</button>
+            <button class="button button-white" ng-if="stat.listening" ng-click="report('listening');"><img src="img/tingli_lv_3x_03.png" width="22" /> 听力智能练习</button>
+        </div>
+
+        <div class="padding">
+            <!--<button class="button button-yellow" ng-if="!stat.reading" ng-click="first('reading');"><img src="img/yuedu_3x_03.png" width="22" /> 阅读智能诊断</button>-->
+            <button class="button button-white" ng-if="!stat.reading" ng-click="first('reading');"><img src="img/yuedu_lv_3x_03.png" width="22" /> 阅读智能练习</button>
+            <button class="button button-white" ng-if="stat.reading" ng-click="report('reading');"><img src="img/yuedu_lv_3x_03.png" width="22" /> 阅读智能练习</button>
+        </div>
+
+        <div class="padding">
+            <!--<button class="button button-yellow" ng-if="!stat.translation" ng-click="first('translation');"><img src="img/fanyi_3x_03.png" width="22" /> 翻译智能诊断</button>-->
+            <button class="button button-white" ng-if="!stat.translation" ng-click="first('translation');"><img src="img/fanyi_lv_3x_03.png" width="22" /> 翻译智能练习</button>
+            <button class="button button-white" ng-if="stat.translation" ng-click="report('translation');"><img src="img/fanyi_lv_3x_03.png" width="22" /> 翻译智能练习</button>
+        </div>
+
+        <div class="padding">
+            <!--<button class="button button-yellow" ng-if="!stat.writing" ng-click="first('writing');"><img src="img/xiezuo_3x_03.png" width="22" /> 写作智能诊断</button>-->
+            <button class="button button-white" ng-if="!stat.writing" ng-click="first('writing');"><img src="img/xiezuo_lv_3x_03.png" width="22" /> 写作智能练习</button>
+            <button class="button button-white" ng-if="stat.writing" ng-click="report('writing');"><img src="img/xiezuo_lv_3x_03.png" width="22" /> 写作智能练习</button>
+        </div>
+    </div>
+
+</ion-content>

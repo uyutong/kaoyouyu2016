@@ -1,0 +1,27 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <h1 class="title">微课程</h1>
+</div>
+
+<ion-content class="has-header">
+    <div class="list" ng-if="$root.userinfo.level==1">
+        <a class="item item-thumbnail-left" ng-repeat="item in wk.cet4list" ng-click="goLink('{{item.url}}')">
+            <img src="{{item.logo}}">
+            <h2>{{item.title}}</h2>
+            <p>{{item.source}}</p>
+            <p>{{item.time}}</p>
+            <p class="play-icon"></p>
+        </a>
+    </div>
+
+    <div class="list" ng-if="$root.userinfo.level==2">
+        <a class="item item-thumbnail-left" ng-repeat="item in wk.cet6list" ng-click="goLink('{{item.url}}')">
+            <img src="{{item.logo}}">
+            <h2>{{item.title}}</h2>
+            <p>{{item.source}}</p>
+            <p>{{item.time}}</p>
+            <p class="play-icon"></p>
+        </a>
+    </div>
+
+    <video id="video" controls="controls" width="0" height="0"></video>
+</ion-content>

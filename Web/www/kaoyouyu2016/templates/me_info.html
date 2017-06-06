@@ -1,0 +1,107 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <button class="button button-clear" ng-click="cancel();">取消</button>
+    <h1 class="title">完善资料</h1>
+    <button class="button button-clear" ng-click="complete();">完成</button>
+</div>
+
+
+<ion-content class="has-header">
+    <div class="list">
+        <div class="text-center padding">
+            <img src="{{$root.userinfo.photo}}"  height="90" ng-click="changeHeadImg();" />
+            <p class="gray">头像很重要当别人崇拜你的时候</p>
+        </div>
+
+        <div class="text-center">
+            <div class="sex-box">
+                <div class="sex sex-0" ng-click="$root.userinfo.gender='Female';">
+                    <img src="img/sex-0.png" width="46" />
+                    <p class="dc-checkbox">
+                        <img src="img/checkbox-0.png" width="13" ng-if="$root.userinfo.gender!='Female'" /><img src="img/checkbox-1.png" width="13" ng-if="$root.userinfo.gender=='Female'" /> 女
+                    </p>
+                </div>
+                <div class="sex sex-1" ng-click="$root.userinfo.gender='Male';">
+                    <img src="img/sex-1.png" width="46" />
+                    <p class="dc-checkbox">
+                        <img src="img/checkbox-0.png" width="13" ng-if="$root.userinfo.gender!='Male'" /><img src="img/checkbox-1.png" width="13" ng-if="$root.userinfo.gender=='Male'" /> 男
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="我的名号" ng-model="$root.userinfo.nickName">
+            </label>
+            
+            <div style="height:10px;" class="clearfix"></div>
+
+            <div class="padding-left clearfix">
+                <span style="float:left;">考试类别：</span>
+                <div class="level-box">
+                    <div class="level level-0" ng-click="$root.userinfo.level=1;">
+                        <p class="dc-checkbox">
+                            <img src="img/checkbox-gray-0.png" width="13" ng-if="$root.userinfo.level!=1" /><img src="img/checkbox-gray-1.png" width="13" ng-if="$root.userinfo.level==1" /> CET4
+                        </p>
+                    </div>
+                    <div class="level level-1" ng-click="$root.userinfo.level=2;">
+                        <p class="dc-checkbox">
+                            <img src="img/checkbox-gray-0.png" width="13" ng-if="$root.userinfo.level!=2" /><img src="img/checkbox-gray-1.png" width="13" ng-if="$root.userinfo.level==2" /> CET6
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="height:1px;" class="clearfix"></div>
+
+            <label class="item item-input">
+                <input type="text" placeholder="手机号" ng-model="$root.userinfo.mobile" readonly="readonly">
+            </label>
+
+            <div style="height:10px;" class="clearfix"></div>
+
+            <label class="item item-input">
+                <input type="text" placeholder="所在/毕业大学" ng-model="$root.userinfo.schoolName" ng-click="openSchoolABC();" readonly="readonly" class="no-background">
+            </label>
+
+            <div style="height:10px;" class="clearfix"></div>
+
+            <div ng-show="$root.userinfo.schoolId=='103'">
+
+                <label class="item item-input item-select">
+                    <select ng-model="$root.userinfo.major">
+                        <option value="所属专业">所属专业</option>
+                        <option value="工商管理">工商管理</option>
+                        <option value="国际经济与贸易">国际经济与贸易</option>
+                        <option value="金融学">金融学</option>
+                        <option value="人力资源管理">人力资源管理</option>
+                    </select>
+                </label>
+
+                <div style="height:10px;" class="clearfix"></div>
+
+                <label class="item item-input item-select">
+                    <select ng-model="$root.userinfo.classes" id="ddlClasses">
+                        <option ng-repeat="item in M_C[$root.userinfo.major]" value="{{item}}">{{item}}</option>
+                    </select>
+                </label>
+
+                <div style="height:10px;" class="clearfix"></div>
+                
+            </div>
+
+            <label class="item item-input">
+                <input type="text" placeholder="学号" ng-model="$root.userinfo.number">
+            </label>
+
+            <div style="height:10px;" class="clearfix"></div>
+
+        </div>
+
+        
+
+        <p class="gray text-center clearfix">完善信息将帮您找到理想鱿鱼学伴！从此备考路上满载欢乐！</p>
+    </div>
+
+</ion-content>

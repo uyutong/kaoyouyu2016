@@ -1,0 +1,38 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <h1 class="title">绑定手机号</h1>
+
+    <a class="button button-clear icon-right ion-android-close" href="#/login">&nbsp;</a>
+</div>
+
+<ion-content class="has-header background-gray">
+    <div class="padding"></div>
+
+
+    <div class="row">
+        <div class="col">
+            <labe class="item item-input">
+                <input type="tel" placeholder="请输入您的手机号" ng-model="userinfo.mobile" />
+            </labe>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-56">
+            <labe class="item item-input">
+                <input type="tel" placeholder="请输入验证码" ng-model="userinfo.code" />
+            </labe>
+        </div>
+        <div class="col">
+            <div class="item  item-input">
+                <a class="button-blue" ng-click="getCode();">{{userinfo.buttonText}}</a>
+            </div>
+        </div>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div class="padding">
+        <button class="button button-balanced button-block" ng-click="login();">确定</button>
+    </div>
+
+</ion-content>

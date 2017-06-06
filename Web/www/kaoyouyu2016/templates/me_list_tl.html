@@ -1,0 +1,72 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/me_list_sub"> 返回</a>
+    <a ng-if="$root.FromFav" ng-class="{'button button-clear icon-left':true,'ion-android-star-outline':!tl.isFav,'ion-android-star':tl.isFav}" ng-click="fav(tl.isFav)">&nbsp;</a>
+    <h1 class="title">试题解析</h1>
+    <button class="button button-clear">{{id+1}}/{{$root.TL.length}}</button>
+</div>
+
+<ion-content class="has-header background-gray">
+    <div class="padding background-white" on-swipe-left="pageLeft()" on-swipe-right="pageRight()">
+        <div>
+            <div class="left">
+                Passage {{id+1}}
+            </div>
+            <div class="right text-right gray">
+                {{tl.item_name}}
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="range range-calm">
+            <input type="range" name="volume" min="0" max="{{media.duration}}" ng-model="media.current" ng-change="mainDrag();">
+            <img src="img/tl/tingli_shouye_3x_03.png" width="48" ng-click="mainPlay()" ng-show="!media.playing" />
+            <img src="img/tl/tingli_shouye_3x_19.png" width="48" ng-click="mainPause()" ng-show="media.playing" />
+        </div>
+        <p class="gray text-right" style="position:relative; right:58px; top:-15px; margin-bottom:-10px;">{{media.current | number:0}}/{{media.duration | number:0}}(s)</p>
+
+        <p>Question</p>
+
+        <div>
+            <a class="play" ng-repeat="s in tl.son" ng-click="subPlay($index)"><span ng-if="!s.playing">{{$index+1}} <i class="icon ion-android-volume-up"></i></span> <img src="img/tl/yinpin.gif" width="16" ng-if="s.playing" /></a>
+        </div>
+    </div>
+
+    <div class="padding"></div>
+
+    <div class="padding-horizontal background-white">
+        <ion-slide-box>
+            <ion-slide ng-repeat="s in tl.son" on-swipe-left="slideLeft()" on-swipe-right="slideRight()">
+                <div class="text-center padding title-index"><div class="left">考核点：{{s.test_point_name.join(', ')}}</div><div class="right"><b>{{$index+1}}</b>/{{tl.son.length}}</div></div>
+                <table style="width:100%">
+                    <tr class="t" ng-click="chooseAnswer($parent.$index,i.k);" ng-repeat="i in s.option_arr">
+                        <td width="30"><span ng-class="{'submitted':true,'correct':s.keys==i.k,'error':s.tra_answer==i.k&&s.tra_answer!=s.keys}">{{i.k}}</span></td>
+                        <td>{{i.v}}</td>
+                    </tr>
+                </table>
+
+                <div>
+                    <div class="text-center">
+                        <div class="button-bar">
+                            <a ng-class="{'button button-calm button-block button-small':true,'button-outline':s.tab}" ng-click="s.tab=false;">解析</a>
+                            <a ng-class="{'button button-calm button-block button-small':true,'button-outline':!s.tab}" ng-click="s.tab=true;">原文</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">正确答案：<span class="green">{{s.keys}}</span></div>
+                        <div class="col">您的答案：<span class="assertive">{{s.tra_answer}}</span></div>
+                    </div>
+
+                    <div ng-show="!s.tab">{{s.feedback}}</div>
+
+                    <label ng-show="s.tab" class="popWord"></label>
+                </div>
+
+            </ion-slide>
+        </ion-slide-box>
+    </div>
+
+    
+
+</ion-content>

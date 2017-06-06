@@ -1,0 +1,78 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/tab/mk_home"> 返回</a>
+    <h1 class="title">模考</h1>
+    <button class="button button-clear" ng-click="modalMK.show();">使用说明</button>
+</div>
+
+<ion-content class="has-header">
+    <div class="item text-center">{{mk.paper_name}}</div>
+
+    <div class="text-center padding">
+        <table style="width:154px; height:154px; background-image:url(img/mk/woshidayuanquan.png); background-position:center; background-size:cover; margin:0 auto;">
+            <tr><td valign="middle" style="vertical-align:bottom;">考试时间</td></tr>
+            <tr><td valign="middle" style="vertical-align:middle; padding-top:8px; position:relative;"><b style="font-size:24px;">{{ timediff | date:'HH:mm'}}</b><div style="position:absolute; right:24px; top:24px;">{{ timediff | date:'ss'}}</div></td></tr>
+            <tr><td valign="middle" style="vertical-align:top; font-size:12px;">小时 : 分钟</td></tr>
+        </table>
+    </div>
+
+    <table class="mk-time">
+        <tr>
+            <td>
+                <div class="mk-back" style="width:{{status.zw.current*100/status.zw.count>100?100:status.zw.current*100/status.zw.count}}%"></div>
+                <div class="mk-text">
+                    {{status.zw.count/60}}min<br />作文
+                </div>
+            </td>
+            <td>
+                <div class="mk-back" style="width:{{status.tl.current*100/status.tl.count>100?100:status.tl.current*100/status.tl.count}}%"></div>
+                <div class="mk-text">
+                    {{status.tl.count/60}}min<br />听力
+                </div>
+            </td>
+            <td>
+                <div class="mk-back" style="width:{{status.yd.current*100/status.yd.count>100?100:status.yd.current*100/status.yd.count}}%"></div>
+                <div class="mk-text">
+                    {{status.yd.count/60}}min<br />阅读
+                </div>
+            </td>
+            <td class="last">
+                <div class="mk-back" style="width:{{status.fy.current*100/status.fy.count>100?100:status.fy.current*100/status.fy.count}}%"></div>
+                <div class="mk-text">
+                    {{status.fy.count/60}}min<br />翻译
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="text-center padding-vertical">请考生自行阅读考生须知，准备好试卷和答题卡，开始模考</div>
+
+    <button class="button button-full button-balanced" ng-click="beginMK();" ng-disabled="status.current>0">
+        <img src="img/mk/begin.png" width="22" style="vertical-align:text-top" /> 开始模考
+    </button>
+
+    <button class="button button-full button-balanced" ng-click="endMK();">
+        <img src="img/mk/photo.png" width="22" style="vertical-align:text-top" /> 拍照交卷
+    </button>
+    <p>    <b>考生须知：</b></p>
+
+    <div ng-if="$root.userinfo.level==1" class="padding-horizontal">
+        1. 四级考生须在考试前15分钟即8:45持准考证、学生证、身份证（缺一不可），准时进入指定考场。凡入场开始15分钟后才到的考生，即9:00整，一律不得进入考场。接受考试工作人员核验，并按要求在考场签到册上签名。<br>
+        2. 学生证遗失的，由所在院系开具加盖院系公章的证明函；身份证遗失的，应按《考生守则》上的要求，考生必须出具临时身份证或户籍部门开具的带有本人照片的相关法律证明，并在相片上加盖公章（复印件无效）。<br>
+        3. 除考试用的文具、耳机式接收器外，考生禁止携带任何书籍、笔记、资料、草稿纸以及各种无线通讯工具（如手机、无线耳机、电子记事本）等物品进入考场。考试所用的耳机式接收器（含电池）、2B铅笔、橡皮、黑色签字笔等文具均由考生自备。考场内不得擅自相互借用文具。<br>
+        4. 入场后，要对号入座，将本人准考证、学生证以及有效身份证件放在课桌上，以便核验。<br>
+        5. 答题前应认真填写答题卡中的姓名、准考证号等栏目。凡答题卡中该栏目漏填涂、错填涂或字迹不清、无法辨认的，答题卡一律无效。<br>
+        6. 在考试结束前禁止提前退场。<br>
+        7. 必须严格按要求做答题目。书写部分一律用黑色签字笔作答，填涂信息点时只能用铅笔（2B）涂黑，只能在规定考生做答的位置书写或填涂信息点，不按规定要求填涂和作答的，一律无效。<br>
+        8. 遇试卷分发错误或试题字迹不清等情况应及时要求更换；涉及试题内容的疑问，不得向监考员询问。<br>
+        9. 在考场内必须严格遵守考场纪律，对于违反考场规定和不服从考试工作人员管理者，取消考试成绩并按校纪校规处理。<br>
+        10. 考试结束铃声响时，要立即停止答题，将试卷扣放在桌面上，待监考员允许后方可离开考场。离开考场时必须交卷，不准携带试卷、答题卡离开考场。<br>
+        11. 自觉服从考试工作人员的管理，不得以任何理由妨碍监考员进行正常工作。监考员有权对考场内发生的问题，按规定做出相应处理。对扰乱考场秩序，恐吓、威胁考试工作人员的将移交公安机关追究其责任。<br>
+    </div>
+
+    <div ng-if="$root.userinfo.level==2" class="padding-horizontal">
+        1. 六级考生须在考试前15分钟即下午14:45持准考证、学生证、身份证和四级（425分及以上）成绩报告单（缺一不可）准时进入指定考场。凡入场开始15分钟后才到的考生，即15:00点整，一律不得进入考场。接受考试工作人员核验，并按要求在考场签到册上签名。<br>
+        2. 学生证遗失的，由所在院系开具加盖院系公章的证明函；身份证遗失的，应按《考生守则》上的要求，考生必须出具临时身份证或户籍部门开具的带有本人照片的相关法律证明，并在相片上加盖公章（复印件无效）。<br>
+        3. 如四级成绩报告单丢失，在本校考过四级的同学，可先去学校教务处咨询。如不在本校考的四级，需登陆全国大学英语四、六级考试委员会网站：www.cet.edu.cn在主页右侧“证书/成绩单修改”栏查询补办成绩证明的流程以及联系方式<br>
+    </div>
+
+</ion-content>

@@ -1,0 +1,47 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" ng-click="back();"> 答题卡</a>
+    <button class="button button-clear" ng-click="submit();" ng-if="id!='reading' && id!='listening' ">{{sutmitted?"查看报告":"提交"}}</button>
+    <button class="button button-clear" ng-click="submit();" ng-if="id=='listening' && $root.TL.task_no != 1 ">{{sutmitted?($root.TL.CurrentIndex+1>=$root.TL.result.length?"查看报告":"下一篇"):"提交"}}</button>
+    <button class="button button-clear" ng-click="submit();" ng-if="id=='listening' && $root.TL.task_no == 1 ">{{sutmitted?"查看报告":"提交"}}</button>
+    <button class="button button-clear" ng-click="submit();" ng-if="id=='reading'">{{sutmitted?(iYD.isLast?"查看报告":"下一篇"):"提交"}}</button>
+</div>
+
+<ion-content class="has-header">
+
+    <div class="padding" ng-repeat="item in $root.TL.result[$root.TL.CurrentIndex]" ng-if="id=='listening'">
+        Passage {{$index+1}}
+
+        <div class="padding t">
+            <span ng-repeat="son in item.son" style="margin-bottom:8px;" ng-class="{'answered':son.myanswer&&!$root.TL.sutmitted,'submitted':$root.TL.sutmitted,'correct':$root.TL.sutmitted&&son.keys==son.myanswer,'error':$root.TL.sutmitted&&son.myanswer!=son.keys}" ng-click="goBack($parent.$index,$index)">{{son.myanswer?son.myanswer:($index+1)}}</span>
+        </div>
+    </div>
+
+    <div class="padding" ng-repeat="item in iYD" ng-if="id=='reading'">
+        Passage {{$index+1}}
+
+        <div class="padding t">
+            <span ng-repeat="son in item.son" style="margin-bottom:8px;" ng-class="{'answered':son.myanswer&&!sutmitted,'submitted':sutmitted,'correct':sutmitted&&son.keys==son.myanswer,'error':sutmitted&&son.myanswer!=son.keys}" ng-click="goBack($parent.$index,$index)">{{son.myanswer?son.myanswer:($index+1)}}</span>
+        </div>
+    </div>
+
+    <div class="padding" ng-repeat="item in FYGroup" ng-if="id=='translation'">
+        {{item.item_subtype_name}}
+
+        <div class="padding t">
+            <span ng-repeat="son in item.son" style="margin-bottom:8px;" ng-class="{'answered':son.myanswer&&!$root.FY.sutmitted,'submitted':$root.FY.sutmitted,'correct':$root.FY.sutmitted&&son.keys==son.myanswer,'error':$root.FY.sutmitted&&son.myanswer!=son.keys}" ng-click="goBack(son.index,0)">{{son.myanswer?son.myanswer:(son.index+1)}}</span>
+        </div>
+    </div>
+
+    <div class="padding" ng-repeat="item in XZGroup " ng-if="id=='writing'">
+        {{item.item_subtype_name}}
+
+        <div class="padding t">
+            <span ng-repeat="son in item.son" style="margin-bottom:8px;" ng-class="{'answered':son.myanswer&&!$root.XZ.sutmitted,'submitted':$root.XZ.sutmitted,'correct':$root.XZ.sutmitted&&son.keys==son.myanswer,'error':$root.XZ.sutmitted&&son.myanswer!=son.keys}" ng-click="goBack(son.index,0)">{{son.myanswer?son.myanswer:(son.index+1)}}</span>
+        </div>
+    </div>
+
+    <div class="padding text-center gray" ng-if="sutmitted">
+        点击上面的选项A, B...查看解析
+    </div>
+
+</ion-content>

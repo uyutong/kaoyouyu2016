@@ -1,0 +1,16 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/me_list_main"> {{me_list.title}}</a>
+</div>
+
+<ion-content class="has-header">
+    <div class="list">
+        <div class="item item-icon-right" ng-click="getErrHistoryFavoriteItems($index);" ng-repeat="item in me_list.currentData.son">
+            {{item.skillName||item.st}}
+            <span class="item-note">
+                {{item.c}}
+            </span>
+            <i class="icon ion-ios-arrow-right"></i>
+        </div>
+
+    </div>
+</ion-content>

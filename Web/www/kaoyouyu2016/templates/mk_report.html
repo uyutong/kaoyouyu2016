@@ -1,0 +1,86 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/tab/mk_home"> 返回</a>
+    <h1 class="title">模考报告</h1>
+</div>
+
+<ion-content class="has-header background-white">
+    <div class="text-center padding">{{mk.paper_name}}</div>
+
+        <div class="background-blue">
+            <div class="row">
+                <div class="col">{{$root.MK_Report.inserttime*1000 | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                <div class="col text-right">用时:{{$root.MK_Report.tra_time/60 | number:0}}min</div>
+            </div>
+            <h4 class="text-center">预测分<span class="energized" style="font-size:2.2em">{{$root.MK_Report.score}}</span><span style="font-size:2.2em">/</span>总分710</h4>
+            <div class="row text-center padding-vertical">
+                <div class="col">
+                    正确率<br />{{$root.MK_Report.accuracy}}%
+                </div>
+                <div class="col">
+                    全站平均分<br />{{$root.MK_Report.average}}
+                </div>
+                <div class="col">
+                    击败考生<br />{{$root.MK_Report.win}}人
+                </div>
+            </div>
+        </div>
+
+       <div class="text-center">
+           <h4 class="energized">得分分析（分）</h4>
+       </div>
+
+    <div class="background-gray">
+        <div class="row text-center">
+            <div class="col">写作<br /><span class="green">{{$root.MK_Report.writing_score}}</span>/106.5<br />{{$root.MK_Report.writing_teacher==null?"未批改":""}} <span class='green' ng-click='openSlide(1)' ng-if="$root.MK_Report.writing_teacher!=null">已批改点我</span></div>
+            <div class="col">听力<br /><span class="green">{{$root.MK_Report.listen_score}}</span>/248.5</div>
+            <div class="col">阅读<br /><span class="green">{{$root.MK_Report.reading_score}}</span>/248.5</div>
+            <div class="col">翻译<br /><span class="green">{{$root.MK_Report.translate_score}}</span>/106.5<br />{{$root.MK_Report.translate_teacher==null?"未批改":""}} <span class='green' ng-click='openSlide(2)' ng-if="$root.MK_Report.translate_teacher!=null">已批改点我</span></div>
+        </div>
+        <div class="text-center gray padding-bottom padding-horizontal">注：写作和翻译部分的得分是参照往年的平均得分，批改前是参照往年的平均得分，24小时内进行人工批改。</div>
+    </div>
+
+    <div class="text-center">
+        <h4 class="energized">用时分析（min）</h4>
+    </div>
+
+    <div class="background-gray">
+        <div class="row text-center">
+            <div class="col">写作<br /><span class="green">{{$root.MK_Report.writing_time}}</span>/30</div>
+            <div class="col">听力<br /><span class="green">{{$root.MK_Report.listen_time}}</span>/25</div>
+            <div class="col">阅读<br /><span class="green">{{$root.MK_Report.reading_time}}</span>/40</div>
+            <div class="col">翻译<br /><span class="green">{{$root.MK_Report.translate_time}}</span>/30</div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <h4 class="energized">答题卡</h4>
+    </div>
+
+    <div class="background-gray">
+
+        <div class="green padding" ng-click="openAnswer(1);">查看作文答案</div>
+
+        <div class="padding text-center gray">
+            点击下面的选项A, B, C...查看解析
+        </div>
+
+        <div ng-repeat="item in MKGroup">
+            <div class="text-left padding-left">{{item.item_name}}</div>
+
+            <div ng-repeat="main in item.son">
+                <div class="text-center">{{main.item_name}}</div>
+                <div class="padding t">
+                    <span ng-repeat="son in main.son" style="margin:8px;" ng-class="{'submitted':true,'error':son.answer_isright==0,'correct':son.answer_isright==1}" ng-click="goDetail(son.id,son.item_id,son.item_type,son.paperid)">{{son.tra_answer.replace('-','?')}}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="padding text-center gray">
+            点击上面的选项A, B, C...查看解析
+        </div>
+
+        <div class="green padding" ng-click="openAnswer(2);">查看翻译答案</div>
+    </div>
+
+</ion-content>

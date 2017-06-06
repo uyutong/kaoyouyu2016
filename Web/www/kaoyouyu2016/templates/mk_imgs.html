@@ -1,0 +1,13 @@
+﻿<div class="modal" style="height:100%;">
+    <a class="button button-clear icon-right ion-ios-close-outline btn-close" ng-click="modalImg.hide()" style="position:absolute; right:6px; top:6px; z-index:1000; color:#FFFFFF;"></a>
+
+    <ion-slide-box class="dc">
+        <ion-slide ng-repeat="img in $root.imgs.split('|')">
+            <ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" min-zoom="1" scrollbar-x="false" scrollbar-y="false">
+                <img src="{{img}}" width="100%" class="vcenter" />
+            </ion-scroll>
+        </ion-slide>
+
+    </ion-slide-box>
+
+</div>

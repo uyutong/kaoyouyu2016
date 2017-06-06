@@ -1,0 +1,42 @@
+﻿<div class="modal">
+    <div class="bar bar-header bar-calm bar-green">
+        <button class="button button-clear icon-left ion-ios-arrow-left" ng-click="modalSubmit.hide()"> 返回</button>
+        <h1 class="title">{{submit_type=="xz"?"写作":"翻译"}}</h1>
+    </div>
+
+    <ion-content class="has-header background-gray">
+        <div class="item text-center background-white">{{mk.paper_name}}</div>
+        <div class="padding">
+            <p class="grown">
+                注意：请确保所提交内容与本试卷对应，否则将不予批改。我们会在提交的24小时内进行批改，请注意查看！
+            </p>
+       
+            <table align="center" border="0" cellpadding="0" style="margin:10px auto;" ng-if="submit_type=='xz'">
+                <tr>
+                    <td align="center" valign="middle" class="mk-bg xz0_pic"  ng-click="takePhoto('xz0')"><img src="img/mk/paizhaiwancheng_3x_11.png" width="55" /></td>
+                    <td align="center" valign="middle" width="20">&nbsp;</td>
+                    <td align="center" valign="middle" class="mk-bg xz1_pic" ng-click="takePhoto('xz1')"><img src="img/mk/paizhaiwancheng_3x_11.png" width="55" /></td>
+                </tr>
+                <tr>
+                    <td align="center" valign="middle">写作第一页</td>
+                    <td align="center" valign="middle">&nbsp;</td>
+                    <td align="center" valign="middle">写作第二页（可空）</td>
+                </tr>
+            </table>
+
+            <table align="center" border="0" cellpadding="0" style="margin:10px auto;" ng-if="submit_type=='fy'">
+                <tr>
+                    <td align="center" valign="middle" class="mk-bg fy3_pic" ng-click="takePhoto('fy3')"><img src="img/mk/paizhaiwancheng_3x_11.png" width="55" /></td>
+                </tr>
+                <tr>
+                    <td align="center" valign="middle">翻译</td>
+                </tr>
+            </table>
+
+            <div class="padding" style="width:50%; margin:10px auto;">
+                  <button class="button button-balanced button-block button-round " ng-click="submit();">提交</button>
+            </div>
+        </div>
+
+    </ion-content>
+</div>

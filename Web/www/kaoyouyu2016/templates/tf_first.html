@@ -1,0 +1,25 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/tab/tf_home"> 返回</a>
+    <h1 class="title">{{name}}</h1>
+</div>
+
+<ion-content class="has-header  background-gray">
+    <div class="dc-content padding">
+        <h4 class="text-center padding">
+            <img src="img/logo-0.png" height="30" style="vertical-align:middle; margin-right:10px;" /> 温馨提示
+        </h4>
+
+        <p>本次{{$root.userinfo.level==1?'四':'六'}}级英语{{name}}基础知识和技能诊断将消耗你5-10分钟，请确保有充足的时间认真找“痛点”！练习过程中，随着联系次数的增加，预测分将越来越准确。</p>
+
+
+        <div class="padding">
+            <div class="padding">
+                <div class="padding">
+                    <button class="button button-balanced button-block button-round " ng-click="beginTest();">开始诊断</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</ion-content>

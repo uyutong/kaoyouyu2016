@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DE26F77F-D55C-42FA-83DE-8C625671C262}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web</RootNamespace>
+    <AssemblyName>Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ChuKeer.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ChuKeer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ChuKeer.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ChuKeer.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="www\kaoyouyu2016\css\ionic.min.css" />
+    <Content Include="www\kaoyouyu2016\css\jr-crop.css" />
+    <Content Include="www\kaoyouyu2016\css\style.css" />
+    <Content Include="www\kaoyouyu2016\fonts\ionicons.svg" />
+    <Content Include="www\kaoyouyu2016\img\baise-3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\baise_dianjihou_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\bangding_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\bg.png" />
+    <Content Include="www\kaoyouyu2016\img\btn-start.png" />
+    <Content Include="www\kaoyouyu2016\img\checkbox-0.png" />
+    <Content Include="www\kaoyouyu2016\img\checkbox-1.png" />
+    <Content Include="www\kaoyouyu2016\img\checkbox-gray-0.png" />
+    <Content Include="www\kaoyouyu2016\img\checkbox-gray-1.png" />
+    <Content Include="www\kaoyouyu2016\img\corrected.png" />
+    <Content Include="www\kaoyouyu2016\img\cuotiben_3x_13.png" />
+    <Content Include="www\kaoyouyu2016\img\dalvquan_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\denglu_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\denglu_3x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\dianjihou_haungse_3x_06.png" />
+    <Content Include="www\kaoyouyu2016\img\erji_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\fanyi_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\fanyi_lv_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\flower.png" />
+    <Content Include="www\kaoyouyu2016\img\hongdian_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\honglvdian_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\honglvdian_2x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\honglvdian_2x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\honglvdian_3x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\huangse_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\huiquan_3x.png" />
+    <Content Include="www\kaoyouyu2016\img\i.png" />
+    <Content Include="www\kaoyouyu2016\img\icon_more_3x.png" />
+    <Content Include="www\kaoyouyu2016\img\intro\1.png" />
+    <Content Include="www\kaoyouyu2016\img\intro\2.png" />
+    <Content Include="www\kaoyouyu2016\img\intro\3.png" />
+    <Content Include="www\kaoyouyu2016\img\jifen_icon_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\jifen_icon_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\kaobao_3x.png" />
+    <Content Include="www\kaoyouyu2016\img\kaouyu_wx.jpg" />
+    <Content Include="www\kaoyouyu2016\img\logo-0.png" />
+    <Content Include="www\kaoyouyu2016\img\logo.png" />
+    <Content Include="www\kaoyouyu2016\img\main_caiti_nal.png" />
+    <Content Include="www\kaoyouyu2016\img\main_caiti_pres.png" />
+    <Content Include="www\kaoyouyu2016\img\me-1.png" />
+    <Content Include="www\kaoyouyu2016\img\me-10.png" />
+    <Content Include="www\kaoyouyu2016\img\me-11.png" />
+    <Content Include="www\kaoyouyu2016\img\me-12.png" />
+    <Content Include="www\kaoyouyu2016\img\me-2.png" />
+    <Content Include="www\kaoyouyu2016\img\me-3.png" />
+    <Content Include="www\kaoyouyu2016\img\me-4.png" />
+    <Content Include="www\kaoyouyu2016\img\me-5.png" />
+    <Content Include="www\kaoyouyu2016\img\me-6.png" />
+    <Content Include="www\kaoyouyu2016\img\me-7.png" />
+    <Content Include="www\kaoyouyu2016\img\me-8.png" />
+    <Content Include="www\kaoyouyu2016\img\me-9.png" />
+    <Content Include="www\kaoyouyu2016\img\media-current.png" />
+    <Content Include="www\kaoyouyu2016\img\media-play.png" />
+    <Content Include="www\kaoyouyu2016\img\media-stop.png" />
+    <Content Include="www\kaoyouyu2016\img\media-voice-0.png" />
+    <Content Include="www\kaoyouyu2016\img\media-voice-1.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\AboutKaouyu.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\CallUs.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\DownLoad.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\Favorites.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\HistoricTask.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\MagicalMall.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\me_yzm_jh.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\self_scb.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\Setting.png" />
+    <Content Include="www\kaoyouyu2016\img\ME_HOME\WrongTitle.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\m1.jpg" />
+    <Content Include="www\kaoyouyu2016\img\mk\m2.jpg" />
+    <Content Include="www\kaoyouyu2016\img\mk\m3.jpg" />
+    <Content Include="www\kaoyouyu2016\img\mk\m4.jpg" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokaobaogao_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokaobaogao_3x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokaobaogao_3x_10.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokaobaogao_3x_15.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokaobaogao_3x_16.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokao_paizhao_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokao_paizhao_3x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\mokao_paizhao_3x_11.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\paizhaiwancheng_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\paizhaiwancheng_3x_06.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\paizhaiwancheng_3x_11.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\woshidayuanquan.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\小猴与大猩_06.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\begin.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\photo.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\蓝白金箍棒_03.png" />
+    <Content Include="www\kaoyouyu2016\img\mk\蓝白金箍棒_05.png" />
+    <Content Include="www\kaoyouyu2016\img\more_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\pic_bg.gif" />
+    <Content Include="www\kaoyouyu2016\img\pipeiti_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\pipeiti_2x_06.png" />
+    <Content Include="www\kaoyouyu2016\img\pipeiti_2x_09.png" />
+    <Content Include="www\kaoyouyu2016\img\pipeiti_2x_11.png" />
+    <Content Include="www\kaoyouyu2016\img\product-1.png" />
+    <Content Include="www\kaoyouyu2016\img\product-2.png" />
+    <Content Include="www\kaoyouyu2016\img\product-3.png" />
+    <Content Include="www\kaoyouyu2016\img\radio-0.png" />
+    <Content Include="www\kaoyouyu2016\img\radio-1.png" />
+    <Content Include="www\kaoyouyu2016\img\result-0.png" />
+    <Content Include="www\kaoyouyu2016\img\result-1.png" />
+    <Content Include="www\kaoyouyu2016\img\result-2.png" />
+    <Content Include="www\kaoyouyu2016\img\result-3.png" />
+    <Content Include="www\kaoyouyu2016\img\SC\houdianxing_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\SC\houdianxing_3x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\sekuai_2x_02.png" />
+    <Content Include="www\kaoyouyu2016\img\sekuai_2x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\sekuai_3x_02.png" />
+    <Content Include="www\kaoyouyu2016\img\sex-0.png" />
+    <Content Include="www\kaoyouyu2016\img\sex-1.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_2x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_2x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_2x_09.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_2x_11.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_3x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_3x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_3x_10.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_3x_13.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_dianjihou_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_dianjihou_2x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_dianjihou_2x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_dianjihou_2x_09.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_dianjihou_2x_11.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_weixuanzhong_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_weixuanzhong_3x_05.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_weixuanzhong_3x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_weixuanzhong_3x_10.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_button_weixuanzhong_3x_13.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_fanyi_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_tingli_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_xiezuo_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\shouye_yuedu_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\status-0.png" />
+    <Content Include="www\kaoyouyu2016\img\status-1.png" />
+    <Content Include="www\kaoyouyu2016\img\status-2.png" />
+    <Content Include="www\kaoyouyu2016\img\status-3.png" />
+    <Content Include="www\kaoyouyu2016\img\tab-1-0.png" />
+    <Content Include="www\kaoyouyu2016\img\tab-1-1.png" />
+    <Content Include="www\kaoyouyu2016\img\tab-2-0.png" />
+    <Content Include="www\kaoyouyu2016\img\tab-2-1.png" />
+    <Content Include="www\kaoyouyu2016\img\tab-3-0.png" />
+    <Content Include="www\kaoyouyu2016\img\tab-3-1.png" />
+    <Content Include="www\kaoyouyu2016\img\tf-intro.png" />
+    <Content Include="www\kaoyouyu2016\img\tingli_lv_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力2_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力2_2x_06.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力_2x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力_2x_11.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力_2x_15.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力_2x_19.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力_2x_23.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\2x\听力_2x_25.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_3x_07.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_3x_11.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_3x_15.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_3x_17.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_shouye_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_shouye_3x_06.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_shouye_3x_09.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_shouye_3x_14.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_shouye_3x_19.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\tingli_shouye_3x_21.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\xiaoduantui_.9_03.png" />
+    <Content Include="www\kaoyouyu2016\img\tl\yinpin.gif" />
+    <Content Include="www\kaoyouyu2016\img\tl\未标题-4.gif" />
+    <Content Include="www\kaoyouyu2016\img\tongdian.png" />
+    <Content Include="www\kaoyouyu2016\img\tuila_3x_02.png" />
+    <Content Include="www\kaoyouyu2016\img\uploaded.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w1.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w2.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w3.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w4.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w5.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w6.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w7.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w8.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\w9.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk1.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk10.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk2.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk3.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk4.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk5.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk6.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk7.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk8.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk9.png" />
+    <Content Include="www\kaoyouyu2016\img\wk\wk_play.png" />
+    <Content Include="www\kaoyouyu2016\img\xiezuo_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\xiezuo_lv_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\yuedu_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\yuedu_lv_3x_03.png" />
+    <Content Include="www\kaoyouyu2016\img\猴哥~_03.png" />
+    <Content Include="www\kaoyouyu2016\img\背景_3x_02.jpg" />
+    <Content Include="www\kaoyouyu2016\index.html" />
+    <Content Include="www\kaoyouyu2016\js\angular-filter.min.js" />
+    <Content Include="www\kaoyouyu2016\js\app.js" />
+    <Content Include="www\kaoyouyu2016\js\controller.js" />
+    <Content Include="www\kaoyouyu2016\js\highcharts.js" />
+    <Content Include="www\kaoyouyu2016\js\ion-pullup.js" />
+    <Content Include="www\kaoyouyu2016\js\ionic.bundle.min.js" />
+    <Content Include="www\kaoyouyu2016\js\jquery.min.js" />
+    <Content Include="www\kaoyouyu2016\js\jr-crop.js" />
+    <Content Include="www\kaoyouyu2016\js\md5.js" />
+    <Content Include="www\kaoyouyu2016\js\sha1.js" />
+    <Content Include="www\kaoyouyu2016\js\standalone-framework.js" />
+    <Content Include="www\kaoyouyu2016\js\UyuHuaCi.js" />
+    <Content Include="www\kaoyouyu2016\readme.txt" />
+    <Content Include="www\kaoyouyu2016\templates\bind_mobile.html" />
+    <Content Include="www\kaoyouyu2016\templates\login.html" />
+    <Content Include="www\kaoyouyu2016\templates\dy_home.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_qrcode.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_list_sub.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_list_main.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_imgs.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_answer.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_submit_xz_fy.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_submit.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_intro.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_detail.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_home.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_kb_status.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_kb_intro.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_address.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_cart.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_product.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_products.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_report.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_tl.html" />
+    <Content Include="www\kaoyouyu2016\templates\mk_yd.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_list_tl.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_list_yd.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_list_xz.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_list_fy.html" />
+    <Content Include="www\kaoyouyu2016\templates\wk_home.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_xz.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_submit.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_fy.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_yd.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_report.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_tl.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_first.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_about.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_point.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_home.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_setting.html" />
+    <Content Include="www\kaoyouyu2016\templates\tf_home.html" />
+    <Content Include="www\kaoyouyu2016\templates\me_info.html" />
+    <Content Include="www\kaoyouyu2016\templates\school.html" />
+    <Content Include="www\kaoyouyu2016\templates\school_abc.html" />
+    <Content Include="www\kaoyouyu2016\templates\tab.html" />
+    <Content Include="www\kaoyouyu2016\test.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="www\kaoyouyu2016\fonts\ionicons.eot" />
+    <Content Include="www\kaoyouyu2016\fonts\ionicons.ttf" />
+    <Content Include="www\kaoyouyu2016\fonts\ionicons.woff" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>24298</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:24298/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

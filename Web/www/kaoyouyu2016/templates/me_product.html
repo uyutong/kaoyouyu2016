@@ -1,0 +1,65 @@
+﻿<div class="bar bar-header bar-calm bar-green">
+    <a class="button button-clear icon-left ion-ios-arrow-left" href="#/me_products"> 商城</a>
+    <h1 class="title">神器详情页</h1>
+</div>
+
+
+
+<div class="content has-header" style="background-color:#EFEFF4; height:100%;">
+    <div class="padding-top padding-left padding-right" id="product-top">
+        <div class="product">
+            <img ng-src="{{product.image}}" />
+            <div class="padding">
+                <h4>{{product.product_name}}</h4>
+                <div class="price">
+                    <div class="left">￥{{product.price}}</div>
+                    <!--<div class="right pink-back" ng-click="cart();">立即购买</div>-->
+                    <button class="button button-small button-assertive right" ng-click="cart();" ng-show="!product.isBuy">立即购买</button>
+                    <button class="button button-small button-assertive right" ng-show="product.isBuy" disabled="disabled">已购买</button>
+                    <div class="gray">已有{{product.buyNum}}人购买</div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="padding-top">
+            <div class="row dc-tab">
+                <div class="col col-50" ng-class="{'active':!f,'':f}" ng-click="f=false;">
+                    <div class="text-center">产品详情</div>
+                </div>
+                <div class="col col-50" ng-class="{'active':f,'':!f}" ng-click="f=true;">
+                    <div class="text-center">联系我们</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="padding-left padding-right">
+        <div class="product" ng-show="!f">
+            <div style="overflow-y:scroll;  -webkit-overflow-scrolling: touch;" id="product-bottom" >
+                <img ng-src="{{product.desc}}" />
+            </div>
+        </div>
+        <div class="product" ng-show="f">
+            <div class="padding">
+                <p class="padding-vertical">
+                    本产品一经售出，概不退还。如有任何使用问题，请联系：
+                </p>
+                <div class="row">
+                    <div class="col text-right">热线电话：</div>
+                    <div class="col col-67">4008-197-997<br />(周一至周五9:00-18:00)</div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">微信：</div>
+                    <div class="col col-67">kaouyu</div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">客服邮箱：</div>
+                    <div class="col col-67">kaouyukf@uyutong.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

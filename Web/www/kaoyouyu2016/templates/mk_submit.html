@@ -1,0 +1,42 @@
+﻿<div class="modal">
+    <div class="bar bar-header bar-calm bar-green">
+        <button class="button button-clear icon-left ion-ios-arrow-left" ng-click="modalSubmit.hide()"> 返回</button>
+        <h1 class="title">模考</h1>
+        <button class="button button-clear" ng-click="submit();">提交</button>
+    </div>
+
+    <ion-content class="has-header background-gray">
+        <div class="item text-center background-white">{{mk.paper_name}}</div>
+        <div class="padding">
+            <p class="grown">
+                注意：<br />
+                1.黑色边框要完全进入拍摄范围<br />
+                2.拍摄时，手机与答题卡保持平行
+            </p>
+       
+            <table align="center" border="0" cellpadding="0" style="margin:0 auto;">
+                <tr>
+                    <td align="center" valign="middle" class="mk-bg xz_pic"><img src="img/mk/paizhaiwancheng_3x_11.png" width="55" ng-click="takePhoto('xz')" ng-if="!mk.stu_file_writing" /><span ng-if="mk.stu_file_writing">您的写作部分已经提交</span></td>
+                    <td align="center" valign="middle" width="20">&nbsp;</td>
+                    <td align="center" valign="middle" class="mk-bg tl_pic" ng-click="takePhoto('tl')"><img src="img/mk/paizhaiwancheng_3x_11.png" width="55" /></td>
+                </tr>
+                <tr>
+                    <td align="center" valign="middle">答题卡1（写作）</td>
+                    <td align="center" valign="middle">&nbsp;</td>
+                    <td align="center" valign="middle">答题卡1（听力）</td>
+                </tr>
+                <tr>
+                    <td align="center" valign="middle" class="mk-bg yd_pic" ng-click="takePhoto('yd')"><img src="img/mk/paizhaiwancheng_3x_11.png" width="55" /></td>
+                    <td align="center" valign="middle">&nbsp;</td>
+                    <td align="center" valign="middle" class="mk-bg fy_pic"><img src="img/mk/paizhaiwancheng_3x_11.png" width="55" ng-click="takePhoto('fy')" ng-if="!mk.stu_file_translate" /><span ng-if="mk.stu_file_translate">您的翻译部分已经提交</span></td>
+                </tr>
+                <tr>
+                    <td align="center" valign="middle">答题卡2（阅读）</td>
+                    <td align="center" valign="middle">&nbsp;</td>
+                    <td align="center" valign="middle">答题卡2（翻译）</td>
+                </tr>
+            </table>
+        </div>
+
+    </ion-content>
+</div>
