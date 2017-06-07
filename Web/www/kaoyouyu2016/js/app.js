@@ -13,8 +13,6 @@
     $rootScope.exam = "http://download.kaouyu.com/examination";
     
 
-
-
     $ionicPlatform.ready(function ()
     {
         initCordova();
