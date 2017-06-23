@@ -1,0 +1,72 @@
+﻿
+<ion-content class="background-black" onclick="">
+    <div class="row padding-top ">
+        <div class="col">&nbsp;</div>
+        <div class="col col-40">
+        </div>
+        <div class="col text-right">
+            <a href="javascript:void(0);" ng-click="colse()"><img src="img/dc/close.png" height="36" /></a>
+        </div>
+    </div>
+
+    <div class="padding" style="margin: 10px;padding-top: 0px;margin-top: 0px;">
+        <img src="img/dc/bg-setence-t.png" style="width:100%; position:relative; bottom:-10px;" />
+        <div class="bg-setence text-center">
+            <div class="headline ">
+<!--                <img src="img/dc/play.png" ng-src="img/dc/{{playButton}}" ng-click="play();" />
+-->                {{sentences[0].expl_cn}}
+<!--                <img src="img/dc/correct.png" ng-if="keys==result" />
+-->         </div>
+            <div class="setence-box">
+                <span class="sentence-fill" id="{{word}}_se_{{$index}}" ng-click="kongClick($index)" ng-repeat="voc in vocs  track by $index">&#12288;</span>
+            </div>
+        </div>
+        <img src="img/dc/bg-setence-b.png" style="width:100%;" />
+    </div>
+
+    <!--<div class="padding text-center" >
+        <button ng-class="{'button button-small button-energized':true,'button-disable':item.submitted,'button-error':item.submitted==-1}" ng-click="chooseAnswer($index)" ng-repeat="item in items" style="font-size:14px;">{{item.value}}</button>
+    </div>-->
+
+    <div class="padding text-center" >
+        <button class="word_select_bt" ng-click="chooseAnswer(option)" ng-repeat="option in options track by $index">{{option}}</button>
+    </div>
+
+     
+    <div class="padding text-center">
+    	<button class="button button-small button-outline button-energized" ng-click="clear()">
+                              清空
+        </button>
+    </div>
+    <!--<div class="row text-center padding">
+        <div class="col text-left">
+            <button class="button button-small button-outline button-energized wawa-font">
+                上一句
+            </button>
+        </div>
+
+        <div class="col text-right">
+            <button class="button button-small button-outline button-energized wawa-font">
+                下一句
+            </button>
+        </div>
+    </div>-->
+
+</ion-content>
+
+<!--<div class="tabs dc-tabs-setting">
+    <div class="row">
+        <div class="col text-left">
+            <button class="button button-small button-outline button-energized wawa-font">
+                上一句
+            </button>
+        </div>
+
+
+        <div class="col text-right">
+            <button class="button button-small button-outline button-energized wawa-font">
+                下一句
+            </button>
+        </div>
+    </div>
+</div>-->

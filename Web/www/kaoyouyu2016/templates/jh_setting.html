@@ -1,0 +1,243 @@
+﻿<ion-content class="background-black has-tabs">
+    <div class="row">
+        <div class="col"><a href="#/home"><img src="img/dc/back.png" height="36"/></a></div>
+        <div class="col">
+            <div class="padding-top text-center energized" style="font-size: 18px;">设定计划</div>
+        </div>
+        <div class="col text-right">
+            <!--<button class="button button-clear button-energized" style="font-size:20px;">
+                添加
+            </button>-->
+        </div>
+    </div>
+
+    <div ng-show="false" class="padding-horizontal padding-bottom" style="height:120px;">
+        <ion-slides options="slider.optionHorizontal" slider="slider.sliderHorizontal">
+            <!--<ion-slide-page>-->
+                <!--<div class="result-item result-item-small">-->
+                    <!--<h4 class="wawa-font no-bottom">新建计划</h4>-->
+                    <!--<div>-->
+                        <!--<p>&nbsp;</p>-->
+                        <!--<p>&nbsp;</p>-->
+                        <!--<a class="button button-icon icon ion-ios-plus-outline"></a>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</ion-slide-page>-->
+
+            <ion-slide-page>
+                <div class="result-item result-item-small active" ng-click="showT()">
+                    <h4 class="wawa-font no-bottom">考研词汇</h4>
+                    <div>
+                        <p><b>80</b>%</p>
+                        <p>进行中</p>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page>
+                <div class="result-item result-item-small" ng-click="showT()">
+                    <h4 class="wawa-font no-bottom">四级</h4>
+                    <div>
+                        <p><b>10</b>%</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page>
+                <div class="result-item result-item-small">
+                    <h4 class="wawa-font no-bottom">四级</h4>
+                    <div>
+                        <p><b>10</b>%</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page>
+                <div class="result-item result-item-small">
+                    <h4 class="wawa-font no-bottom">四级</h4>
+                    <div>
+                        <p><b>10</b>%</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page>
+                <div class="result-item result-item-small">
+                    <h4 class="wawa-font no-bottom">四级</h4>
+                    <div>
+                        <p><b>10</b>%</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page>
+                <div class="result-item result-item-small">
+                    <h4 class="wawa-font no-bottom">四级</h4>
+                    <div>
+                        <p><b>10</b>%</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page>
+            <div class="result-item result-item-small">
+            <h4 class="wawa-font no-bottom">新建计划</h4>
+            <div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <a class="button button-icon icon ion-ios-plus-outline"></a>
+            </div>
+            </div>
+            </ion-slide-page>
+
+        </ion-slides>
+
+    </div>
+
+
+        <!--<div class="padding-horizontal padding-bottom">
+                    <div class="result-item result-item-small">
+                        <h4 class="wawa-font no-bottom">新建计划</h4>
+                        <div>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <a class="button button-icon icon ion-ios-plus-outline"></a>
+                        </div>
+                    </div>
+
+                    <div class="result-item result-item-small active">
+                        <h4 class="wawa-font no-bottom">考研词汇</h4>
+                        <div>
+                            <p><b>80</b>%</p>
+                            <p>进行中</p>
+                        </div>
+                    </div>
+
+                    <div class="result-item result-item-small">
+                        <h4 class="wawa-font no-bottom">四级</h4>
+                        <div>
+                            <p><b>10</b>%</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+
+                    <div class="result-item result-item-small">
+                        <h4 class="wawa-font no-bottom">四级</h4>
+                        <div>
+                            <p><b>10</b>%</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+
+
+
+
+
+                        <div class="result-item result-item-small">
+                            <h4 class="wawa-font no-bottom">四级</h4>
+                            <div>
+                                <p><b>10</b>%</p>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+
+                        <div class="result-item result-item-small">
+                            <h4 class="wawa-font no-bottom">四级</h4>
+                            <div>
+                                <p><b>10</b>%</p>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+
+                        <div class="result-item result-item-small">
+                            <h4 class="wawa-font no-bottom">四级</h4>
+                            <div>
+                                <p><b>10</b>%</p>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+
+                        <div class="middle-line col-60">
+                    <div class="row">
+                        <div class="col">
+                            <ion-slides options="slider.optionHorizontal" slider="slider.sliderHorizontal">
+                                <ion-slide-page ng-repeat="t in tests">
+                                    <div class="result-item " ng-click="showT()">
+                                        <h4 class="wawa-font no-bottom">四级</h4>
+                                        <div>
+                                            <p><b>10</b>%</p>
+                                            <p>&nbsp;</p>
+                                        </div>
+                                    </div>
+                                </ion-slide-page>
+                            </ion-slides>
+                        </div>
+                    </div>
+                </div>
+        </div>-->
+
+        <div class="padding-horizontal padding-bottom">
+            <div class="result-item">
+                <h4 class="wawa-font no-bottom">
+                    <i class="icon ion-ios-home-outline"></i> 词库 <p class="item-note">多选</p>
+                </h4>
+                <ion-list>
+                    <ion-toggle ng-repeat="item in word_category" ng-model="item.checked" ng-checked="item.checked"
+                                ng-change="change()">{{item.label}} {{item.amount}}个 （已烤{{item.throw_away}}）
+                    </ion-toggle>
+                </ion-list>
+            </div>
+        </div>
+        
+       
+        <div class="text-center light">{{amount_date.amount}}个 计划完成日期 {{amount_date.date | date:'yyyy年MM月dd日'}}</div>
+
+        <div class="padding">
+            <div class="result-item">
+                <h4 class="wawa-font no-bottom">
+                    <font><i class="icon ion-ios-clock-outline"></i> 计划天数</font>
+                    <font>每日背单词数</font>
+                </h4>
+                <div class="middle-line">
+                    <div class="row">
+                        <div class="col">
+                            <ion-slides options="slider.optionLeft" slider="slider.sliderLeft">
+                                <ion-slide-page ng-repeat="item in day_word">{{item.day}} 天</ion-slide-page>
+                            </ion-slides>
+                        </div>
+                        <div class="col">
+                            <ion-slides options="slider.optionRight" slider="slider.sliderRight">
+                                <ion-slide-page ng-repeat="item in day_word">{{item.amount}} 个</ion-slide-page>
+                            </ion-slides>
+                        </div>
+                    </div>
+                    <div style="height:22px; background-color:#EEEEEE; position:absolute; top:63px; width:100%;"></div>
+                    <div style="width:2px; height:100%; background-color:#FFC20F; position:absolute; left:50%; top:0px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="text-center">
+            <button class="button button-full button-energized" ng-click="setPlan();">
+                完成
+            </button>
+
+            <div class="padding" ng-if="id!=='register'"><a class="dc-link" ng-click="loginMethod('register')">再次诊断</a></div>
+
+        </div>-->
+
+</ion-content>
+
+<div class="tabs dc-tabs-setting">
+    <!--<a class="tab-item">
+        删除计划
+    </a>-->
+    <a class="tab-item" ng-click="setPlan()">
+        完成
+    </a>
+</div>

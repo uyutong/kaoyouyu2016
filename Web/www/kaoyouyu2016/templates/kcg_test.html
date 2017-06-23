@@ -1,0 +1,103 @@
+﻿
+<ion-content class="background-black has-tabs">
+    <div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
+        <div class="row padding-top " >
+            <div class="col"><a href="#/home" class="dc-title">返回</a></div>
+            <div class="col col-40">
+                <div class="text-center dc-title">{{id+1}}/{{vocabularys.length}}</div>
+            </div>
+            <div class="col text-right" style="position:relative;">
+                <a style="position:absolute; right:60px; top:3px;" ng-click="collect()"><img  ng-src="img/{{voc.collect_img}}" width="32" /></a>
+                <a class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
+            </div>
+        </div>
+        <div class="text-center padding word"><span><img src="img/play.png" ng-click="play();" />{{voc.word}}</span></div>
+        <div class="text-center padding gray"> {{voc.word_ori}}</div>
+        <div class="text-center gray padding-bottom"> <span class="tag">必修词</span> 考核频率 ★★★</div>
+
+        <div class="text-center padding-vertical">
+            <div class="cut">
+                <div>
+                    <p>un</p>
+                    <p>从,不</p>
+                </div>
+            </div>
+            <div class="cut">
+                <div>
+                    <p>doube</p>
+                    <p>入,向内</p>
+                </div>
+            </div>
+            <!--<div class="cut">-->
+                <!--<div>-->
+                    <!--<p>ed</p>-->
+                    <!--<p>入,向内</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="cut">-->
+                <!--<div>-->
+                    <!--<p>ly</p>-->
+                    <!--<p>入,向内</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+        <div class="text-center padding-vertical" style="display: none">
+            <img src="img/brain.png" class="word-img" />
+        </div>
+
+        <div class="row row-headline" ng-if="voc.submited==true" >
+            <div class="col">释义</div>
+        </div>
+
+        <div class="padding white" ng-if="voc.submited==true" >
+            <div class="padding">
+                <p>{{voc.pos}} {{voc.def}} </p>
+            </div>
+        </div>
+
+
+        <!--例句-->
+        <div class="example" ng-show="explain">
+            <div class="row row-headline">
+                <div class="col">例句</div>
+            </div>
+            <div class="row row-line">
+                <div class="col-10"><img src="img/play.png" ng-click="play();" /></div>
+                <div class="col">
+                    <p>Diligence is the <span class="yellow">mother</span> of good fortune.</p>
+                    <p>勤勉是好运之母。</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row row-headline">
+            <div class="col">请选择正确的释义</div>
+        </div>
+
+        <div class="padding">
+            <div ng-class="{'dc-item dc-item-2 dc-item-round':true, 'dc-item-correct':voc.submited==true && question.option==voc.keys ,'dc-item-error':voc.submited==true && question.option==voc.myanswer && question.option!=voc.keys}" ng-click="chooseAnswer(question.option);" ng-repeat="question in voc.option_list">
+                {{question.content}}
+            </div>
+        </div>
+
+        <!--<div class="row">
+            <div class="col"><button class="button button-full button-energized" ng-click="spell()">拼写</button></div>
+            <div class="col"><button class="button button-full button-energized"  ng-click="explain=!explain">详解</button></div>
+            <div class="col"><button class="button button-full button-energized" ng-click="sentence()">炼句</button></div>
+        </div>-->
+
+
+    </div>
+
+</ion-content>
+
+<div class="tabs dc-tabs-setting">
+    <div class="row">
+        <div class="col"><button class="button button-full button-small button-energized" ng-click="spell()">拼写</button></div>
+        <div class="col"><button class="button button-full button-small button-energized" ng-click="explain=!explain">详解</button></div>
+        <div class="col"><button class="button button-full button-small button-energized" ng-click="sentence()">炼句</button></div>
+    </div>
+</div>

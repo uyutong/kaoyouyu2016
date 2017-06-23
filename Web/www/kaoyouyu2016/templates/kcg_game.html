@@ -1,0 +1,71 @@
+﻿<ion-content class="background-black ">
+	<!--<div class="row">
+        <div class="col"><a href="javascript:void(0);" ng-click="colse()"><img src="img/back.png" height="36" /></a></div>
+        <div class="col col-40">
+            <div class="padding-top text-center dc-title yellow-bg">词根游戏</div>
+        </div>
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>-->
+
+	<div>
+		<img src="img/kcgyx_top.png" style="text-align:center;width:100%;height: 110px;" />
+	</div>
+
+   
+        <img src="img/kcgyx_back.png"  ng-click="colse()" style="position:absolute;left:15px;top:15px;width:35px;height:35px;" />
+
+
+        <img src="img/kcgyx_sc.png" style="position:absolute;right:15px;top:15px;width:35px;height:35px;" />
+  
+
+
+	<div>
+		<p style="text-align:center;font-family:HuakangWawa;color:#ff9d29;margin-top:-10px;font-size:17px;">判断词根的释义并与单词相连</p>
+	</div>
+
+	<table id="game_table" height="300px" style="text-align: center;width: 100%;margin-top:30px;">
+
+		<tr ng-repeat="records in data_records" ng-init="pid=$index">
+			<td ng-repeat="record in records">
+				<button id="{{record.word}}" style="text-align: center;"
+					ng-class="{
+						'button':true,
+						'button-small':true, 
+						'c1':$index==0,
+						'c2':$index==1,
+						'game_bt_nal':record.is_right==null,
+						'game_bt_right':record.is_right==true,
+						'game_bt_err':record.is_right==false,
+                	    'selected':record.is_checked==true
+                	    }" ng-click="optionClick(record.word,pid,$index)">
+                    {{record.word}}
+                </button>
+                <div style="color: white;vertical-align: text-top;height: 16px;" ng-if="record.is_right==false && record.type==2" >sdfdsa</div>
+                
+			</td>
+		</tr>
+	</table>
+
+	<img id="table_bg" src="img/kcg_yx_bg.png" width="90%" height="350px" style="position: absolute;top:125px;left:0;margin-left: 5%;margin-right:5%;z-index:-100 ;" />
+
+	<div id="canvas_div">
+
+	</div>
+
+    <div class="text-center row" >
+    	  <button ng-if="is_commit==false" class="button button-full button-energized" style="top:20px;margin: 24px;min-height: 30px;"  ng-click="reset()">
+                            重置
+        </button>
+    	
+        <button ng-if="is_commit==false" class="button button-full button-energized" style="top:20px;margin: 24px;min-height: 30px;"  ng-click="submit()">
+                         提交
+        </button>
+
+        <button ng-if="is_commit==true" class="button button-full button-energized" style="top:20px;margin: 24px;min-height: 30px;" ng-click="">
+                         下一组
+        </button>
+    </div>
+
+</ion-content>

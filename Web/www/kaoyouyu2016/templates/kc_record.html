@@ -1,0 +1,58 @@
+﻿<div class="bar bar-header bar-dark">
+	<div class="row" style="height:44px;padding: 0px;">
+		<div class="col" style="padding: 0px;">
+			<a href="#/dc_tab/kc_home"><img src="img/dc/back.png" height="36" /></a>
+		</div>
+		<div class="col col-40" style="height:44px;text-align:center; padding: 0px;">
+			<div class="dropdown">
+				<div class="dropbtn" ng-click="showselect()">
+					<label style="font-size:16px">{{titleLable.name}}</label><img class="dropbtn_img" src="img/dc/xl_sjx.png" />
+				</div>
+				<div class="dropdown-content" id="lable_down">
+					<a href="javascript:void(0)" ng-repeat="item in titleLables" ng-click="lableSelect($index)">{{item.name}}</a>
+				</div>
+			</div>
+		</div>
+		<div class="col" style="padding: 0px;">
+			&nbsp;
+		</div>
+	</div>
+	
+</div>
+
+
+<ion-content class="has-header background-black">
+	
+	<div ng-if="titleLable.options">
+		<ul class="sub_menu">
+			<li ng-repeat="option in titleLable.options">
+				<a href="javascript:void(0)" ng-class="{'sub_menu_a_actived':option.selected==true,'sub_menu_a':option.selected==false}" ng-click="optionSelect($index)">{{option.name}}</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="row">
+		<div class="col">
+			<p style="color:white;">{{words.length}}/{{total}}条数据</p>
+		</div>
+		<div class="col text-right">
+			<button class="button button-small button-outline button-energized wawa-font" ng-click="showAll()">
+                                          解锁全部释义
+            </button>
+		</div>
+	</div>
+
+	<div class="record_row" style="color:white;border-bottom:1px #EEEEEE solid;" ng-repeat="word in words" ng-click="" >
+		<div class="row row-center">
+			<div class="col col-40" style="font-size:16px;">{{word.word}}</div>
+			<div class="col col-60" ng-if="word.show"ng-click="recordSelect($index)"><span ng-repeat="zw in word.zhs">{{zw.property}} {{zw.zh}}</span></div>
+			<img class="col col-60" ng-if="!word.show" ng-click="recordSelect($index)" class="zhezhao" src="img/dc/zhegai.png"/>
+		</div>
+	</div>
+	
+	<div class="padding text-center" ng-show="hasmore"> <button class="button button-full button-light" ng-click="loadmore()">点击加载更多</button></div>
+
+<!--<ion-infinite-scroll ng-if="hasmore"  on-infinite="loadmore()" distance="1%"> </ion-infinite-scroll>
+-->
+</ion-content>
+

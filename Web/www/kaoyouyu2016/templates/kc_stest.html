@@ -1,0 +1,63 @@
+﻿<ion-content class="background-black">
+	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
+
+		<div class="kc_main" ng-show="!is_end">
+			<div class="row padding-top ">
+				<div class="col">
+					<a href="#/dc_tab/kc_home" class="dc-title">返回</a>
+				</div>
+				<div class="col col-40">
+					<div class="text-center dc-title">{{id+1}}/{{voc_list.length}}</div>
+				</div>
+				<div class="col text-right" style="position:relative;">
+					<a style="position:absolute; right:60px; top:3px;" ng-click="fav()"><img src="img/dc/collected.png" ng-if="voc.is_favorite=='1'" width="30" /><img src="img/dc/star.png" ng-if="voc.is_favorite=='0'" width="30" /></a>
+					<a class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
+				</div>
+			</div>
+			<p>&nbsp;</p>
+			<div class="text-center padding word"><span><img src="img/dc/play.png" width="26"  ng-click="play();" />{{voc.word}}</span></div>
+			<div class="text-center padding gray">[{{voc.pron_us}}]</div>
+
+			<div class="padding">
+				<div ng-class="{'dc-item dc-item-2 dc-item-round':true, 'dc-item-correct':voc.exercise.submited==true && voc.exercise.answer==$index ,'dc-item-error':voc.exercise.submited==true && voc.exercise.myanswer==$index && voc.exercise.myanswer!=voc.exercise.answer}" ng-click="chooseAnswer($index);" ng-repeat="question in voc.exercise.items">
+					{{question}}
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="is_end">
+			<p>&nbsp;</p>
+			<div class="padding text-center">
+				<div class="banner">
+					<div class="tag">
+						<img src="img/logo.png" width="66" />
+					</div>
+					<p>&nbsp;</p>
+					<div class="headline">烤词战绩</div>
+					<div class="body">
+						<p>今日考完<b class="yellow">{{throwed_num}}</b>个单词</p>
+						<p>剩余<b class="yellow">{{word_plan.num-throwed_num}}</b>个单词</p>
+					</div>
+				</div>
+			</div>
+
+			<p>&nbsp;</p>
+
+			<div class="row text-center padding">
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="getTrueExam()">
+                                    挑战真题
+                </button>
+				</div>
+
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="continue()">
+	                         继续学习
+	            </button>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</ion-content>

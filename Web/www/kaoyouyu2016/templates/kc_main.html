@@ -1,0 +1,152 @@
+﻿<ion-content class="background-black">
+	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
+
+		<div class="kc_main" ng-show="!is_end">
+			<div class="row">
+				<div class="col">
+					<a href="#/dc_tab/kc_home" class="dc-title">返回</a>
+				</div>
+				<div class="col col-40">
+					<div class="text-center dc-title">{{id+1}}/{{vocabularys.length}}</div>
+				</div>
+				<div class="col text-right" style="position:relative;">
+					<a style="position:absolute; right:60px; top:3px;" ng-click="fav()"><img src="img/dc/collected.png" ng-if="voc.is_favorite=='1'" width="30" /><img src="img/dc/star.png" ng-if="voc.is_favorite=='0'" width="30" /></a>
+					<a class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
+				</div>
+			</div>
+
+			<div class="word"><img src="img/dc/play.png" width="26" ng-click="play();" />{{voc.word}} </div>
+
+			<div class="padding text-center" ng-show="voc.question_show" ng-if="voc.images"><img width="120" style="padding:10px;background-color: white;" src="http://cet.kaouyu.com/upload/word/img/{{voc.images}}"></div>
+
+			<div ng-show="!voc.question_show">
+
+				<div class="padding gray" style="font-size: 16px;position: relative">
+					[{{voc.pron_us}}]
+					<img src="img/dc/fayin.png" style="position: absolute;width:25px;right: 80px;" ng-click="speak()">
+
+					<img src="img/dc/xie.png" style="position: absolute;width:25px;right: 20px;" ng-click="spell()">
+				</div>
+
+				<div class="padding word" style="font-size:16px;padding-top: 2px;" ng-repeat="zh in voc.zhs">
+					{{zh.property}}{{zh.zh}}
+				</div>
+
+				<div ng-if="voc.derived">
+					<div class="row-headline">
+						<div class="col">词义推导</div>
+					</div>
+					<div class="row-line">
+						<div class="col">
+							{{voc.derived}}
+						</div>
+					</div>
+				</div>
+
+				<div ng-if="voc.note">
+					<div class="row-headline">
+						<div class="col">助记</div>
+					</div>
+					<div class="row-line">
+						<div class="col">{{voc.note}}</div>
+					</div>
+				</div>
+
+				<div ng-if="voc.example">
+					<!--例句-->
+					<div class="row-headline">
+						<div class="col">例句</div>
+					</div>
+
+					<div id="{{voc.word}}_example">
+
+					</div>
+				</div>
+			</div>
+
+			<!--        <div class="text-center gray"> <span class="tag">必修词</span> 考核频率 ★★★</div>
+-->
+			<!--<div class="text-center padding-vertical cut_main">
+            <div class="cut">
+                <div>
+                    <p>un</p>
+                    <p>从,不</p>
+                </div>
+            </div>
+            <div class="cut">
+                <div>
+                    <p>doube</p>
+                    <p>入,向内</p>
+                </div>
+            </div>
+        </div>-->
+
+			<div ng-show="voc.question_show">
+				<div class="row-headline">
+					<div class="col">请选择正确的释义</div>
+				</div>
+				<div class="padding">
+					<div ng-class="{'dc-item dc-item-2 dc-item-round':true, 'dc-item-correct':voc.exercise.submited==true && voc.exercise.answer==$index ,'dc-item-error':voc.exercise.submited==true && voc.exercise.myanswer==$index && voc.exercise.myanswer!=voc.exercise.answer}" ng-click="chooseAnswer($index);" ng-repeat="question in voc.exercise.items">
+						{{question}}
+					</div>
+				</div>
+			</div>
+			<p>&nbsp</p>
+			<p>&nbsp</p>
+			<p>&nbsp</p>
+		</div>
+		
+		<div ng-show="is_end">
+			<p>&nbsp;</p>
+			<div class="padding text-center">
+				<div class="banner">
+					<div class="tag">
+						<img src="img/logo.png" width="66" />
+					</div>
+					<p>&nbsp;</p>
+					<div class="headline">烤词战绩</div>
+					<div class="body">
+						<p>今日考完<b class="yellow">{{throwed_num}}</b>个单词</p>
+						<p>剩余<b class="yellow">{{word_plan.num-throwed_num}}</b>个单词</p>
+					</div>
+				</div>
+			</div>
+
+			<p>&nbsp;</p>
+
+			<div class="row text-center padding">
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="again();">
+                        再学一遍
+            </button>
+				</div>
+
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="simpleTest()">
+                        小测一下
+            </button>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</ion-content>
+
+<!--<div class="tabs dc-tabs-setting" >
+    <div class="row">
+        <div class="col"><button class="button button-full button-small button-energized" ng-click="spell()">拼写</button></div>
+        <div class="col"><button class="button button-full button-small button-energized" ng-click="explain=!explain">跟读</button></div>
+        <div class="col"><button class="button button-full button-small button-energized" ng-click="sentence()">炼句</button></div>
+    </div>
+</div>-->
+
+<!--<div class="dc-tabs-setting" style="position: fixed;bottom: 0px; left: 0;width: 100%;background: #000000;" ng-show="voc.question.submited==true">
+	<div class="row">
+		<div class="col"><button class="button button-full button-small button-energized" ng-click="spell()">拼写</button></div>
+		<div class="col"><button class="button button-full button-small button-energized" ng-click="">跟读</button></div>
+		<div class="col"><button class="button button-full button-small button-energized" ng-click="sentence()">炼句</button></div>
+		<div class="col"><button class="button button-full button-small button-energized" ng-click="slideLeft()"></button></div>
+	</div>
+</div>-->

@@ -1,0 +1,35 @@
+﻿
+<ion-content class="background-black">
+    <p>&nbsp;</p>
+    <div class="padding text-center">
+        <div class="banner">
+            <div class="tag">
+                <img src="img/logo.png" width="66" />
+            </div>
+            <p>&nbsp;</p>
+            <div class="headline">烤词战绩</div>
+            <div class="body">
+                <p>考完<b class="yellow">{{finish}}</b>个单词</p>
+                <p>今日剩余<b class="yellow">{{remain}}</b>个单词</p>
+                <p>&nbsp;</p>
+                <p>积分：4526 <i class="icon ion-help-circled"></i></p>
+            </div>
+        </div>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div class="row text-center padding">
+        <div class="col">
+            <button class="button button-full button-energized" ng-click="again();">
+                再学一遍
+            </button>
+        </div>
+
+        <div class="col">
+            <button class="button button-full button-energized" ng-click="simpleTest()">
+                小测一下
+            </button>
+        </div>
+    </div>
+</ion-content>

@@ -6,12 +6,18 @@
     <div class="padding text-center">
         <img src="img/logo.png" width="100" />
     </div>
-
+    
     <div class="padding text-center">
-        <img src="img/猴哥~_03.png" width="236" />
+        <img src="img/tifen_tips.png" width="236" />
     </div>
-
+    
     <div class="padding text-center">
+    	
+    	<div class="padding">
+            <!--<button class="button button-yellow" ng-if="!stat.writing" ng-click="first('writing');"><img src="img/xiezuo_3x_03.png" width="22" /> 写作智能诊断</button>-->
+            <button class="button button-white"  ng-click="word()"><img src="img/xiezuo_lv_3x_03.png" width="22" />单词智能练习</button>
+        </div>
+    	
         <div class="padding">
             <!--<button class="button button-yellow" ng-if="!stat.listening" ng-click="first('listening');"><img src="img/erji_3x_03.png" width="22" /> 听力智能诊断</button>-->
             <button class="button button-white" ng-if="!stat.listening" ng-click="first('listening');"><img src="img/tingli_lv_3x_03.png" width="22" /> 听力智能练习</button>
@@ -35,6 +41,7 @@
             <button class="button button-white" ng-if="!stat.writing" ng-click="first('writing');"><img src="img/xiezuo_lv_3x_03.png" width="22" /> 写作智能练习</button>
             <button class="button button-white" ng-if="stat.writing" ng-click="report('writing');"><img src="img/xiezuo_lv_3x_03.png" width="22" /> 写作智能练习</button>
         </div>
+         
     </div>
 
 </ion-content>

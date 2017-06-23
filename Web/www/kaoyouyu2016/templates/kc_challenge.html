@@ -1,0 +1,143 @@
+﻿<ion-content class="background-black" noscroll>
+	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
+		<div class="kc_main" ng-show="!is_end">
+			<div class="row padding-top ">
+				<div class="col">
+					<a href="#/home" class="dc-title">返回</a>
+				</div>
+				<div class="col col-40">
+					<div class="text-center dc-title">{{id+1}}/{{$root.ExerciseList.length}}</div>
+				</div>
+				<div class="col text-right" style="position:relative;">
+					<a style="position:absolute; right:60px; top:3px;" ng-click="fav()"><img src="img/dc/collected.png" ng-if="exercise.is_favorite=='1'" width="30" /><img src="img/dc/star.png" ng-if="exercise.is_favorite=='0'" width="30" /></a>
+					<a class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
+				</div>
+			</div>
+
+			<div class="padding" ng-if="exercise.item_subtype=='1'||exercise.item_subtype=='2'||exercise.item_subtype=='3'">
+				<div class="text-center">
+					<div class="padding">
+						<img src="img/dc/icon-play-false.png" width="48" ng-click="mainPlay()" ng-src="img/dc/icon-play-{{media.playing}}.png" />
+					</div>
+					<!--<div class="col">
+                    <div class="range range-energized">
+                        <input type="range" name="volume" min="0" max="{{media.duration}}" ng-model="media.current"
+                               ng-change="mainDrag();">
+                    </div>
+                </div>
+                <div class="col col-10"></div>
+                <div class="media-time">{{media.current | number:0}}/{{media.duration | number:0}} (s)</div>-->
+				</div>
+			</div>
+
+			<div ng-if="exercise.item_subtype=='2'">
+
+				<div class="padding white font16  challenge_question_edit" id="challenge_subtype2_{{exercise.keys}}"></div>
+				<div ng-show="answer_if_show">
+					<div class="padding text-center" style="font-size: 18px;color: white;">{{exercise.keys}}</div>
+					<div class="row-headline">
+						<div class="col">译文</div>
+					</div>
+					<div class="padding white">
+						{{exercise.translation}}
+					</div>
+				</div>
+
+				<div ng-show="!answer_if_show" class="padding text-center" ng-click="answer_if_show=!answer_if_show" style="font-size: 16px;color: white;">查看答案</div>
+
+			</div>
+
+			<div class="padding white font16" ng-if="exercise.item_subtype=='1' || exercise.item_subtype=='4'">{{exercise.stem_text}}</div>
+
+			<div class="padding-horizontal">
+				<div ng-class="{'dc-item dc-item-2 normal-font dc-item-round':true, 'dc-item-correct':exercise.submited==true && question.substr(0,1)==exercise.keys,'dc-item-error':exercise.submited==true && question.substr(0,1)==exercise.myanswer && exercise.myanswer!=exercise.keys}" ng-click="chooseAnswer(question);" ng-repeat="question in exercise.option_list">
+					{{question}}
+				</div>
+			</div>
+
+			<!--<div class="padding-horizontal">
+            <span class="bg-white">2015年6月阅读真题</span>
+        </div>-->
+
+			<div ng-if="exercise.submited==true">
+				<div ng-if="exercise.item_subtype=='1'||exercise.item_subtype=='4'">
+					<div class="row-headline">
+						<div class="col">译文</div>
+					</div>
+					<div class="padding white">
+						{{exercise.translation}}
+					</div>
+					<div class="row-headline">
+						<div class="col">解析</div>
+					</div>
+					<div class="padding white">
+						{{exercise.feedback}}
+					</div>
+				</div>
+			</div>
+
+			<div ng-if="exercise.item_subtype=='3'">
+				<!--涂抹题-->
+				<div class="padding white font16" ng-show="show_translation">
+					{{exercise.translation}}
+				</div>
+
+				<div class="padding">
+					<div class="erase-box" ng-repeat="st in stem_text_arr track by $index">
+						<span>{{st}}</span>
+						<div ng-click="earse($event)"></div>
+					</div>
+
+				</div>
+
+				<!--<div class="padding white blue-line">
+		           
+           </div>-->
+				<div class="row">
+					<div class="col text-center">
+						<button class="button button-clear  button-energized" ng-click="show_translation=!show_translation">显示译文</button>
+					</div>
+					<div class="col text-center">
+						<button class="button button-clear  button-energized" ng-click="clear();">显示原文</button>
+					</div>
+				</div>
+				<!--涂抹题结束-->
+			</div>
+		</div>
+		<div ng-show="is_end">
+			<p>&nbsp;</p>
+			<div class="padding text-center">
+				<div class="banner">
+					<div class="tag">
+						<img src="img/logo.png" width="66" />
+					</div>
+					<p>&nbsp;</p>
+					<div class="headline">烤词战绩</div>
+					<div class="body">
+						<p>今日考完<b class="yellow">{{throwed_num}}</b>个单词</p>
+						<p>剩余<b class="yellow">{{word_plan.num-throwed_num}}</b>个单词</p>
+					</div>
+				</div>
+			</div>
+
+			<p>&nbsp;</p>
+
+			<div class="row text-center padding">
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="getTrueExam()">
+                                    挑战真题
+                </button>
+				</div>
+
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="continue()">
+	                         继续学习
+	            </button>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</ion-content>
