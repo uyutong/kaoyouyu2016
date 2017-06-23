@@ -1,5 +1,5 @@
 ﻿<ion-content class="background-black" noscroll>
-	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
+	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()" style="min-height: 90%;">
 		<div class="kc_main" ng-show="!is_end">
 			<div class="row padding-top ">
 				<div class="col">
@@ -17,7 +17,7 @@
 			<div class="padding" ng-if="exercise.item_subtype=='1'||exercise.item_subtype=='2'||exercise.item_subtype=='3'">
 				<div class="text-center">
 					<div class="padding">
-						<img src="img/dc/icon-play-false.png" width="48" ng-click="mainPlay()" ng-src="img/dc/icon-play-{{media.playing}}.png" />
+						<img src="img/dc/icon-play-false.png" width="48" id="kc_challenge_word" ng-click="play()" ng-src="img/dc/icon-play-{{media.playing}}.png" />
 					</div>
 					<!--<div class="col">
                     <div class="range range-energized">
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 
-				<div ng-show="!answer_if_show" class="padding text-center" ng-click="answer_if_show=!answer_if_show" style="font-size: 16px;color: white;">查看答案</div>
+				<div ng-show="if_subtype2_finished" class="padding text-center" ng-click="answer_if_show=!answer_if_show" style="font-size: 16px;color: white;">查看答案</div>
 
 			</div>
 
@@ -61,18 +61,23 @@
 
 			<div ng-if="exercise.submited==true">
 				<div ng-if="exercise.item_subtype=='1'||exercise.item_subtype=='4'">
-					<div class="row-headline">
-						<div class="col">译文</div>
+					<div ng-if="exercise.translation">
+						<div class="row-headline">
+							<div class="col">译文</div>
+						</div>
+						<div class="padding white">
+							{{exercise.translation}}
+						</div>
 					</div>
-					<div class="padding white">
-						{{exercise.translation}}
-					</div>
-					<div class="row-headline">
+					<div ng-if="exercise.feedback">
+						<div class="row-headline">
 						<div class="col">解析</div>
+						</div>
+						<div class="padding white">
+							{{exercise.feedback}}
+						</div>
 					</div>
-					<div class="padding white">
-						{{exercise.feedback}}
-					</div>
+					
 				</div>
 			</div>
 
@@ -123,15 +128,10 @@
 			<p>&nbsp;</p>
 
 			<div class="row text-center padding">
-				<div class="col">
-					<button class="button button-full button-energized" ng-click="getTrueExam()">
-                                    挑战真题
-                </button>
-				</div>
 
 				<div class="col">
 					<button class="button button-full button-energized" ng-click="continue()">
-	                         继续学习
+	                                        继续学习
 	            </button>
 				</div>
 			</div>

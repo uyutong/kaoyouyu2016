@@ -15,8 +15,8 @@
 				</div>
 			</div>
 			<p>&nbsp;</p>
-			<div class="text-center padding word"><span><img src="img/dc/play.png" width="26"  ng-click="play();" />{{voc.word}}</span></div>
-			<div class="text-center padding gray">[{{voc.pron_us}}]</div>
+			<div class="text-center padding word" style="padding-right:36px;"><span><img src="img/dc/play.png" width="26" id="kc_stest_word" ng-click="play();" />{{voc.word}}</span></div>
+			<div class="text-center padding gray" style="font-size: 16px;">[{{voc.pron_us}}]</div>
 
 			<div class="padding">
 				<div ng-class="{'dc-item dc-item-2 dc-item-round':true, 'dc-item-correct':voc.exercise.submited==true && voc.exercise.answer==$index ,'dc-item-error':voc.exercise.submited==true && voc.exercise.myanswer==$index && voc.exercise.myanswer!=voc.exercise.answer}" ng-click="chooseAnswer($index);" ng-repeat="question in voc.exercise.items">

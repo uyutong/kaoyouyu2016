@@ -2111,7 +2111,7 @@
 		} else {
 			$scope.name = "写作";
 		}
-
+		
 		$scope.beginTest = function() {
 			if(id == "listening") {
 				$rootScope.tl();
@@ -5988,7 +5988,7 @@
 		$scope.speak = function() {
 			$state.go("kc_speak", {
 				"word": $scope.voc.word,
-				"audio": "1.mp3"
+				"audio": $scope.voc.audio_us,
 			});
 		}
 
@@ -6027,22 +6027,24 @@
 		$scope.simpleTest = function() {
 
 			$rootScope.voc_list = angular.copy($rootScope.vocabularys);
+            angular.forEach($rootScope.voc_list,function(data){
+            	data.exercise.submited = false;
+            	data.exercise.myanswer = undefined;
+            })
 
 			$state.go("kc_stest", {
 				id: 0
 			});
 		}
-
+		
 		$scope.again = function() {
 			$state.go("kc_main", {
 				id: 0
 			});
 		}
-
+		
 		$scope.play = function() {
-			var v = document.getElementById("audio");
-			v.src = "audio/error.mp3";
-			v.play();
+			$rootScope.playWord($rootScope.wordAudioUrl+$scope.voc.audio_us,$("#kc_main_word"))
 		}
 
 		//#region 加入学习记录
@@ -6113,7 +6115,7 @@
 			}
 		}
 		//#endregion
-
+		
 		//#region 扔烤箱
 		$scope.throw = function() {
 			if($rootScope.vocabularys.length < 2) {
@@ -6175,7 +6177,7 @@
 				$scope.has_write = $scope.has_write - 1;
 			}
 		}
-
+		
 		$scope.completed = false;
 		$scope.right = true;
 		$scope.has_write = 0;
@@ -6210,7 +6212,6 @@
 					}
 				}
 			}
-
 		}
 
 		$scope.word_show = false;
@@ -6457,6 +6458,7 @@
 		$scope.score = 0;
 		$scope.seconds = 0;
 		$scope.word = $stateParams.word;
+		$scope.audio_us = $stateParams.audio;
 		$scope.time_long = 3;
 
 		//		$scope.per_progress = 23;
@@ -6616,6 +6618,11 @@
 		$scope.playReadWord0 = function(audio) {
 			$rootScope.playWord(audio, $("#read_paly_0"));
 		}
+		
+		$scope.play = function() {
+			$rootScope.playWord($rootScope.wordAudioUrl+$scope.audio_us,$("#kc_speak_word"))
+		}
+		
 
 	})
 
@@ -6697,6 +6704,8 @@
 				$state.go("kc_stest", {
 					id: $scope.id + 1
 				});
+			}else{
+				$scope.is_end = true;
 			}
 		}
 		$scope.slideRight = function() {
@@ -6790,6 +6799,12 @@
 			})
 		}
 		//#endregion
+		
+		$scope.play = function() {
+			$rootScope.playWord($rootScope.wordAudioUrl+$scope.voc.audio_us,$("#kc_stest_word"))
+		}
+		
+		
 
 	})
 	//#endregion
@@ -6814,6 +6829,8 @@
 		}
 
 		if($scope.exercise.item_subtype == '2') {
+			$scope.if_subtype2_finished = false;
+			
 			$scope.exercise.stem_text = $scope.exercise.stem_text.replace("___", "<input class='text-center' name='et_tv' id='input_" + $scope.exercise.keys + "' maxlength='" + $scope.exercise.keys.length + "'  style='width:60px'/>");
 			alert($scope.exercise.stem_text);
 			setTimeout(function() {
@@ -6825,7 +6842,9 @@
 						$(this).css({
 							color: "black"
 						});
-						//				    		$(this).width(textWidth($(this).val()));
+						$scope.if_subtype2_finished = false;
+						$scope.$apply();
+						//$(this).width(textWidth($(this).val()));
 					} else if($(this).val().length == $scope.exercise.keys.length) {
 						if($(this).val() == $scope.exercise.keys) {
 							$(this).css({
@@ -6836,13 +6855,15 @@
 								color: "red"
 							});
 						}
+						$scope.if_subtype2_finished = true;
+						$scope.$apply();
 					}
 				});
+				
 			}, 300)
 		}
 
 		$scope.exercise.collect_img = "star.png";
-
 		//#region 音频
 		//#region 初始化音频
 		$scope.media = {
@@ -6851,55 +6872,59 @@
 			playing: false
 		};
 
-		var v = document.getElementById("audio");
-		v.pause();
-		v.src = "audio/1.mp3";
+//		var v = document.getElementById("audio");
+//		v.pause();
+//		v.src = "audio/1.mp3";
+//
+//		//#endregion
+//		$scope.mainPlay = function() {
+//			if(!$scope.media.playing) //播放
+//			{
+//				$scope.media.playing = true;
+//
+//				v.addEventListener("timeupdate", function() {
+//					$scope.media.duration = v.duration;
+//					$scope.media.current = v.currentTime;
+//					$scope.$apply();
+//				});
+//
+//				v.addEventListener("ended", function() {
+//					$scope.media.playing = false;
+//				});
+//
+//				v.play();
+//			} else //暂停
+//			{
+//				$scope.media.playing = false;
+//				v.pause();
+//			}
+//		}
+//
+//		$scope.mainDrag = function() {
+//			if($scope.media.duration == 0) {
+//				return;
+//			} else {
+//				v.pause();
+//				v.currentTime = $scope.media.current;
+//				$scope.media.playing = true;
+//				v.play();
+//			}
+//		}
+//		//#endregion
 
-		//#endregion
-		$scope.mainPlay = function() {
-			if(!$scope.media.playing) //播放
-			{
-				$scope.media.playing = true;
-
-				v.addEventListener("timeupdate", function() {
-					$scope.media.duration = v.duration;
-					$scope.media.current = v.currentTime;
-					$scope.$apply();
-				});
-
-				v.addEventListener("ended", function() {
-					$scope.media.playing = false;
-				});
-
-				v.play();
-			} else //暂停
-			{
-				$scope.media.playing = false;
-				v.pause();
-			}
+        $scope.continue = function() {
+			$state.go("kc_main", {
+				id: 0
+			})
 		}
-
-		$scope.mainDrag = function() {
-			if($scope.media.duration == 0) {
-				return;
-			} else {
-				v.pause();
-				v.currentTime = $scope.media.current;
-				$scope.media.playing = true;
-				v.play();
-			}
-		}
-		//#endregion
-
+        
 		//#region 涂抹题
 		$scope.earse = function($event) {
 			$($event.currentTarget).addClass("slideout");
 		};
-
 		$scope.clear = function() {
 			$(".erase-box div").addClass("slideout");
 		}
-
 		$scope.is_end = false;
 
 		//#endregion
@@ -6979,6 +7004,12 @@
 			})
 		}
 		//#endregion
+		
+		$scope.play = function() {
+			$rootScope.playWord($rootScope.exerciseAudioUrl+$scope.exercise.item_id+".mp3",$("#kc_challenge_word"))
+		}
+		
+		
 		
 	})
 

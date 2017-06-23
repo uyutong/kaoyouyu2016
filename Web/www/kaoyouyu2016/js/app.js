@@ -8,6 +8,9 @@
 		};
 		$rootScope.rootUrl = "http://api.kaouyu.com";
 		$rootScope.wordRootUrl = "http://cet.kaouyu.com/index.php/api/";
+		$rootScope.wordAudioUrl ="http://cet.kaouyu.com/upload/word/mp3/";
+		$rootScope.exerciseAudioUrl ="http://source.efenji.com/item/audio/";
+	
 		//$rootScope.rootUrl = "http://222.128.6.94:8090";
 		$rootScope.sMp3 = "http://source.efenji.com/source/audio/";
 		$rootScope.iMp3 = "http://source.efenji.com/item/audio/";
@@ -1425,6 +1428,18 @@ function InitIonic($rootScope, $ionicModal, $ionicPopup, $ionicLoading, $http, $
 		IonicClosePopupService.register(alertPopup);
 	};
 
+	$rootScope.playWord = function(audio_url, obj) {
+		var v = document.getElementById("audio");
+		v.src = audio_url;
+		v.loop = false;
+		v.addEventListener('ended', function() {
+			obj.attr("src", "img/dc/icon-play-false.png");
+		}, false);
+		v.addEventListener('error', function(e) {}, false)
+		v.play();
+		obj.attr("src", "img/dc/playing.gif");
+	}
+
 };
 //#endregion
 
@@ -1598,5 +1613,4 @@ function textWidth(text) {
 	sensor.remove();
 	return width;
 };
-
 //#endregion
