@@ -1,0 +1,31 @@
+﻿<div class="bar bar-header bar-dark" style="padding: 0px;">
+	<div class="row" style="height:44px;background-image: url(img/dc/title_bg.png);">
+		<div class="col col-30 col-center">
+			<a href="#/dc_tab/kc_home"><img src="img/dc/back.png" height="36" /></a>
+		</div>
+		<div class="col col-40 col-center" style="text-align:center;font-size:18px;">
+	    	必备短语
+		</div>
+		<div class="col col-30 col-center text-right" style="font-size: 14px;">
+			{{phrases.length}}/{{total}}
+		</div>
+	</div>	
+
+</div>
+
+
+<ion-content class="has-header background-black">
+	
+	<div class="record_row" style="color:white;border-bottom:1px #EEEEEE solid;" ng-repeat="phrase in phrases"  >
+		<div class="padding yellow" style="font-size: 18px;">{{phrase.phrase}}</div>
+		<div class="text-center"><img ng-if="!phrase.show" height="30px" ng-click="phrase_show($index)" class="zhezhao" src="img/dc/zhegai.png"/></div>
+		<div class="yellow" ng-if="phrase.show"style="font-size: 16px;padding-left: 10px;padding-right: 10px;">{{phrase.def_zh}}</div>
+		<div class="row row-center" ng-if="phrase.show" ng-repeat="ex in phrase.example | limitTo:1" ng-if="index<1" ng-click="sentence(phrase,ex.en,ex.zh)" >
+			<div class="col col-90 col-center" style="font-size:16px;">{{ex.en}}<br>{{ex.zh}}</div>
+			<div class="col col-10 col-center text-center"><img width="25px" src="img/dc/lian.png"></div>
+		</div>
+	</div>
+	
+	<div class="padding text-center" ng-show="hasmore"> <button class="button button-full button-light" ng-click="loadmore()">点击加载更多</button></div>
+</ion-content>
+

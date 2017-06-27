@@ -1278,11 +1278,11 @@
 			})
 
 			//炼句
-			.state('kc_setence', {
+			.state('kc_sentence', {
 				cache: false,
-				url: '/kc_setence/:word/:sentences',
-				templateUrl: 'templates/kc_setence.html',
-				controller: 'kc_setenceCtrl'
+				url: '/kc_sentence/:word/:sentence_en/:sentence_zh',
+				templateUrl: 'templates/kc_sentence.html',
+				controller: 'kc_sentenceCtrl'
 			})
 
 			//炼句
@@ -1300,6 +1300,13 @@
 				templateUrl: 'templates/kc_record.html',
 				controller: 'kc_recordCtrl'
 			})
+			
+			.state('kc_phrase', {
+				cache: false,
+				url: '/kc_phrase',
+				templateUrl: 'templates/kc_phrase.html',
+				controller: 'kc_phraseCtrl'
+			})
 
 			.state('kc_tip', {
 				url: '/kc_tip',
@@ -1313,6 +1320,28 @@
 				templateUrl: 'templates/kc_challenge.html',
 				controller: 'kc_challengeCtrl'
 			})
+
+	        .state('kc_voctest', {
+				cache: false,
+				url: '/kc_voctest/:id',
+				templateUrl: 'templates/kc_voctest.html',
+				controller: 'kc_voctestCtrl'
+			})
+
+            .state('kcg_list', {
+				cache: false,
+				url: '/kcg_list/:id',
+				templateUrl: 'templates/kcg_list.html',
+				controller: 'kcg_listCtrl'
+			})
+
+            .state('kcg_exercise', {
+				cache: false,
+				url: '/kcg_exercise/:id',
+				templateUrl: 'templates/kcg_exercise.html',
+				controller: 'kcg_exerciseCtrl'
+			})
+
 
 		//  var userinfo = getStorage("userinfo");
 

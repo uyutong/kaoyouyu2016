@@ -182,13 +182,15 @@
 .dc-item3 {
 	background-color: #FFC20F;
 	padding: 14px 10px;
-	margin:8px 8px;
+	margin:auto;
+	margin-top:20px;
 	font-family: HuakangWawa;
 	font-size: 22px;
 	color: #000;
 	text-shadow: 2px 2px 6px #fff;
 	border-radius: 5px;
 	position: relative;
+	width: 80%;
 }
 
 .dc-item3.activated {

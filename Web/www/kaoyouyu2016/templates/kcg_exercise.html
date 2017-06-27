@@ -1,0 +1,72 @@
+﻿<ion-content class="background-black">
+	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
+
+		<div class="kc_main" ng-show="!is_end">
+			<div class="row">
+				<div class="col">
+					<a href="#/dc_tab/kcg_home" class="dc-title">返回</a>
+				</div>
+				<div class="col col-40">
+					<div class="text-center dc-title">{{id+1}}/{{kcgExercisesList.length}}</div>
+				</div>
+				<div class="col col-30 col-center text-right" style="font-size: 14px;">
+				</div>
+			</div>
+
+			<div class="padding text-center word" style="font-size: 16px;">{{exercise.question}}</div>
+			<!--<div class="padding word" style="font-size:16px;padding-top: 2px;" ng-repeat="zh in voc.zhs">
+				{{zh.property}}{{zh.zh}}
+			</div>-->
+			<div class="padding">
+				<div ng-class="{'dc-item dc-item-2 dc-item-round':true, 'dc-item-correct':exercise.submitted==true &&item.substr(0,1)==exercise.answer,'dc-item-error':exercise.submitted==true && exercise.myanswer==$index && exercise.if_correct==false}" ng-click="chooseAnswer($index);" ng-repeat="item in exercise.itemList">
+					{{item}}
+				</div>
+			</div>
+
+			<div ng-show="exercise.submitted" ng-repeat="affix in exercise.affix_entity">
+				<div class="row row-center">
+					<div class="col col-40 yellow" style="font-size:18px;">{{affix.en}}</div>
+					<div class="col col-60 yellow" style="font-size:16px;">{{affix.zh}}</div>
+				</div>
+				<div class="padding" ng-repeat="word in affix.words">
+					<span style="background-color:#000000;color: white;">{{word.en}}</span>&nbsp;&nbsp;<span style="color: white;">{{word.example}}</span>
+				</div>
+			</div>
+
+			<!--		   {{voc.exercise.answer}}
+                                                      -->
+		</div>
+
+		<div ng-show="is_end">
+			<p>&nbsp;</p>
+			<div class="padding text-center">
+				<div class="text-center" style="position: relative;">
+					<img style="height: 214px;width: 247px;" src="img/dc/kaocizhanji.png">
+					<div ng-class="{'text-center':true,'red':result.if_warn,'green':result.if_safe}" style="position: absolute;left: 50%;top:50%;transform:translate(-50%,-50%);">
+						<span>正确数</span>
+						<span style="color: green;font-size: 18px;">{{right_num}}</span>
+					</div>
+				</div>
+			</div>
+
+			<p>&nbsp;</p>
+
+			<div class="row text-center padding">
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="again()">
+                                                回     看                 
+            </button>
+				</div>
+
+				<div class="col">
+					<button class="button button-full button-energized" ng-click="next();">
+                                                下一组
+            </button>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</ion-content>

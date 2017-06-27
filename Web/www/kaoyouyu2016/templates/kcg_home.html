@@ -7,76 +7,25 @@
 
 <ion-content class="has-header background-black">
 
-    <div class="padding text-center">
-        <div class="banner">
-            <div class="tag"><img src="img/tag.png" width="80" /></div>
-            <div class="headline">我的任务</div>
-            <div class="body">
-                <p>考完<b class="yellow">{{plan.finish}}</b>个词根</p>
-                <p>还剩多少<b>{{plan.leftday}}</b>个</p>
-            </div>
-
-        </div>
-
-            <div class="dc-item4" ng-click="start()">
-                开始
-            </div>
-    </div>
-
 
     <div class="padding">
-        <div >
-            <div class="dc-item3" ng-click="">
-                常用前缀
-                <span class="item-note">15</span>
+        <div>
+            <div class="dc-item3" ng-click="kcg_list(0);">
+                                                常用前缀
             </div>
-            <div class="dc-item3" ng-click="">
-                常用后缀
-                <span class="item-note">15</span>
+            <div class="dc-item3" ng-click="kcg_list(1);">
+                                                 常用后缀
             </div>
-            <div class="dc-item3" ng-click="">
-                基本词根
-                <span class="item-note">15</span>
+            <div class="dc-item3" ng-click="kcg_list(2);">
+                                                基本词根
             </div>
-            <div class="dc-item3" ng-click="">
-                常用词根
-                <span class="item-note">15</span>
-            </div>
-            <div class="dc-item3" ng-click="">
-                高级词根
-                <span class="item-note">15</span>
+            <div class="dc-item3" ng-click="kcg_exercise()">
+                                                词根助记
             </div>
         </div>
 
     </div>
 
-
-    <div class="row text-center padding">
-        <div class="col">
-            <button class="button button-small button-outline button-energized wawa-font" ng-click="record(0)">
-                收藏夹
-            </button>
-        </div>
-
-        <div class="col">
-            <button class="button button-small button-outline button-energized wawa-font" ng-click="record(1)">
-                错题本
-            </button>
-        </div>
-
-        <div class="col">
-            <button class="button button-small button-outline button-energized wawa-font" ng-click="record(2)">
-                烤词记录
-            </button>
-        </div>
-
-
-        <div class="col">
-            <button class="button button-small button-outline button-energized wawa-font" ng-click="kcgGame()">
-                词根游戏
-            </button>
-        </div>
-    </div>
 
    
 

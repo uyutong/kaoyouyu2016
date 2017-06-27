@@ -2094,7 +2094,6 @@
 		$scope.word = function() {
 			$state.go("dc_tab.kc_home");
 		}
-
 		$rootScope.updateUserInfo();
 
 	})
@@ -2111,7 +2110,7 @@
 		} else {
 			$scope.name = "写作";
 		}
-		
+
 		$scope.beginTest = function() {
 			if(id == "listening") {
 				$rootScope.tl();
@@ -5405,6 +5404,9 @@
 	//#region 烤词主页
 	.controller('kc_homeCtrl', function($rootScope, $scope, $state, $http) {
 		var date = new Date();
+		if(getStorage("" + formatDate2(date), true) == "") {
+			setStorage("" + formatDate2(date), 0, false);
+		}
 		$rootScope.throwed_num = parseInt(getStorage("" + formatDate2(date), true));
 		//		//#region 获取学习计划
 		//		$rootScope.LoadingShow();
@@ -5557,6 +5559,26 @@
 			}, "json")
 		}
 
+		$scope.getTestWord = function() {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "word_test";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(!response.error) {
+					$rootScope.TestVocsList = response;
+					$state.go("kc_voctest", {
+						id: 0
+					});
+				} else {
+					$rootScope.Alert("获取测试题失败");
+				}
+			}, "json");
+		}
+
 		//#region 学习记录 错题本 收藏夹
 		$scope.record = function(type) {
 			$state.go('kc_record', {
@@ -5574,6 +5596,12 @@
 		//#region setPlan
 		$scope.setPlan = function() {
 			$state.go('jh_setting');
+		}
+		//#endregion
+
+		//#region setPlan
+		$scope.phrase = function() {
+			$state.go('kc_phrase');
 		}
 		//#endregion
 
@@ -5732,17 +5760,88 @@
 	})
 	//#endregion
 
-	//#region 烤词根
-	.controller('kcg_homeCtrl', function($rootScope, $scope, $state, $http) {
+	//#region 短语精选
+	.controller('kc_phraseCtrl', function($rootScope, $scope, $state, $http, $stateParams, $timeout) {
 
-		$scope.kcgGame = function() {
-			$state.go("kcg_game");
+		$scope.page = 0;
+		$scope.hasmore = false;
+
+		$scope.getList = function() {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "phrase_list";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"page": $scope.page,
+				"page_size": "20",
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(response) {
+					$scope.phrases = response.phrases;
+					$scope.page = response.page;
+					$scope.total = response.total;
+					if(parseInt($scope.page) * 20 < parseInt($scope.total)) {
+						$scope.hasmore = true;
+					} else {
+						$scope.hasmore = false;
+					}
+				} else {
+					$rootScope.Alert("获取词汇失败");
+				}
+			}, "json")
 		}
 
-		$scope.start = function() {
-			$state.go("kcg_intro");
+		$scope.getList();
+
+		$scope.isshowAll = false;
+		$scope.showAll = function() {
+			$scope.isshowAll = !$scope.isshowAll;
+			angular.forEach($scope.phrases, function(data) {
+				data.show = $scope.isshowAll;
+			});
 		}
 
+		$scope.phrase_show = function(index) {
+			$scope.phrases[index].show = true;
+		}
+
+		$scope.loadmore = function() {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "phrase_list";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"page": parseInt($scope.page) + 1 + "",
+				"page_size": "20",
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(response) {
+					$scope.phrases = $scope.phrases.concat(response.phrases);
+					$scope.page = response.page;
+					$scope.total = response.total;
+					//page_size=20
+					if(parseInt($scope.page) * 20 < parseInt($scope.total)) {
+						$scope.hasmore = true;
+					} else {
+						$scope.hasmore = false;
+					}
+
+				} else {
+					$rootScope.Alert("获取词汇失败");
+				}
+			}, "json")
+		}
+
+		$scope.sentence = function(phrase, en, zh) {
+			//			var word = phrase.phrase.replace(/\s/g,"").repeat("...","").repeat("(","").replace(")","").replace(".","");
+			$state.go("kc_sentence", {
+				"word": "phrase",
+				"sentence_en": en,
+				"sentence_zh": zh
+			});
+		}
 	})
 	//#endregion
 
@@ -5973,14 +6072,14 @@
 
 		//#region 炼句
 		$scope.sentence = function(index) {
-			var sentences = [];
-			sentences.push({
-				"expl_en": $scope.voc.example[index].en,
-				"expl_cn": $scope.voc.example[index].zh
-			});
-			$state.go("kc_setence", {
+
+			var sentence_en = $scope.voc.example[index].en.replace("<u>", "").replace("</u>", "");
+			var sentence_zh = $scope.voc.example[index].zh;
+
+			$state.go("kc_sentence", {
 				"word": $scope.voc.word,
-				"sentences": JSON.stringify(sentences)
+				"sentence_en": sentence_en,
+				"sentence_zh": sentence_zh
 			});
 		}
 		//#endregion
@@ -6027,24 +6126,24 @@
 		$scope.simpleTest = function() {
 
 			$rootScope.voc_list = angular.copy($rootScope.vocabularys);
-            angular.forEach($rootScope.voc_list,function(data){
-            	data.exercise.submited = false;
-            	data.exercise.myanswer = undefined;
-            })
+			angular.forEach($rootScope.voc_list, function(data) {
+				data.exercise.submited = false;
+				data.exercise.myanswer = undefined;
+			})
 
 			$state.go("kc_stest", {
 				id: 0
 			});
 		}
-		
+
 		$scope.again = function() {
 			$state.go("kc_main", {
 				id: 0
 			});
 		}
-		
+
 		$scope.play = function() {
-			$rootScope.playWord($rootScope.wordAudioUrl+$scope.voc.audio_us,$("#kc_main_word"))
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
 		}
 
 		//#region 加入学习记录
@@ -6115,7 +6214,7 @@
 			}
 		}
 		//#endregion
-		
+
 		//#region 扔烤箱
 		$scope.throw = function() {
 			if($rootScope.vocabularys.length < 2) {
@@ -6177,7 +6276,7 @@
 				$scope.has_write = $scope.has_write - 1;
 			}
 		}
-		
+
 		$scope.completed = false;
 		$scope.right = true;
 		$scope.has_write = 0;
@@ -6240,16 +6339,15 @@
 	//#endregion
 
 	//#region 炼句
-	.controller('kc_setenceCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
+	.controller('kc_sentenceCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
 
 		//		$rootScope.Tip('提示', '听录音<br>选出正确的单词组成句子');
-		var Regx = /^[A-Za-z\.]*$/;
+		var Regx = /^[A-Za-z\.\']*$/;
 		$scope.word = $stateParams.word;
-		$scope.sentences = JSON.parse($stateParams.sentences);
-		var sentence = $scope.sentences[0];
-
-		$scope.vocs = sentence.expl_en.replace("<u>", "").replace("</u>", "").split(/\s+/);
-		$scope.answers = sentence.expl_en.replace("<u>", "").replace("</u>", "").split(/\s+/);
+		$scope.sentence_en = $stateParams.sentence_en;
+		$scope.sentence_zh = $stateParams.sentence_zh;
+		$scope.vocs = $scope.sentence_en.split(/\s+/);
+		$scope.answers = $scope.sentence_en.split(/\s+/);
 
 		function sortNumber(a, b) {
 			return a < b
@@ -6618,11 +6716,10 @@
 		$scope.playReadWord0 = function(audio) {
 			$rootScope.playWord(audio, $("#read_paly_0"));
 		}
-		
+
 		$scope.play = function() {
-			$rootScope.playWord($rootScope.wordAudioUrl+$scope.audio_us,$("#kc_speak_word"))
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.audio_us, $("#kc_speak_word"))
 		}
-		
 
 	})
 
@@ -6704,7 +6801,7 @@
 				$state.go("kc_stest", {
 					id: $scope.id + 1
 				});
-			}else{
+			} else {
 				$scope.is_end = true;
 			}
 		}
@@ -6799,12 +6896,10 @@
 			})
 		}
 		//#endregion
-		
+
 		$scope.play = function() {
-			$rootScope.playWord($rootScope.wordAudioUrl+$scope.voc.audio_us,$("#kc_stest_word"))
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_stest_word"))
 		}
-		
-		
 
 	})
 	//#endregion
@@ -6830,7 +6925,7 @@
 
 		if($scope.exercise.item_subtype == '2') {
 			$scope.if_subtype2_finished = false;
-			
+
 			$scope.exercise.stem_text = $scope.exercise.stem_text.replace("___", "<input class='text-center' name='et_tv' id='input_" + $scope.exercise.keys + "' maxlength='" + $scope.exercise.keys.length + "'  style='width:60px'/>");
 			alert($scope.exercise.stem_text);
 			setTimeout(function() {
@@ -6859,7 +6954,7 @@
 						$scope.$apply();
 					}
 				});
-				
+
 			}, 300)
 		}
 
@@ -6872,52 +6967,52 @@
 			playing: false
 		};
 
-//		var v = document.getElementById("audio");
-//		v.pause();
-//		v.src = "audio/1.mp3";
-//
-//		//#endregion
-//		$scope.mainPlay = function() {
-//			if(!$scope.media.playing) //播放
-//			{
-//				$scope.media.playing = true;
-//
-//				v.addEventListener("timeupdate", function() {
-//					$scope.media.duration = v.duration;
-//					$scope.media.current = v.currentTime;
-//					$scope.$apply();
-//				});
-//
-//				v.addEventListener("ended", function() {
-//					$scope.media.playing = false;
-//				});
-//
-//				v.play();
-//			} else //暂停
-//			{
-//				$scope.media.playing = false;
-//				v.pause();
-//			}
-//		}
-//
-//		$scope.mainDrag = function() {
-//			if($scope.media.duration == 0) {
-//				return;
-//			} else {
-//				v.pause();
-//				v.currentTime = $scope.media.current;
-//				$scope.media.playing = true;
-//				v.play();
-//			}
-//		}
-//		//#endregion
+		//		var v = document.getElementById("audio");
+		//		v.pause();
+		//		v.src = "audio/1.mp3";
+		//
+		//		//#endregion
+		//		$scope.mainPlay = function() {
+		//			if(!$scope.media.playing) //播放
+		//			{
+		//				$scope.media.playing = true;
+		//
+		//				v.addEventListener("timeupdate", function() {
+		//					$scope.media.duration = v.duration;
+		//					$scope.media.current = v.currentTime;
+		//					$scope.$apply();
+		//				});
+		//
+		//				v.addEventListener("ended", function() {
+		//					$scope.media.playing = false;
+		//				});
+		//
+		//				v.play();
+		//			} else //暂停
+		//			{
+		//				$scope.media.playing = false;
+		//				v.pause();
+		//			}
+		//		}
+		//
+		//		$scope.mainDrag = function() {
+		//			if($scope.media.duration == 0) {
+		//				return;
+		//			} else {
+		//				v.pause();
+		//				v.currentTime = $scope.media.current;
+		//				$scope.media.playing = true;
+		//				v.play();
+		//			}
+		//		}
+		//		//#endregion
 
-        $scope.continue = function() {
+		$scope.continue = function() {
 			$state.go("kc_main", {
 				id: 0
 			})
 		}
-        
+
 		//#region 涂抹题
 		$scope.earse = function($event) {
 			$($event.currentTarget).addClass("slideout");
@@ -7004,13 +7099,368 @@
 			})
 		}
 		//#endregion
-		
+
 		$scope.play = function() {
-			$rootScope.playWord($rootScope.exerciseAudioUrl+$scope.exercise.item_id+".mp3",$("#kc_challenge_word"))
+			$rootScope.playWord($rootScope.exerciseAudioUrl + $scope.exercise.item_id + ".mp3", $("#kc_challenge_word"))
 		}
-		
-		
-		
 	})
 
+	//#endregion
+
+	//#region 词汇量测试 
+	.controller('kc_voctestCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
+
+		$scope.id = parseInt($stateParams.id);
+		$scope.voc = $rootScope.TestVocsList[$scope.id];
+
+		$scope.wordTestResult = function(data) {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "word_test_result";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"data": data
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(!response.error) {
+					$scope.result = response;
+					if($scope.result.info.indexOf("危") >= 0) {
+						$scope.result.if_warn = true;
+					}
+					if($scope.result.info.indexOf("安") >= 0) {
+						$scope.result.if_safe = true;
+					}
+				} else {
+					$rootScope.Alert("获取测试题失败");
+				}
+			}, "json");
+		}
+
+		$scope.slideLeft = function() {
+			if($scope.id < $rootScope.TestVocsList.length - 1) {
+				$state.go("kc_voctest", {
+					id: $scope.id + 1
+				});
+			} else {
+				$scope.is_end = true;
+				var submit_objs = [];
+				for(var j = 0; j < $rootScope.TestVocsList.length; j++) {
+					if(submit_objs.length > 0) {
+						var if_exist = false;
+						for(var k = 0; k < submit_objs.length; k++) {
+							if(submit_objs[k].id == $rootScope.TestVocsList[j].category_id) {
+								if($rootScope.TestVocsList[j].exercise.myanswer == $rootScope.TestVocsList[j].exercise.answer)
+									submit_objs[k].num = submit_objs[k].num + 1;
+								if_exist = true;
+								break;
+							}
+						}
+						if(!if_exist) {
+							var submit_obj = {};
+							submit_obj.id = $rootScope.TestVocsList[j].category_id;
+							submit_obj.num = 0;
+							if($rootScope.TestVocsList[j].exercise.myanswer == $rootScope.TestVocsList[j].exercise.answer) {
+								submit_obj.num = submit_obj.num + 1;
+							}
+							submit_objs.push(submit_obj);
+						}
+					} else {
+						var submit_obj = {};
+						submit_obj.id = $rootScope.TestVocsList[j].category_id;
+						submit_obj.num = 0;
+						if($rootScope.TestVocsList[j].exercise.myanswer == $rootScope.TestVocsList[j].exercise.answer) {
+							submit_obj.num = submit_obj.num + 1;
+						}
+						submit_objs.push(submit_obj);
+					}
+				}
+
+				var data = "";
+				for(var t = 0; t < submit_objs.length; t++) {
+					data = data + submit_objs[t].id + "|" + submit_objs[t].num + ","
+				}
+				data = data.substr(0, data.length - 1);
+				$scope.wordTestResult(data);
+			}
+		}
+
+		$scope.slideRight = function() {
+			if($scope.id > 0) {
+				$state.go("kc_voctest", {
+					id: $scope.id - 1
+				});
+				$scope.is_end = false;
+			}
+		}
+
+		$scope.chooseAnswer = function(option) {
+			if($scope.voc.exercise.submitted) {
+				return;
+			}
+			$scope.voc.exercise.submitted = true;
+			$scope.voc.exercise.myanswer = option;
+
+			//			setTimeout(function() {
+			$scope.slideLeft();
+			//			}, 500)
+		}
+
+		$scope.learn = function() {
+			$state.go("kc_main", {
+				id: 0
+			})
+		}
+
+		$scope.again = function() {
+			$scope.getTestWord();
+		}
+		$scope.getTestWord = function() {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "word_test";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(!response.error) {
+					$rootScope.TestVocsList = response;
+					$state.go("kc_voctest", {
+						id: 0
+					});
+				} else {
+					$rootScope.Alert("获取测试题失败");
+				}
+			}, "json");
+		}
+
+	})
+	//#endregion
+
+	//#region 烤词根
+	.controller('kcg_homeCtrl', function($rootScope, $scope, $state, $http) {
+
+		$scope.kcgGame = function() {
+			$state.go("kcg_game");
+		}
+
+		$scope.start = function() {
+			$state.go("kcg_intro");
+		}
+
+		$scope.kcg_list = function(index) {
+			$state.go("kcg_list", {
+				id: index
+			});
+		}
+
+		$scope.kcg_exercise = function(index) {
+
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "affix_exercise";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(response) {
+					$rootScope.kcgExercisesList = response;
+					$state.go("kcg_exercise", {
+						id: 0
+					});
+				} else {
+					$rootScope.Alert("获取词汇失败");
+				}
+			}, "json")
+		}
+	})
+	//#endregion
+
+	//#region 词根列表
+	.controller('kcg_listCtrl', function($rootScope, $scope, $state, $http, $stateParams, $timeout) {
+
+		$scope.id = parseInt($stateParams.id);
+		$scope.titleLables = [{
+			"type": "prefix",
+			"name": "前缀",
+		}, {
+			"type": "suffix",
+			"name": "后缀",
+		}, {
+			"type": "root",
+			"name": "词根",
+		}];
+
+		$scope.titleLable = $scope.titleLables[$scope.id];
+		$scope.page = 0;
+		$scope.hasmore = false;
+
+		$scope.getList = function(page, type) {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "affix_list";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"page": page,
+				"page_size": "20",
+				"type": type
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(response) {
+					$scope.affixs = response.affixs;
+					$scope.page = response.page;
+					$scope.total = response.total;
+					//page_size=20
+					if(parseInt($scope.page) * 20 < parseInt($scope.total)) {
+						$scope.hasmore = true;
+					} else {
+						$scope.hasmore = false;
+					}
+
+				} else {
+					$rootScope.Alert("获取词汇失败");
+				}
+			}, "json")
+		}
+
+		$scope.getList("1", $scope.titleLable.type)
+
+		document.getElementById("lable_down").style.display = 'none';
+		$scope.showselect = function() {
+			if(document.getElementById("lable_down").style.display == 'none') {
+				document.getElementById("lable_down").style.display = 'block';
+			} else {
+				document.getElementById("lable_down").style.display = 'none';
+			}
+		};
+
+		$scope.lableSelect = function(index) {
+			$scope.hasmore = false;
+			$scope.page = 0;
+			$scope.titleLable = $scope.titleLables[index];
+			document.getElementById("lable_down").style.display = 'none';
+			$scope.getList("1", $scope.titleLable.type)
+		}
+
+		$scope.recordSelect = function(item) {
+			$scope.affixs[item].show = !$scope.affixs[item].show;
+		}
+
+		$scope.loadmore = function() {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "affix_list";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"page": parseInt($scope.page) + 1 + "",
+				"page_size": "20",
+				"type": $scope.titleLable.type,
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(response) {
+					$scope.affixs = $scope.affixs.concat(response.affixs);
+					$scope.page = response.page;
+					$scope.total = response.total;
+					//page_size=20
+					if(parseInt($scope.page) * 20 < parseInt($scope.total)) {
+						$scope.hasmore = true;
+					} else {
+						$scope.hasmore = false;
+					}
+				} else {
+					$rootScope.Alert("获取词汇失败");
+				}
+			}, "json")
+		}
+	})
+	//#endregion
+
+	//#region 词根助记
+	.controller('kcg_exerciseCtrl', function($rootScope, $scope, $state, $http, $stateParams, $timeout) {
+
+		$scope.id = parseInt($stateParams.id);
+
+		$scope.exercise = $rootScope.kcgExercisesList[$scope.id];
+
+		$scope.exercise.itemList = $scope.exercise.items.split("^");
+
+		for(var k = 0; k < $scope.exercise.itemList.length; k++) {
+			$scope.exercise.itemList[k] = trim($scope.exercise.itemList[k]);
+
+		}
+
+		$scope.slideLeft = function() {
+			if($scope.id < $rootScope.kcgExercisesList.length - 1) {
+				$state.go("kcg_exercise", {
+					id: $scope.id + 1
+				});
+			} else {
+				$scope.is_end = true;
+				$scope.right_num = 0;
+				for(var h = 0; h < $rootScope.kcgExercisesList.length; h++) {
+					if($rootScope.kcgExercisesList[h].if_correct == true) {
+						$scope.right_num = $scope.right_num + 1;
+					}
+				}
+			}
+		}
+
+		$scope.slideRight = function() {
+			if($scope.id > 0) {
+				$state.go("kcg_exercise", {
+					id: $scope.id - 1
+				});
+				$scope.is_end = false;
+			}
+		}
+
+		$scope.chooseAnswer = function(option) {
+			if($scope.exercise.submitted) {
+				return;
+			}
+			$scope.exercise.submitted = true;
+			$scope.exercise.myanswer = option;
+			if($scope.exercise.itemList[option].substr(0, 1) == $scope.exercise.answer) {
+				$scope.exercise.if_correct = true;
+			} else {
+				$scope.exercise.if_correct = false;
+			}
+		}
+
+		$scope.again = function() {
+			$state.go("kcg_exercise", {
+				id: 0
+			});
+		}
+
+		$scope.next = function() {
+			$scope.kcg_exercise(0);
+		}
+
+		$scope.kcg_exercise = function(index) {
+
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "affix_exercise";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(response) {
+					$rootScope.kcgExercisesList = response;
+					$state.go("kcg_exercise", {
+						id: 0
+					});
+				} else {
+					$rootScope.Alert("获取词汇失败");
+				}
+			}, "json")
+		}
+
+	})
 //#endregion
