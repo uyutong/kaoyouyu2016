@@ -169,7 +169,7 @@
 }
 
 .dc-item-2 {
-	background-color: #E7DCBE;
+	background-color: #BEBEBE;
 	padding: 16px 10px;
 	margin:8px 8px;
 	font-size: 20px;
@@ -181,11 +181,11 @@
 
 .dc-item3 {
 	background-color: #FFC20F;
-	padding: 14px 10px;
+	padding: 12px 8px;
 	margin:auto;
 	margin-top:20px;
 	font-family: HuakangWawa;
-	font-size: 22px;
+	font-size: 18px;
 	color: #000;
 	text-shadow: 2px 2px 6px #fff;
 	border-radius: 5px;

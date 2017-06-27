@@ -1320,6 +1320,14 @@
 				templateUrl: 'templates/kc_challenge.html',
 				controller: 'kc_challengeCtrl'
 			})
+			
+			.state('kc_word_detail', {
+				cache: false,
+				url: '/kc_word_detail',
+				templateUrl: 'templates/kc_word_detail.html',
+				controller: 'kc_word_detailCtrl'
+			})
+
 
 	        .state('kc_voctest', {
 				cache: false,

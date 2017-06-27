@@ -5757,6 +5757,13 @@
 				}
 			}, "json")
 		}
+		
+		
+		$scope.wordDetail = function(index){
+		    $rootScope.rootvoc = $scope.words[index];
+		    $state.go("kc_word_detail");
+		}
+		
 	})
 	//#endregion
 
@@ -6722,6 +6729,100 @@
 		}
 
 	})
+	
+	
+	//#region 小测提示
+	.controller('kc_word_detailCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
+       
+       
+       //#region收藏/取消收藏
+		$scope.fav = function() {
+			if($rootScope.rootvoc.is_favorite == "0") {
+				$rootScope.favorite($rootScope.rootvoc.id, $rootScope.rootvoc.category_id, function(response) {
+					if(response.error == 0) {
+						$rootScope.rootvoc.is_favorite = "1";
+					}
+				})
+			} else if($rootScope.rootvoc.is_favorite == "1") {
+				$rootScope.remove_favorite($rootScope.rootvoc.id, $rootScope.rootvoc.category_id, function(response) {
+					if(response.error == 0) {
+						$rootScope.rootvoc.is_favorite = "0";
+					}
+				})
+			}
+		}
+		//#endregion
+
+		//#region 扔烤箱
+		$scope.throw = function() {
+			
+			$rootScope.root_throw($rootScope.rootvoc.id, $rootScope.rootvoc.category_id, function(response) {
+				if(response.error == 0) {
+					$rootScope.Alert("已将单词扔入烤箱");
+				} else {
+					$rootScope.Alert("扔烤箱失败");
+				}
+			})
+		}
+		//#endregion
+		
+		
+		
+		$scope.speak = function() {
+			$state.go("kc_speak", {
+				"word":$rootScope.rootvoc.word,
+				"audio":$rootScope.rootvoc.audio_us,
+			});
+		}
+		
+		
+		//#region 拼写
+		$scope.spell = function() {
+			var letters = [];
+			var word = $rootScope.rootvoc.word;
+			for(var i = 0; i < word.length; i++) {
+				if(!letters.contains(word.substring(i, i + 1))) {
+					letters.push(word.substring(i, i + 1));
+				}
+			}
+			$state.go("kc_word", {
+				'audio': $rootScope.rootvoc.audio_us,
+				'letters': JSON.stringify(letters.sort()),
+				'word': $rootScope.rootvoc.word
+			})
+		}
+		//#endregion
+		
+		
+		//#region 炼句
+		$scope.sentence = function(index) {
+
+			var sentence_en = $rootScope.rootvoc.example[index].en.replace("<u>", "").replace("</u>", "");
+			var sentence_zh = $rootScope.rootvoc.example[index].zh;
+
+			$state.go("kc_sentence", {
+				"word": $rootScope.rootvoc.word,
+				"sentence_en": sentence_en,
+				"sentence_zh": sentence_zh
+			});
+		}
+		//#endregion
+		
+		
+		if($rootScope.rootvoc.example) {
+			setTimeout(function() {
+				for(var m = 0; m < $rootScope.rootvoc.example.length; m++) {
+					$('#' + $rootScope.rootvoc.word + '_example').append("<div class='row'><div class='col-80'><div class='col'><p style='color:#ffffff'>" + $rootScope.rootvoc.example[m].en + "</p><p style='color:#222222'>" + $rootScope.rootvoc.example[m].zh + "</p></div></div><div class='col-20 text-center col-center'><img src='img/dc/lian.png' width=25 id='" + $rootScope.rootvoc.word + "_eimg_" + m + "')' ></div></div>");
+					$('#' + $rootScope.rootvoc.word + '_eimg_' + m).click(function() {
+						$scope.sentence(this.id.toString().substring(this.id.toString().length - 1, this.id.toString().length));
+					});
+				}
+			}, 1000);
+		}
+
+		
+	})
+	//#endregion
 
 	//#region 小测提示
 	.controller('kc_tipCtrl', function($rootScope, $scope, $state, $stateParams, $http) {

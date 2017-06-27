@@ -24,11 +24,11 @@
 	<div class="record_row" style="color:white;border-bottom:1px #EEEEEE solid;" ng-repeat="affix in affixs track by $index" ng-click="">
 		<div class="row row-center">
 			<div class="col col-40 yellow" style="font-size:18px;">{{affix.en}}</div>
-			<div class="col col-60 yellow" style="font-size:16px;" ng-if="affix.show"ng-click="recordSelect($index)"><span>{{affix.zh}}</span></div>
+			<div class="col col-60 yellow" style="font-size:16px;" ng-if="affix.show" ng-click="recordSelect($index)"><span>{{affix.zh}}</span></div>
 			<img class="col col-60" ng-if="!affix.show" ng-click="recordSelect($index)" class="zhezhao" src="img/dc/zhegai.png"/>
 		</div>
 		
-		<div class="padding" ng-repeat="word in affix.words">
+		<div ng-if="affix.show" class="padding" ng-repeat="word in affix.words">
 			<span style="background-color:#000000;">{{word.en}}</span>&nbsp;&nbsp;<span>{{word.example}}</span>
 		</div>
 		
