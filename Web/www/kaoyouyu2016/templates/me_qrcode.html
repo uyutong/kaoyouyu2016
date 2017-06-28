@@ -7,7 +7,28 @@
 <ion-content class="has-header">
     <div class="padding text-center grown" ng-if="$root.userinfo.level==1">抱歉您的试用已结束，请扫描烤鱿鱼英语四级验证码(二维码)激活app！验证码是区分四六级的哦！</div>
     <div class="padding text-center grown" ng-if="$root.userinfo.level==2">抱歉您的试用已结束，请扫描烤鱿鱼英语六级验证码(二维码)激活app！验证码是区分四六级的哦！</div>
-    <div class="padding text-center">
+   
+	<div style="background: white;margin-top: 10px;padding: 10px;border-top: 1px solid gainsboro;border-bottom: 1px solid gainsboro">
+		<div class="text-left padding">{{bizProduct.product_name}}</div>
+		<div class="text-left padding" style="color:burlywood;">{{bizProduct.usage}}</div>
+		<div class="row">
+			<div class="col-30 col-center" style="color: gray;text-decoration:line-through;">原价：¥{{bizProduct.discount}}</div>
+			<div class="col-30 col-center text-center" style="color: red;font-size:20px ;">¥{{bizProduct.price}}</div>
+			<div class="col-40 text-center" class="text-center" style="padding: 5px;">
+				<button  class="app_vcode_button" ng-click="addOrder()">
+		                             购买验证码
+	            </button>
+	            <!--<button ng-show="userinfo.active" class="app_vcode_button" style="background:gainsboro;"  ng-click="">
+		                             您已激活                  
+	            </button>-->
+			</div>					
+		</div>
+		<div class="text-center padding">支付方式：仅支持微信支付</div> 
+
+	</div>
+   
+   
+   <div class="padding text-center">
         <button class="button button-balanced button-block button-round " ng-click='scanCode();'>扫描二维码</button>
     </div>
     <div class="text-center background-gray">

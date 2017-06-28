@@ -1,8 +1,22 @@
-﻿<ion-content class="background-black">
+﻿
+<div class="bar bar-header bar-bluebg">
+   <div class="row col-center" ng-show="!is_end">
+		<div class="col col-center">
+			<a href="#/dc_tab/kcg_home" class="dc-title">返回</a>
+		</div>
+		<div class="col col-40 col-center">
+			<div class="text-center dc-title">{{id+1}}/{{kcgExercisesList.length}}</div>
+		</div>
+			<div class="col col-30 col-center text-right" style="font-size: 14px;">
+				</div>
+	</div>
+</div>
+
+<ion-content class="has-header background-black">
 	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
 
 		<div class="kc_main" ng-show="!is_end">
-			<div class="row">
+			<!--<div class="row">
 				<div class="col">
 					<a href="#/dc_tab/kcg_home" class="dc-title">返回</a>
 				</div>
@@ -11,7 +25,7 @@
 				</div>
 				<div class="col col-30 col-center text-right" style="font-size: 14px;">
 				</div>
-			</div>
+			</div>-->
 
 			<div class="padding text-center word" style="font-size: 16px;">{{exercise.question}}</div>
 			<!--<div class="padding word" style="font-size:16px;padding-top: 2px;" ng-repeat="zh in voc.zhs">

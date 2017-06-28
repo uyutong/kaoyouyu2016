@@ -1,20 +1,23 @@
-﻿<ion-content class="background-black">
+﻿<div class="bar bar-header bar-bluebg">
+	<div class="row col-center" ng-show="!is_end">
+		<div class="col col-30">
+			<a href="#/dc_tab/kc_home" class="dc-title">返回</a>
+		</div>
+		<div class="col col-40">
+			<div class="text-center dc-title">{{id+1}}/{{TestVocsList.length}}</div>
+		</div>
+		<div class="col col-30 col-center text-right" style="font-size: 14px;">
+<!--			{{phrases.length}}/{{total}}
+-->		</div>
+	</div>
+</div>
+
+<ion-content class="has-header background-black">
 	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()">
 
 		<div class="kc_main" ng-show="!is_end">
-			<div class="row">
-				<div class="col">
-					<a href="#/dc_tab/kc_home" class="dc-title">返回</a>
-				</div>
-				<div class="col col-40">
-					<div class="text-center dc-title">{{id+1}}/{{TestVocsList.length}}</div>
-				</div>
-			<div class="col col-30 col-center text-right" style="font-size: 14px;">
-				{{phrases.length}}/{{total}}
-		    </div>
-			</div>
-
-			<div class="text-center word" style="padding-right: 10px;"><img src="img/dc/play.png" width="26" id="kc_main_word" ng-click="play();" />{{voc.word}}<span ng-repeat="zh in voc.zhs | limitTo:1" style="color: gainsboro;font-size: 14px;padding-left: 3px;">{{zh.property}}</span></div>
+         
+			<div class="padding text-center word" style="padding-right: 10px;"><img src="img/dc/play.png" width="26" id="kc_main_word" ng-click="play();" />{{voc.word}}<span ng-repeat="zh in voc.zhs | limitTo:1" style="color: gainsboro;font-size: 14px;padding-left: 3px;">{{zh.property}}</span></div>
 
 			<div class="padding gray text-center" style="font-size: 16px;position: relative">
 				[{{voc.pron_us}}]

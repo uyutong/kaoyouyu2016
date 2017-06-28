@@ -1,19 +1,22 @@
-﻿<ion-content class="background-black" noscroll>
+﻿<div class="bar bar-header bar-bluebg">
+   <div class="row col-center" ng-show="!is_end">
+		<div class="col col-center">
+			<a href="#/dc_tab/kc_home" class="dc-title">返回</a>
+		</div>
+		<div class="col col-40 col-center">
+			<div class="text-center dc-title">{{id+1}}/{{$root.ExerciseList.length}}</div>
+		</div>
+		<div class="col text-right" style="position:relative;">
+			<a style="position:absolute; right:60px;" ng-click="fav()"><img src="img/dc/collected.png" ng-if="exercise.is_favorite=='1'" width="26" /><img src="img/dc/star.png" ng-if="exercise.is_favorite=='0'" width="26" /></a>
+			<a class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
+		</div>
+	</div>
+</div>
+
+<ion-content class="has-header background-black" noscroll>
 	<div on-swipe-right="slideRight()" on-swipe-left="slideLeft()" style="min-height: 90%;">
 		<div class="kc_main" ng-show="!is_end">
-			<div class="row padding-top ">
-				<div class="col">
-					<a href="#/home" class="dc-title">返回</a>
-				</div>
-				<div class="col col-40">
-					<div class="text-center dc-title">{{id+1}}/{{$root.ExerciseList.length}}</div>
-				</div>
-				<div class="col text-right" style="position:relative;">
-					<a style="position:absolute; right:60px; top:3px;" ng-click="fav()"><img src="img/dc/collected.png" ng-if="exercise.is_favorite=='1'" width="30" /><img src="img/dc/star.png" ng-if="exercise.is_favorite=='0'" width="30" /></a>
-					<a class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
-				</div>
-			</div>
-
+		
 			<div class="padding" ng-if="exercise.item_subtype=='1'||exercise.item_subtype=='2'||exercise.item_subtype=='3'">
 				<div class="text-center">
 					<div class="padding">

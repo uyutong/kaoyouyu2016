@@ -1370,6 +1370,103 @@
 	})
 
 	.controller('me_qrcodeCtrl', function($rootScope, $scope, $state, $http) {
+
+		$scope.getBizProd = function() {
+			//#region 重新获取地址
+			var url = $rootScope.bizUrl;
+			var data = {
+				"func": "getBizProd",
+				"unionid": $rootScope.userinfo.unionid
+			};
+			encode(data);
+			$rootScope.LoadingShow();
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.data) {
+					var bizProducts = response.data;
+					for(var k = 0; k < bizProducts.length; k++) {
+						if($rootScope.userinfo.level == "1" && bizProducts[k].product_name.indexOf("四级验证码") > 0 && bizProducts[k].product_type == "10") {
+							$scope.bizProduct = bizProducts[k];
+							return;
+						}
+						if($rootScope.userinfo.level == "2" && bizProducts[k].product_name.indexOf("六级验证码") > 0 && bizProducts[k].product_type == "10") {
+							$scope.bizProduct = bizProducts[k];
+							return;
+						}
+					}
+				}
+
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+			//#endregion
+		}
+		$scope.getBizProd();
+
+		$scope.addOrder = function() {
+				//#region 重新获取地址
+			var url = $rootScope.bizUrl;
+			var data = {
+				"func": "addOrder",
+				"unionid": $rootScope.userinfo.unionid,
+			    "payway": "3",
+				"prodid": $scope.bizProduct.prodid,
+				"money": $scope.bizProduct.price,
+				"buy_num": "1"
+			};
+			encode(data);
+			$rootScope.LoadingShow();
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.data) {
+					$scope.unifiedorder();
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+			//#endregion		
+		}
+
+        $scope.unifiedorder = function(){
+//      	var url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+//			var data = {
+//				"xmlContent": "<xml><appid>wx2421b1c4370ec43b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>"
+//			};
+//			$rootScope.LoadingShow();
+//			$http.post(url, data).success(function(response) {
+//				$rootScope.LoadingHide();
+//				if(response) {
+//				}
+//			}).error(function(response, status) {
+//				$rootScope.LoadingHide();
+//				$rootScope.Alert('连接失败！[' + response + status + ']');
+//				return;
+//			});
+//			//#endregion	
+			     $.ajax({
+                     url:'https://api.mch.weixin.qq.com/pay/unifiedorder',
+                     type:'post',
+                     data: "<xml><appid>wx63489880614d923b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>",
+                     dataType:'xml',
+                     success:function(data){
+                         alert(data);
+                         //成功之后调用该函数
+                         //data:服务器返回的数据，
+                         //如果服务器返回的是一个xml文档
+                         //需要调用$(data),将xml转换成一个jQuery对象                       
+                     },
+
+                     error:function(){
+                         //失败调用该函数
+                         alert('系统出错');
+                     }
+                 });
+        }
+
 		$scope.scanCode = function() {
 
 			cordova.plugins.barcodeScanner.scan(
@@ -5403,6 +5500,7 @@
 
 	//#region 烤词主页
 	.controller('kc_homeCtrl', function($rootScope, $scope, $state, $http) {
+
 		var date = new Date();
 		if(getStorage("" + formatDate2(date), true) == "") {
 			setStorage("" + formatDate2(date), 0, false);
@@ -5757,13 +5855,12 @@
 				}
 			}, "json")
 		}
-		
-		
-		$scope.wordDetail = function(index){
-		    $rootScope.rootvoc = $scope.words[index];
-		    $state.go("kc_word_detail");
+
+		$scope.wordDetail = function(index) {
+			$rootScope.rootvoc = $scope.words[index];
+			$state.go("kc_word_detail");
 		}
-		
+
 	})
 	//#endregion
 
@@ -6729,13 +6826,11 @@
 		}
 
 	})
-	
-	
+
 	//#region 小测提示
 	.controller('kc_word_detailCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
-       
-       
-       //#region收藏/取消收藏
+
+		//#region收藏/取消收藏
 		$scope.fav = function() {
 			if($rootScope.rootvoc.is_favorite == "0") {
 				$rootScope.favorite($rootScope.rootvoc.id, $rootScope.rootvoc.category_id, function(response) {
@@ -6755,7 +6850,7 @@
 
 		//#region 扔烤箱
 		$scope.throw = function() {
-			
+
 			$rootScope.root_throw($rootScope.rootvoc.id, $rootScope.rootvoc.category_id, function(response) {
 				if(response.error == 0) {
 					$rootScope.Alert("已将单词扔入烤箱");
@@ -6765,17 +6860,14 @@
 			})
 		}
 		//#endregion
-		
-		
-		
+
 		$scope.speak = function() {
 			$state.go("kc_speak", {
-				"word":$rootScope.rootvoc.word,
-				"audio":$rootScope.rootvoc.audio_us,
+				"word": $rootScope.rootvoc.word,
+				"audio": $rootScope.rootvoc.audio_us,
 			});
 		}
-		
-		
+
 		//#region 拼写
 		$scope.spell = function() {
 			var letters = [];
@@ -6792,8 +6884,7 @@
 			})
 		}
 		//#endregion
-		
-		
+
 		//#region 炼句
 		$scope.sentence = function(index) {
 
@@ -6807,8 +6898,7 @@
 			});
 		}
 		//#endregion
-		
-		
+
 		if($rootScope.rootvoc.example) {
 			setTimeout(function() {
 				for(var m = 0; m < $rootScope.rootvoc.example.length; m++) {
@@ -6820,7 +6910,6 @@
 			}, 1000);
 		}
 
-		
 	})
 	//#endregion
 

@@ -10,7 +10,8 @@
 		$rootScope.wordRootUrl = "http://cet.kaouyu.com/index.php/api/";
 		$rootScope.wordAudioUrl ="http://cet.kaouyu.com/upload/word/mp3/";
 		$rootScope.exerciseAudioUrl ="http://source.efenji.com/item/audio/";
-	
+	    $rootScope.bizUrl = "http://api.kaouyu.com/bizProd.php";
+
 		//$rootScope.rootUrl = "http://222.128.6.94:8090";
 		$rootScope.sMp3 = "http://source.efenji.com/source/audio/";
 		$rootScope.iMp3 = "http://source.efenji.com/item/audio/";
@@ -1328,7 +1329,6 @@
 				controller: 'kc_word_detailCtrl'
 			})
 
-
 	        .state('kc_voctest', {
 				cache: false,
 				url: '/kc_voctest/:id',
@@ -1650,4 +1650,8 @@ function textWidth(text) {
 	sensor.remove();
 	return width;
 };
+//生成长度为10的随机字符串 to string 2-36
+function random(){
+    return	Math.random().toString(36).substring(2,12);
+}
 //#endregion
