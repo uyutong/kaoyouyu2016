@@ -10,9 +10,9 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 		};
 		$rootScope.rootUrl = "http://api.kaouyu.com";
 		$rootScope.wordRootUrl = "http://cet.kaouyu.com/index.php/api/";
-		$rootScope.wordAudioUrl ="http://cet.kaouyu.com/upload/word/mp3/";
-		$rootScope.exerciseAudioUrl ="http://source.efenji.com/item/audio/";
-	    $rootScope.bizUrl = "http://api.kaouyu.com/bizProd.php";
+		$rootScope.wordAudioUrl = "http://cet.kaouyu.com/upload/word/mp3/";
+		$rootScope.exerciseAudioUrl = "http://source.efenji.com/item/audio/";
+		$rootScope.bizUrl = "http://api.kaouyu.com/bizProd.php";
 
 		//$rootScope.rootUrl = "http://222.128.6.94:8090";
 		$rootScope.sMp3 = "http://source.efenji.com/source/audio/";
@@ -21,6 +21,14 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 		$rootScope.exam = "http://download.kaouyu.com/examination";
 		$ionicPlatform.ready(function() {
 			initCordova();
+			if($rootScope.isIOS) {
+				document.addEventListener('deviceready', function() {
+
+					iniFileSystem();
+
+				}, false);
+			}
+
 		});
 
 		InitIonic($rootScope, $ionicModal, $ionicPopup, $ionicLoading, $http, $state);
@@ -755,8 +763,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			});
 		}
 		//#endregion
-		
-		
+
 		//#region 获取要学习的单词
 		$rootScope.wordGet = function() {
 			$rootScope.LoadingShow();
@@ -778,33 +785,33 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			}, "json")
 		}
 
-//		//#region 获取十个要学习的词汇
-//		$rootScope.getVocabulary = function() {
-//			$rootScope.LoadingShow();
-//			var url = $rootScope.rootUrl + "learn/getvocabulary";
-//			var data = {
-//				"uid": $rootScope.userinfo.uid
-//			};
-//			$.post(url, data, function(response) {
-//				$rootScope.LoadingHide();
-//				if(response && response.status == 200) {
-//
-//					//保存刚开始获取的八个词汇 后面的操作在此变量上进行
-//					$rootScope.vocabularys = response.data;
-//
-//					//保存刚开始获取的八个词汇 后面的操作不在此变量上进行 目的是 获取八个真题的时候使用
-//					$rootScope.original_vocabularys = angular.copy($rootScope.vocabularys);
-//
-//					$state.go("kc_main", {
-//						id: 0
-//					});
-//				} else {
-//					$rootScope.Alert("获取词汇失败");
-//				}
-//			}, "json")
-//
-//		}
-//		//#endregion
+		//		//#region 获取十个要学习的词汇
+		//		$rootScope.getVocabulary = function() {
+		//			$rootScope.LoadingShow();
+		//			var url = $rootScope.rootUrl + "learn/getvocabulary";
+		//			var data = {
+		//				"uid": $rootScope.userinfo.uid
+		//			};
+		//			$.post(url, data, function(response) {
+		//				$rootScope.LoadingHide();
+		//				if(response && response.status == 200) {
+		//
+		//					//保存刚开始获取的八个词汇 后面的操作在此变量上进行
+		//					$rootScope.vocabularys = response.data;
+		//
+		//					//保存刚开始获取的八个词汇 后面的操作不在此变量上进行 目的是 获取八个真题的时候使用
+		//					$rootScope.original_vocabularys = angular.copy($rootScope.vocabularys);
+		//
+		//					$state.go("kc_main", {
+		//						id: 0
+		//					});
+		//				} else {
+		//					$rootScope.Alert("获取词汇失败");
+		//				}
+		//			}, "json")
+		//
+		//		}
+		//		//#endregion
 
 		$rootScope.favorite = function(word_id, category_id, callback) {
 			$rootScope.LoadingShow();
@@ -918,35 +925,33 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			}
 
 		})
-		
-		
-		
+
 		var ua = navigator.userAgent;
 		$rootScope.isIOS = ua.match(/(iPhone|iPod|iPad)/);
 		$rootScope.isAndroid = ua.match(/Android/);
 
-	    //#region 创建临时文件
+		//#region 创建临时文件
 		function iniFileSystem() {
-		    window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 		}
 
 		function gotFS(fileSystem) {
-		    fileSystem.root.getFile(audioRecord, {
-		        create: true,
-		        exclusive: false
-		    }, gotFileEntry, fail);
+			fileSystem.root.getFile(audioRecord, {
+				create: true,
+				exclusive: false
+			}, gotFileEntry, fail);
 		}
 
 		function gotFileEntry(fileEntry) {
-		    iosFileURL = fileEntry.toURL();
+			iosFileURL = fileEntry.toURL();
 
-		    console.log(iosFileURL);
+			console.log(iosFileURL);
 		}
 
 		function fail() {
-		    console.log("------error-------");
+			console.log("------error-------");
 		}
-	    //#endregion
+		//#endregion
 
 		//#endregion
 	})
@@ -1382,7 +1387,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				templateUrl: 'templates/kc_record.html',
 				controller: 'kc_recordCtrl'
 			})
-			
+
 			.state('kc_phrase', {
 				cache: false,
 				url: '/kc_phrase',
@@ -1402,7 +1407,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				templateUrl: 'templates/kc_challenge.html',
 				controller: 'kc_challengeCtrl'
 			})
-			
+
 			.state('kc_word_detail', {
 				cache: false,
 				url: '/kc_word_detail',
@@ -1410,27 +1415,26 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				controller: 'kc_word_detailCtrl'
 			})
 
-	        .state('kc_voctest', {
+			.state('kc_voctest', {
 				cache: false,
 				url: '/kc_voctest/:id',
 				templateUrl: 'templates/kc_voctest.html',
 				controller: 'kc_voctestCtrl'
 			})
 
-            .state('kcg_list', {
+			.state('kcg_list', {
 				cache: false,
 				url: '/kcg_list/:id',
 				templateUrl: 'templates/kcg_list.html',
 				controller: 'kcg_listCtrl'
 			})
 
-            .state('kcg_exercise', {
+			.state('kcg_exercise', {
 				cache: false,
 				url: '/kcg_exercise/:id',
 				templateUrl: 'templates/kcg_exercise.html',
 				controller: 'kcg_exerciseCtrl'
 			})
-
 
 		//  var userinfo = getStorage("userinfo");
 
@@ -1732,7 +1736,7 @@ function textWidth(text) {
 	return width;
 };
 //生成长度为10的随机字符串 to string 2-36
-function random(){
-    return	Math.random().toString(36).substring(2,12);
+function random() {
+	return Math.random().toString(36).substring(2, 12);
 }
 //#endregion
