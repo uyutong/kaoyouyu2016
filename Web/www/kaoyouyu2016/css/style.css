@@ -872,7 +872,7 @@ input[readonly].dc-input.activated{border-color:#0FC0A1; color:#FFF; background-
 
 
 .banner {
-	width: 88%;
+	width: 80%;
 	background-color: #FDEBBB;
 	border: 3px solid #FFCA44;
 	margin: 30px auto 0px auto;
@@ -882,11 +882,11 @@ input[readonly].dc-input.activated{border-color:#0FC0A1; color:#FFF; background-
 
 .banner .headline {
 	font-family: HuakangWawa;
-	font-size: 26px;
+	font-size: 22px;
 	color: #fff;
 	text-shadow: 2px 2px 6px #000;
 	-webkit-text-stroke: 1px #00B9EF;
-	margin: 15px auto 15px auto;
+	margin: 10px auto 10px auto;
 }
 
 .banner .body {

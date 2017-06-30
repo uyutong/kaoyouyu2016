@@ -9,9 +9,9 @@
             <!--<span class="green nowrap" ng-if="item.isExit==0">开始模考</span>
             <span class="green nowrap" ng-if="item.isExit==1">查看结果</span>-->
             <div class="row" style="padding:0px; margin-top:15px;">
-                <div class="col green" style="padding:0px; position:relative;" ng-click="endMK($index,'xz')">作文批改<img class="m-uploaded" src="img/uploaded.png" ng-if="(item.stu_file_writing && !item.writing_file) || (item.isExit==1 && !item.writing_file)" /><img class="m-corrected" src="img/corrected.png" ng-if="item.writing_file" /></div>
-                <div class="col green" style="padding:0px; position:relative;" ng-click="endMK($index,'fy')">翻译批改<img class="m-uploaded" src="img/uploaded.png" ng-if="(item.stu_file_translate && !item.translate_file) || (item.isExit==1 && !item.translate_file)" /><img class="m-corrected" src="img/corrected.png" ng-if="item.translate_file" /></div>
-                <div class="col green" style="padding:0px; position:relative;" ng-click="beginMK($index)">{{item.isExit==0?"开始模考":"整卷报告"}}</div>
+                <!--<div class="col green" style="padding:0px; position:relative;" ng-click="endMK($index,'xz')">作文批改<img class="m-uploaded" src="img/uploaded.png" ng-if="(item.stu_file_writing && !item.writing_file) || (item.isExit==1 && !item.writing_file)" /><img class="m-corrected" src="img/corrected.png" ng-if="item.writing_file" /></div>
+                <div class="col green" style="padding:0px; position:relative;" ng-click="endMK($index,'fy')">翻译批改<img class="m-uploaded" src="img/uploaded.png" ng-if="(item.stu_file_translate && !item.translate_file) || (item.isExit==1 && !item.translate_file)" /><img class="m-corrected" src="img/corrected.png" ng-if="item.translate_file" /></div>-->
+                <div class="col green text-center" style="padding:0px; position:relative;" ng-click="beginMK($index)">{{item.isExit==0?"开始模考":"整卷报告"}}</div>
             </div>
         </div>
     </div>

@@ -13,17 +13,17 @@
     
     <div class="kc_main" style="font-size: 20px;color: white;">
        	<div class="padding text-center word" style="padding-right: 50px;"><img src="img/dc/play.png" width="26" id="kc_speak_word" ng-click="play();"/>{{word}}</div>
-       	<div class="padding text-center">[dsafdsa]</div>
+       	<div class="padding text-center">[{{yb}}]</div>
        	<div class="padding row" style="margin-top: 20px;margin-bottom: 20px;">     
        	     <div class="padding col text-center col-center">
-       	     	<span class="padding" style="display: inline-block;">Stop</span><br>
-       	     	<span class="padding" style="display: inline-block;">00:00</span>
+       	     	<span class="padding" style="display: inline-block;">{{record_state}}</span><br>
+       	     	<span class="padding" style="display: inline-block;">00:0{{seconds}}</span>
        	     </div>
        	     <div class="padding col text-center col-center">
        	     	得分？
        	     </div>
        	</div>      
-       	<div class="padding text-center"><img width="60" style="padding: 5px;" src="img/dc/fayin.png" ng-click="recordAudio()" ><img width="60" style="padding: 5px;" src="img/dc/ic_play.png" ng-click="playRecordAudio()" ></div>
+       	<div class="padding text-center"><img width="60" id="read_record" style="padding: 5px;" src="img/dc/fayin.png" ng-click="recordAudio()" ><img ng-app="!record" width="60" style="padding: 5px;" id="read_play" src="img/dc/ic_play.png" ng-click="playRecordAudio()" ></div>
         <div class="padding text-center">发音评测</div>
     </div>
     

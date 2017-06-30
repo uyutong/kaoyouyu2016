@@ -1406,12 +1406,12 @@
 		$scope.getBizProd();
 
 		$scope.addOrder = function() {
-				//#region 重新获取地址
+			//#region 重新获取地址
 			var url = $rootScope.bizUrl;
 			var data = {
 				"func": "addOrder",
 				"unionid": $rootScope.userinfo.unionid,
-			    "payway": "3",
+				"payway": "3",
 				"prodid": $scope.bizProduct.prodid,
 				"money": $scope.bizProduct.price,
 				"buy_num": "1"
@@ -1431,41 +1431,41 @@
 			//#endregion		
 		}
 
-        $scope.unifiedorder = function(){
-//      	var url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-//			var data = {
-//				"xmlContent": "<xml><appid>wx2421b1c4370ec43b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>"
-//			};
-//			$rootScope.LoadingShow();
-//			$http.post(url, data).success(function(response) {
-//				$rootScope.LoadingHide();
-//				if(response) {
-//				}
-//			}).error(function(response, status) {
-//				$rootScope.LoadingHide();
-//				$rootScope.Alert('连接失败！[' + response + status + ']');
-//				return;
-//			});
-//			//#endregion	
-			     $.ajax({
-                     url:'https://api.mch.weixin.qq.com/pay/unifiedorder',
-                     type:'post',
-                     data: "<xml><appid>wx63489880614d923b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>",
-                     dataType:'xml',
-                     success:function(data){
-                         alert(data);
-                         //成功之后调用该函数
-                         //data:服务器返回的数据，
-                         //如果服务器返回的是一个xml文档
-                         //需要调用$(data),将xml转换成一个jQuery对象                       
-                     },
+		$scope.unifiedorder = function() {
+			//      	var url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+			//			var data = {
+			//				"xmlContent": "<xml><appid>wx2421b1c4370ec43b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>"
+			//			};
+			//			$rootScope.LoadingShow();
+			//			$http.post(url, data).success(function(response) {
+			//				$rootScope.LoadingHide();
+			//				if(response) {
+			//				}
+			//			}).error(function(response, status) {
+			//				$rootScope.LoadingHide();
+			//				$rootScope.Alert('连接失败！[' + response + status + ']');
+			//				return;
+			//			});
+			//			//#endregion	
+			$.ajax({
+				url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
+				type: 'post',
+				data: "<xml><appid>wx63489880614d923b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>",
+				dataType: 'xml',
+				success: function(data) {
+					alert(data);
+					//成功之后调用该函数
+					//data:服务器返回的数据，
+					//如果服务器返回的是一个xml文档
+					//需要调用$(data),将xml转换成一个jQuery对象                       
+				},
 
-                     error:function(){
-                         //失败调用该函数
-                         alert('系统出错');
-                     }
-                 });
-        }
+				error: function() {
+					//失败调用该函数
+					alert('系统出错');
+				}
+			});
+		}
 
 		$scope.scanCode = function() {
 
@@ -5588,34 +5588,6 @@
 		//			}, "json")
 		//			//#endregion
 
-		//#region 获取八个要学习的词汇
-		$scope.getVocabulary = function() {
-			$rootScope.LoadingShow();
-			var url = $rootScope.rootUrl + "learn/getvocabulary";
-			var data = {
-				"uid": $rootScope.userinfo.uid
-			};
-			$.post(url, data, function(response) {
-				$rootScope.LoadingHide();
-				if(response && response.status == 200) {
-
-					//保存刚开始获取的八个词汇 后面的操作在此变量上进行
-					$rootScope.vocabularys = response.data;
-
-					//保存刚开始获取的八个词汇 后面的操作不在此变量上进行 目的是 获取八个真题的时候使用
-					$rootScope.original_vocabularys = angular.copy($rootScope.vocabularys);
-
-					$state.go("kc_main", {
-						id: 0
-					});
-				} else {
-					$rootScope.Alert("获取词汇失败");
-				}
-			}, "json")
-
-		}
-		//#endregion
-
 		//#region 获取单词计划
 		$scope.getWordPlan = function() {
 			$rootScope.LoadingShow();
@@ -5635,27 +5607,6 @@
 			}, "json")
 		}
 		//#endregion
-
-		//#region 获取要学习的单词
-		$scope.wordGet = function() {
-			$rootScope.LoadingShow();
-			var url = $rootScope.wordRootUrl + "word_get";
-			var data = {
-				"unionid": $rootScope.userinfo.unionid,
-				"level": $rootScope.userinfo.level
-			};
-			$.post(url, data, function(response) {
-				$rootScope.LoadingHide();
-				if(response) {
-					$rootScope.vocabularys = response;
-					$state.go("kc_main", {
-						id: 0
-					});
-				} else {
-					$rootScope.Alert("获取词汇失败");
-				}
-			}, "json")
-		}
 
 		$scope.getTestWord = function() {
 			$rootScope.LoadingShow();
@@ -6192,6 +6143,7 @@
 			$state.go("kc_speak", {
 				"word": $scope.voc.word,
 				"audio": $scope.voc.audio_us,
+				"yb": $scope.voc.pron_us
 			});
 		}
 
@@ -6653,29 +6605,22 @@
 	})
 	//#endregion
 
-	.controller('kc_speakCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
+	.controller('kc_speakCtrl', function($rootScope, $scope, $state, $stateParams, $http, $interval) {
 
 		$scope.recorded = false;
 		$scope.playing = false;
 		$scope.score = 0;
 		$scope.seconds = 0;
+		$scope.record_state = "Stop";
 		$scope.word = $stateParams.word;
 		$scope.audio_us = $stateParams.audio;
-		$scope.time_long = 3;
+		$scope.yb = $stateParams.yb;
+		$scope.time_long = 5;
 
-		//		$scope.per_progress = 23;
-		//		if($scope.word.en.length > 8) {
+		//		if($scope.word.length > 8) {
 		//			$scope.time_long = 5;
-		//			$scope.per_progress = 14;
 		//		}
 		$scope.isFinished = false;
-		//	
-		//		if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/') > 10) {
-		//			setTimeout(function() {
-		//				$('#explain_word1').html($scope.word.zh.replace('/', '<br>/'));
-		//			}, 100);
-		//		}
-
 		// Record audio
 		//mp3不支持
 		var remoreAudioUrl = "";
@@ -6685,17 +6630,13 @@
 		if($rootScope.isIOS) {
 			src = audioRecord;
 		}
-
-		$scope.clicked = false;
+		$scope.clicked = true;
 		$scope.recordAudio = function() {
 			$scope.if_low_show = false;
-
-			if(!$scope.clicked) {
+			if($scope.clicked) {
 				$scope.recorded = false;
-				$scope.clicked = true;
+				$scope.clicked = false;
 				$scope.seconds = 0;
-				$scope.count = 0;
-
 				mediaRec = new Media(src,
 					// success callback
 					function() {},
@@ -6706,30 +6647,20 @@
 				);
 				// Record audio
 				mediaRec.startRecord();
-
-				$("#read_record").attr("src", "img/record_gif.gif")
-
+				$scope.record_state = "Recording";
+				$("#read_record").attr("src", "img/dc/ic_pause.png")
 				var timer = $interval(function() {
-					$scope.count++;
-					if($scope.count == 1) {} else if($scope.count > $scope.time_long) {
-						$scope.seconds = $scope.time_long;
-					} else {
-						$scope.seconds = $scope.count - 1;
-					}
-
-					if($scope.count == $scope.time_long + 1) {
-						$("#read_record").attr("src", "img/xiaoxue_cut_09.png")
+					$scope.seconds++;
+					$scope.record_state = "Stop";
+					if($scope.seconds == $scope.time_long) {
 						$scope.recorded = true;
-						$scope.clicked = false;
+						$scope.clicked = true;
+						$("#read_record").attr("src", "img/dc/fayin.png")
 						mediaRec.stopRecord();
 						$scope.uploadAudio($scope.word.en);
 					}
 
-					if($scope.count > $scope.time_long) {
-						$interval.cancel(timer); //停止并清除
-					}
-
-				}, 1000, 10);
+				}, 1000, 5);
 
 			}
 		}
@@ -6787,30 +6718,19 @@
 
 		$scope.playRecordAudio = function() {
 
-			if(!$scope.playing) {
+			if(!$scope.playing&&!recorded) {
 				$scope.seconds = 0;
-				$scope.count = 0;
 				$scope.playing = true;
 				mediaRec.play();
-
-				$("#read_play").attr("src", "img/play_gif.gif")
+				$("#read_play").attr("src", "img/dc/ic_pause.png")
 				var timer2 = $interval(function() {
-					$scope.count++;
-					if($scope.count == 1) {} else if($scope.count > $scope.time_long) {
-						$scope.seconds = $scope.time_long;
-					} else {
-						$scope.seconds = $scope.count - 1;
-					}
-					$('.progress_bar').width(($scope.per_progress * $scope.seconds) + '%').css("backgroundColor", "#0c7cd6");
+					$scope.seconds++;
 					if($scope.seconds == $scope.time_long) {
 						$scope.playing = false;
 						mediaRec.stop();
-						$("#read_play").attr("src", "img/xiaoxue_cut_07.png")
+						$("#read_play").attr("src", "img/dc/ic_play.png")
 					}
-					if($scope.count > $scope.time_long) {
-						$interval.cancel(timer2); //停止并清除
-					}
-				}, 1000, 10);
+				}, 1000, 5);
 			}
 		}
 
@@ -6865,6 +6785,7 @@
 			$state.go("kc_speak", {
 				"word": $rootScope.rootvoc.word,
 				"audio": $rootScope.rootvoc.audio_us,
+				"audio": $rootScope.rootvoc.pron_us
 			});
 		}
 
@@ -7043,11 +6964,11 @@
 			}
 		}
 
-		$scope.continue = function() {
-			$state.go("kc_main", {
-				id: 0
-			})
-		}
+		//		$scope.continue = function() {
+		//			$state.go("kc_main", {
+		//				id: 0
+		//			})
+		//		}
 
 		//#region收藏/取消收藏
 		$scope.fav = function() {
@@ -7117,7 +7038,7 @@
 			$scope.if_subtype2_finished = false;
 
 			$scope.exercise.stem_text = $scope.exercise.stem_text.replace("___", "<input class='text-center' name='et_tv' id='input_" + $scope.exercise.keys + "' maxlength='" + $scope.exercise.keys.length + "'  style='width:60px'/>");
-			alert($scope.exercise.stem_text);
+			//			alert($scope.exercise.stem_text);
 			setTimeout(function() {
 				$("#challenge_subtype2_" + $scope.exercise.keys).html($scope.exercise.stem_text);
 				//input宽度自适应
@@ -7197,11 +7118,11 @@
 		//		}
 		//		//#endregion
 
-		$scope.continue = function() {
-			$state.go("kc_main", {
-				id: 0
-			})
-		}
+		//		$scope.continue = function() {
+		//			$state.go("kc_main", {
+		//				id: 0
+		//			})
+		//		}
 
 		//#region 涂抹题
 		$scope.earse = function($event) {
@@ -7231,6 +7152,24 @@
 			}
 		}
 
+		//只提交错误的
+		$scope.exerciseSubmit = function(wordid) {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "exercise_submit";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"word_list": wordid
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(!response.error) {
+
+				} else {
+					$rootScope.Alert("提交真题失败");
+				}
+			}, "json");
+		}
 		$scope.chooseAnswer = function(option) {
 			if($scope.exercise.submited) {
 				return;
@@ -7249,8 +7188,11 @@
 						});
 					}
 				}, 1000)
+			} else {
+				$scope.exerciseSubmit($scope.exercise.word_id);
 			}
 		}
+		//
 
 		//#region收藏/取消收藏
 		$scope.fav = function() {

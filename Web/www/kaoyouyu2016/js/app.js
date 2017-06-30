@@ -755,6 +755,56 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			});
 		}
 		//#endregion
+		
+		
+		//#region 获取要学习的单词
+		$rootScope.wordGet = function() {
+			$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "word_get";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(response) {
+					$rootScope.vocabularys = response;
+					$state.go("kc_main", {
+						id: 0
+					});
+				} else {
+					$rootScope.Alert("获取词汇失败");
+				}
+			}, "json")
+		}
+
+//		//#region 获取十个要学习的词汇
+//		$rootScope.getVocabulary = function() {
+//			$rootScope.LoadingShow();
+//			var url = $rootScope.rootUrl + "learn/getvocabulary";
+//			var data = {
+//				"uid": $rootScope.userinfo.uid
+//			};
+//			$.post(url, data, function(response) {
+//				$rootScope.LoadingHide();
+//				if(response && response.status == 200) {
+//
+//					//保存刚开始获取的八个词汇 后面的操作在此变量上进行
+//					$rootScope.vocabularys = response.data;
+//
+//					//保存刚开始获取的八个词汇 后面的操作不在此变量上进行 目的是 获取八个真题的时候使用
+//					$rootScope.original_vocabularys = angular.copy($rootScope.vocabularys);
+//
+//					$state.go("kc_main", {
+//						id: 0
+//					});
+//				} else {
+//					$rootScope.Alert("获取词汇失败");
+//				}
+//			}, "json")
+//
+//		}
+//		//#endregion
 
 		$rootScope.favorite = function(word_id, category_id, callback) {
 			$rootScope.LoadingShow();
@@ -1320,7 +1370,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			//炼句
 			.state('kc_speak', {
 				cache: false,
-				url: '/kc_speak/:word/:audio',
+				url: '/kc_speak/:word/:audio/:yb',
 				templateUrl: 'templates/kc_speak.html',
 				controller: 'kc_speakCtrl'
 			})
