@@ -1,4 +1,6 @@
-﻿angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePopup', 'dachutimes.controllers'])
+﻿var audioRecord = "audio.wav";
+var iosFileURL = "";
+angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePopup', 'dachutimes.controllers'])
 
 	.run(function($ionicPlatform, $http, $state, $rootScope, $ionicModal, $ionicPopup, $ionicLoading, $ionicActionSheet, $ionicHistory) {
 
@@ -866,6 +868,35 @@
 			}
 
 		})
+		
+		
+		
+		var ua = navigator.userAgent;
+		$rootScope.isIOS = ua.match(/(iPhone|iPod|iPad)/);
+		$rootScope.isAndroid = ua.match(/Android/);
+
+	    //#region 创建临时文件
+		function iniFileSystem() {
+		    window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+		}
+
+		function gotFS(fileSystem) {
+		    fileSystem.root.getFile(audioRecord, {
+		        create: true,
+		        exclusive: false
+		    }, gotFileEntry, fail);
+		}
+
+		function gotFileEntry(fileEntry) {
+		    iosFileURL = fileEntry.toURL();
+
+		    console.log(iosFileURL);
+		}
+
+		function fail() {
+		    console.log("------error-------");
+		}
+	    //#endregion
 
 		//#endregion
 	})
