@@ -6654,10 +6654,10 @@
 					$scope.record_state = "Stop";
 					if($scope.seconds == $scope.time_long) {
 						$scope.recorded = true;
-						$scope.clicked = true;
+						$scope.clicked = true; 
 						$("#read_record").attr("src", "img/dc/fayin.png")
 						mediaRec.stopRecord();
-						$scope.uploadAudio($scope.word.en);
+						$scope.uploadAudio($scope.word);
 					}
 
 				}, 1000, 5);
@@ -6736,6 +6736,7 @@
 		$scope.playReadWord1 = function(audio) {
 			$rootScope.playWord(audio, $("#read_paly_1"));
 		}
+		
 		$scope.playReadWord0 = function(audio) {
 			$rootScope.playWord(audio, $("#read_paly_0"));
 		}
