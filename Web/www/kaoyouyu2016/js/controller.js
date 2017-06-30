@@ -6693,7 +6693,7 @@
 			}
 			options.params = params;   
 			var ft = new FileTransfer();   //上传地址
-			var SERVER = $rootScope.rootUrl + "/stt";
+			var SERVER = $rootScope.speakSubmitUrl + "/stt";
 
 			ft.upload(fileURL, encodeURI(SERVER), function(r) {     
 				$rootScope.LoadingHide();
@@ -6706,7 +6706,6 @@
 
 				if($scope.score < 60) {
 					$scope.if_low_show = true;
-
 				}
 
 			}, function(error) {     
@@ -6718,7 +6717,7 @@
 
 		$scope.playRecordAudio = function() {
 
-			if(!$scope.playing&&!recorded) {
+			if(!$scope.playing&&!$scope.recorded) {
 				$scope.seconds = 0;
 				$scope.playing = true;
 				mediaRec.play();
