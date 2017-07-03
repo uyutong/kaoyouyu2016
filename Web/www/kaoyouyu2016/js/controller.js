@@ -5587,6 +5587,14 @@
 		//				}
 		//			}, "json")
 		//			//#endregion
+		
+		
+		$scope.word_search= function(){
+		   var t= $("#word_search_in").val();
+		   if(t){
+		   		$rootScope.wordSearch(trim(t));
+		   }
+		}
 
 		//#region 获取单词计划
 		$scope.getWordPlan = function() {
@@ -6830,6 +6838,28 @@
 				}
 			}, 1000);
 		}
+		
+		
+		$scope.challenge = function(){
+			$rootScope.LoadingShow();
+				var url = $rootScope.wordRootUrl + "exercise_list";
+				var data = {
+					"unionid": $rootScope.userinfo.unionid,
+					"level": $rootScope.userinfo.level,
+					"word_list": $rootScope.rootvoc.id //由于获取联系词汇api有误，暂时硬编码
+				};
+				$.post(url, data, function(response) {
+					$rootScope.LoadingHide();
+					if(!response.error) {
+						$rootScope.ExerciseList = response;
+						$state.go("kc_challenge", {
+							id: 0,type:2
+						});
+					} else {
+						$rootScope.Alert("没找到相关真题");
+					}
+			}, "json");
+		}
 
 	})
 	//#endregion
@@ -6955,7 +6985,7 @@
 					if(!response.error) {
 						$rootScope.ExerciseList = response;
 						$state.go("kc_challenge", {
-							id: 0
+							id: 0,type:1
 						});
 					} else {
 						$rootScope.Alert("获取真题失败");
@@ -7019,8 +7049,9 @@
 	.controller('kc_challengeCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
 
 		$scope.id = parseInt($stateParams.id);
+		$scope.type=parseInt($stateParams.type);
+		
 		$scope.exercise = $rootScope.ExerciseList[$scope.id];
-
 		if($scope.exercise.option_list) {
 			if($scope.exercise.option_list instanceof Array) {} else {
 				$scope.exercise.option_list = $scope.exercise.option_list.split("||");
@@ -7137,16 +7168,18 @@
 		$scope.slideLeft = function() {
 			if($scope.id < $rootScope.ExerciseList.length - 1) {
 				$state.go("kc_challenge", {
-					id: $scope.id + 1
+					id: $scope.id + 1,type:$scope.type
 				});
 			} else {
-				$scope.is_end = true;
+				if($scope.type==1){
+					$scope.is_end = true;
+				}
 			}
 		}
 		$scope.slideRight = function() {
 			if($scope.id > 0) {
 				$state.go("kc_challenge", {
-					id: $scope.id - 1
+					id: $scope.id - 1,type:$scope.type
 				});
 				$scope.is_end = false;
 			}
@@ -7184,7 +7217,7 @@
 				setTimeout(function() {
 					if($scope.id < $rootScope.ExerciseList.length - 1) {
 						$state.go("kc_challenge", {
-							id: $scope.id + 1
+							id: $scope.id + 1,type:$scope.type
 						});
 					}
 				}, 1000)

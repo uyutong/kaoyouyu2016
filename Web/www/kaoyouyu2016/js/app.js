@@ -65,7 +65,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			"password": null,
 			"gender": "Female",
 			"schoolId": "191",
-			"level": "2",
+			"level": "1",
 			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
 			"comeFrom": "0",
 			"isConversion": "0",
@@ -868,6 +868,24 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			}, "json")
 		}
 
+        $rootScope.wordSearch= function(word_spell){
+        	$rootScope.LoadingShow();
+			var url = $rootScope.wordRootUrl + "word_item";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"word": word_spell
+			}
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				//记录每天扔烤箱单词多少个
+				if(response) {
+				    $rootScope.rootvoc = response;
+			        $state.go("kc_word_detail");
+				}
+			}, "json")
+        }
+
 		document.addEventListener("resume", function() {
 			$rootScope.updateUserInfo();
 
@@ -1403,7 +1421,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 			.state('kc_challenge', {
 				cache: false,
-				url: '/kc_challenge/:id',
+				url: '/kc_challenge/:id/:type',
 				templateUrl: 'templates/kc_challenge.html',
 				controller: 'kc_challengeCtrl'
 			})
