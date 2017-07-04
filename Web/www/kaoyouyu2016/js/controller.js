@@ -6712,7 +6712,7 @@
 
 		$scope.playRecordAudio = function() {
 
-			if(!$scope.playing && $scope.recorded) {
+			if(!$scope.playing&&$scope.recorded) {
 				$scope.seconds = 0;
 				$scope.playing = true;
 				if(mediaRec) {} else {
