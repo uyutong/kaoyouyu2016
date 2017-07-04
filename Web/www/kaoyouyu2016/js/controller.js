@@ -1405,9 +1405,63 @@
 			//#endregion
 		}
 		$scope.getBizProd();
+
+		$scope.orderPay = function(out_trade_no, pay_orderid, prodid,validity) {
+			//#region 激活
+			var url = $rootScope.bizUrl;
+			var data = {
+				"func": "orderPay",
+				"unionid": $rootScope.userinfo.unionid,
+				"payway": "3",
+				"orderid": out_trade_no,
+				"pay_orderid": pay_orderid,
+				"prodid": prodid,
+				"validity": validity
+			};
+			encode(data);
+			$rootScope.LoadingShow();
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.flag == 1) {
+					$rootScope.Alert(response.err, function() {
+						//#region 获取用户信息
+						var url = $rootScope.rootUrl + "/userinfo.php";
+						var data = {
+							"func": "getUserInfo",
+							"unionid": $rootScope.userinfo.unionid
+						};
+						encode(data);
+
+						$http.post(url, data).success(function(response) {
+							$rootScope.LoadingHide();
+
+							if(response.data && response.data.userId) {
+								$rootScope.userinfo = response.data;
+								setStorage("userinfo", angular.copy($rootScope.userinfo));
+								$state.go("tab.me_home");
+							}
+
+						}).error(function(response, status) {
+							$rootScope.LoadingHide();
+							$rootScope.Alert('连接失败！[' + response + status + ']');
+							return;
+						});
+
+						//#endregion
+
+					});
+
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+
 		$scope.addOrder = function() {
 			//#region 重新获取地址
-			var url = "http://222.128.6.94:8090/bizProd.php";
+			var url = $rootScope.bizUrl;
 			var data = {
 				"func": "addOrder",
 				"unionid": $rootScope.userinfo.unionid,
@@ -1422,7 +1476,8 @@
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
 				if(response.data) {
-					var url = "http://222.128.6.94:8090/wxpay.php?func=unifiedorder&product_name=" + $scope.bizProduct.product_name + "&total_fee=" + parseFloat($scope.bizProduct.price) * 100 + "&out_trade_no=" + response.data + "&sking=__&fr=1";
+					var outTradeNo = response.data;
+					var url =  $rootScope.rootUrl+"/wxpay.php?func=unifiedorder&product_name=" + $scope.bizProduct.product_name + "&total_fee=" + parseFloat($scope.bizProduct.price) * 100 + "&out_trade_no=" + outTradeNo + "&sking=__&fr=1";
 					$http.get(url).success(function(response) {
 						if(response.flag == 0) {
 							var params = {
@@ -1432,7 +1487,20 @@
 								timestamp: response.data.timestamp, // timestamp
 								sign: response.data.sign, // signed string
 							};
-							Wechat.sendPaymentRequest(params, function() {}, function(reason) {
+							Wechat.sendPaymentRequest(params, function() {
+								var url2 = $rootScope.rootUrl+"/wxpay.php?func=orderquery&out_trade_no=" + outTradeNo + "&sking=__&fr=1";;
+								$http.get(url2).success(function(response) {
+									//{"flag":0,"err":"","data":{"return_code":"SUCCESS","return_msg":"OK","trade_state":"SUCCESS","transaction_id":"4009342001201707048870474679","out_trade_no":"170000007120170704164906","total_fee":"1","time_end":"20170704165154"}}
+									if(response.flag == 0 && response.data.return_code == "SUCCESS") {
+										$scope.orderPay(response.data.out_trade_no, response.data.transaction_id, $scope.bizProduct.prodid, $scope.bizProduct.validity);
+									}
+								}).error(function(response, status) {
+									$rootScope.LoadingHide();
+									$rootScope.Alert('连接失败！[' + response + status + ']');
+									return;
+								});
+
+							}, function(reason) {
 								$rootScope.Alert("支付失败: " + reason);
 							});
 						}
@@ -1450,6 +1518,7 @@
 			});
 			//#endregion		
 		}
+
 		$scope.activeVcode = function(code) {
 			if(code) {
 				//#region 激活
@@ -1513,7 +1582,7 @@
 				$rootScope.Alert("无效二维码。");
 			}
 		}
-	
+
 		$scope.vcodeByText = function() {
 			if($('#vcode_text').val().length > 0) {
 				$scope.activeVcode($.trim($('#vcode_text').val()));
