@@ -1452,73 +1452,82 @@
 			//#endregion		
 		}
 
+		$scope.activeVcode = function(code) {
+			if(code) {
+				//#region 激活
+				var url = $rootScope.rootUrl + "/vcode.php";
+				var data = {
+					"func": "activateCode",
+					"unionid": $rootScope.userinfo.unionid,
+					"level": $rootScope.userinfo.level,
+					"code": code,
+					"fr": 1
+				};
+				encode(data);
+
+				$rootScope.LoadingShow();
+
+				$http.post(url, data).success(function(response) {
+					$rootScope.LoadingHide();
+
+					if(response.flag == 0) {
+						$rootScope.Alert(response.err, function() {
+							//#region 获取用户信息
+							var url = $rootScope.rootUrl + "/userinfo.php";
+							var data = {
+								"func": "getUserInfo",
+								"unionid": $rootScope.userinfo.unionid
+							};
+							encode(data);
+
+							$http.post(url, data).success(function(response) {
+								$rootScope.LoadingHide();
+
+								if(response.data && response.data.userId) {
+									$rootScope.userinfo = response.data;
+
+									setStorage("userinfo", angular.copy($rootScope.userinfo));
+
+									$state.go("tab.me_home");
+								}
+
+							}).error(function(response, status) {
+								$rootScope.LoadingHide();
+								$rootScope.Alert('连接失败！[' + response + status + ']');
+								return;
+							});
+
+							//#endregion
+
+						});
+					} else if(response.flag == -1) {
+						$rootScope.Alert(response.err);
+					} else {
+						$rootScope.Alert("错误，请稍后再试。");
+					}
+				}).error(function(response, status) {
+					$rootScope.LoadingHide();
+					$rootScope.Alert('连接失败！[' + response + status + ']');
+					return;
+				});
+				//#endregion
+			} else {
+				$rootScope.Alert("无效二维码。");
+			}
+		}
+	
+		$scope.vcodeByText = function() {
+			if($('#vcode_text').val().length > 0) {
+				$scope.activeVcode($.trim($('#vcode_text').val()));
+			}
+		}
 		$scope.scanCode = function() {
 
 			cordova.plugins.barcodeScanner.scan(
 				function(result) {
 					if(!result.cancelled) {
 						var code = result.text;
-						if(code) {
-							//#region 激活
-							var url = $rootScope.rootUrl + "/vcode.php";
-							var data = {
-								"func": "activateCode",
-								"unionid": $rootScope.userinfo.unionid,
-								"level": $rootScope.userinfo.level,
-								"code": code,
-								"fr": 1
-							};
-							encode(data);
-
-							$rootScope.LoadingShow();
-
-							$http.post(url, data).success(function(response) {
-								$rootScope.LoadingHide();
-
-								if(response.flag == 0) {
-									$rootScope.Alert(response.err, function() {
-										//#region 获取用户信息
-										var url = $rootScope.rootUrl + "/userinfo.php";
-										var data = {
-											"func": "getUserInfo",
-											"unionid": $rootScope.userinfo.unionid
-										};
-										encode(data);
-
-										$http.post(url, data).success(function(response) {
-											$rootScope.LoadingHide();
-
-											if(response.data && response.data.userId) {
-												$rootScope.userinfo = response.data;
-
-												setStorage("userinfo", angular.copy($rootScope.userinfo));
-
-												$state.go("tab.me_home");
-											}
-
-										}).error(function(response, status) {
-											$rootScope.LoadingHide();
-											$rootScope.Alert('连接失败！[' + response + status + ']');
-											return;
-										});
-
-										//#endregion
-
-									});
-								} else if(response.flag == -1) {
-									$rootScope.Alert(response.err);
-								} else {
-									$rootScope.Alert("错误，请稍后再试。");
-								}
-							}).error(function(response, status) {
-								$rootScope.LoadingHide();
-								$rootScope.Alert('连接失败！[' + response + status + ']');
-								return;
-							});
-							//#endregion
-						} else {
-							$rootScope.Alert("无效二维码。");
-						}
+						$scope.activeVcode(code);
 					}
 				},
 				function(error) {
@@ -6712,7 +6721,7 @@
 
 		$scope.playRecordAudio = function() {
 
-			if(!$scope.playing&&$scope.recorded) {
+			if(!$scope.playing && $scope.recorded) {
 				$scope.seconds = 0;
 				$scope.playing = true;
 				if(mediaRec) {} else {
