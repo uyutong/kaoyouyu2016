@@ -429,7 +429,7 @@
 						window.open('https://itunes.apple.com/cn/app/wechat/id414478124', '_system', 'location=yes');
 					}, function() {});
 				}
-				
+
 			}, function(reason) {
 				$rootScope.Alert("Failed: " + reason);
 			});
@@ -1433,8 +1433,7 @@
 								timestamp: response.data.timestamp, // timestamp
 								sign: response.data.sign, // signed string
 							};
-							Wechat.sendPaymentRequest(params, function() {
-							}, function(reason) {
+							Wechat.sendPaymentRequest(params, function() {}, function(reason) {
 								$rootScope.Alert("支付失败: " + reason);
 							});
 						}
@@ -6629,7 +6628,7 @@
 		$scope.clicked = true;
 		$scope.recordAudio = function() {
 			$scope.if_low_show = false;
-			if($scope.clicked) {
+			if($scope.clicked && !$scope.playing) {
 				$scope.recorded = false;
 				$scope.clicked = false;
 				$scope.seconds = 0;
@@ -6716,6 +6715,15 @@
 			if(!$scope.playing && !$scope.recorded) {
 				$scope.seconds = 0;
 				$scope.playing = true;
+				if(mediaRec) {}
+				elese {
+					mediaRec = new Media(src,
+						// success callback
+						function() {},
+						// error callback
+						function(err) {}
+					);
+				}
 				mediaRec.play();
 				$("#read_play").attr("src", "img/dc/ic_pause.png")
 				var timer2 = $interval(function() {
@@ -6726,6 +6734,7 @@
 						$("#read_play").attr("src", "img/dc/ic_play.png")
 					}
 				}, 1000, 5);
+
 			}
 		}
 
