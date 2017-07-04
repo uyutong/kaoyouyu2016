@@ -6715,13 +6715,14 @@
 			if(!$scope.playing && !$scope.recorded) {
 				$scope.seconds = 0;
 				$scope.playing = true;
-				if(mediaRec) {}
-				elese {
+				if(mediaRec) {} else {
 					mediaRec = new Media(src,
 						// success callback
 						function() {},
 						// error callback
-						function(err) {}
+						function(err) {
+							$scope.clicked = false;
+						}
 					);
 				}
 				mediaRec.play();
