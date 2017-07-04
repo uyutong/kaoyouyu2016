@@ -8,6 +8,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			AppID: "wx63489880614d923b",
 			AppSecret: "32ef6430ca95d2b706e6596cbe75a138"
 		};
+		
 		$rootScope.rootUrl = "http://222.128.6.94:8090/";
 //	    $rootScope.rootUrl = "http://api.kaouyu.com";
 		$rootScope.wordRootUrl = "http://cet.kaouyu.com/index.php/api/";

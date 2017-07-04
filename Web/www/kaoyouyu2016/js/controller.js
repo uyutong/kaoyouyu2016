@@ -1452,6 +1452,7 @@
 			//#endregion		
 		}
 
+
 		$scope.activeVcode = function(code) {
 			if(code) {
 				//#region 激活
