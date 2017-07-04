@@ -1427,14 +1427,13 @@
 					$http.get(url).success(function(response) {
 						if(response.flag == 0) {
 							var params = {
-								mch_id: response.partnerid, // merchant id
-								prepay_id: response.prepayid, // prepay id returned from server
-								nonce: response.noncestr, // nonce string returned from server
-								timestamp: response.timestamp, // timestamp
-								sign: response.sign, // signed string
+								mch_id: response.data.partnerid, // merchant id
+								prepay_id: response.data.prepayid, // prepay id returned from server
+								nonce: response.data.noncestr, // nonce string returned from server
+								timestamp: response.data.timestamp, // timestamp
+								sign: response.data.sign, // signed string
 							};
 							Wechat.sendPaymentRequest(params, function() {
-								
 							}, function(reason) {
 								$rootScope.Alert("支付失败: " + reason);
 							});
