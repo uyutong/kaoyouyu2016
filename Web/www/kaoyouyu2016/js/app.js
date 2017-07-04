@@ -8,13 +8,13 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			AppID: "wx63489880614d923b",
 			AppSecret: "32ef6430ca95d2b706e6596cbe75a138"
 		};
-		$rootScope.rootUrl = "http://api.kaouyu.com";
+		$rootScope.rootUrl = "http://222.128.6.94:8090/";
+//	    $rootScope.rootUrl = "http://api.kaouyu.com";
 		$rootScope.wordRootUrl = "http://cet.kaouyu.com/index.php/api/";
 		$rootScope.wordAudioUrl = "http://cet.kaouyu.com/upload/word/mp3/";
 		$rootScope.speakSubmitUrl = "http://xx.kaouyu.com/index.php/api";
 		$rootScope.exerciseAudioUrl = "http://source.efenji.com/item/audio/";
 		$rootScope.bizUrl = "http://api.kaouyu.com/bizProd.php";
-		//$rootScope.rootUrl = "http://222.128.6.94:8090";
 		$rootScope.sMp3 = "http://source.efenji.com/source/audio/";
 		$rootScope.iMp3 = "http://source.efenji.com/item/audio/";
 		$rootScope.img = "http://source.efenji.com/item/image/";
@@ -879,8 +879,9 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			$.post(url, data, function(response) {
 				$rootScope.LoadingHide();
 				//记录每天扔烤箱单词多少个
-				if(response) {
-				    $rootScope.rootvoc = response;
+				if(response.error) {
+				}else{
+					$rootScope.rootvoc = response;
 			        $state.go("kc_word_detail");
 				}
 			}, "json")

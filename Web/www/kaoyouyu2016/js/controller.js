@@ -429,7 +429,7 @@
 						window.open('https://itunes.apple.com/cn/app/wechat/id414478124', '_system', 'location=yes');
 					}, function() {});
 				}
-
+				
 			}, function(reason) {
 				$rootScope.Alert("Failed: " + reason);
 			});
@@ -1373,7 +1373,8 @@
 
 		$scope.getBizProd = function() {
 			//#region 重新获取地址
-			var url = $rootScope.bizUrl;
+			//			var url = $rootScope.bizUrl;
+			var url = "http://222.128.6.94:8090/bizProd.php"
 			var data = {
 				"func": "getBizProd",
 				"unionid": $rootScope.userinfo.unionid
@@ -1407,21 +1408,43 @@
 
 		$scope.addOrder = function() {
 			//#region 重新获取地址
-			var url = $rootScope.bizUrl;
+			var url = "http://222.128.6.94:8090/bizProd.php";
 			var data = {
 				"func": "addOrder",
 				"unionid": $rootScope.userinfo.unionid,
 				"payway": "3",
 				"prodid": $scope.bizProduct.prodid,
 				"money": $scope.bizProduct.price,
-				"buy_num": "1"
+				"buy_num": "1",
+				"addrid": "0"
 			};
 			encode(data);
 			$rootScope.LoadingShow();
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
 				if(response.data) {
-					$scope.unifiedorder();
+					var url = "http://222.128.6.94:8090/wxpay.php?func=unifiedorder&product_name=" + $scope.bizProduct.product_name + "&total_fee=" + parseFloat($scope.bizProduct.price) * 100 + "&out_trade_no=" + response.data + "&sking=__&fr=1";
+					$http.get(url).success(function(response) {
+						if(response.flag == 0) {
+							var params = {
+								mch_id: response.partnerid, // merchant id
+								prepay_id: response.prepayid, // prepay id returned from server
+								nonce: response.noncestr, // nonce string returned from server
+								timestamp: response.timestamp, // timestamp
+								sign: response.sign, // signed string
+							};
+							Wechat.sendPaymentRequest(params, function() {
+								
+							}, function(reason) {
+								$rootScope.Alert("支付失败: " + reason);
+							});
+						}
+
+					}).error(function(response, status) {
+						$rootScope.LoadingHide();
+						$rootScope.Alert('连接失败！[' + response + status + ']');
+						return;
+					});
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -1429,42 +1452,6 @@
 				return;
 			});
 			//#endregion		
-		}
-
-		$scope.unifiedorder = function() {
-			//      	var url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-			//			var data = {
-			//				"xmlContent": "<xml><appid>wx2421b1c4370ec43b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>"
-			//			};
-			//			$rootScope.LoadingShow();
-			//			$http.post(url, data).success(function(response) {
-			//				$rootScope.LoadingHide();
-			//				if(response) {
-			//				}
-			//			}).error(function(response, status) {
-			//				$rootScope.LoadingHide();
-			//				$rootScope.Alert('连接失败！[' + response + status + ']');
-			//				return;
-			//			});
-			//			//#endregion	
-			$.ajax({
-				url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
-				type: 'post',
-				data: "<xml><appid>wx63489880614d923b</appid><attach>支付测试</attach><body>APP支付测试</body><mch_id>10000100</mch_id><nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><notify_url>http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</notify_url><out_trade_no>1415659990</out_trade_no><spbill_create_ip>14.23.150.211</spbill_create_ip><total_fee>1</total_fee><trade_type>APP</trade_type><sign>0CB01533B8C1EF103065174F50BCA001</sign></xml>",
-				dataType: 'xml',
-				success: function(data) {
-					alert(data);
-					//成功之后调用该函数
-					//data:服务器返回的数据，
-					//如果服务器返回的是一个xml文档
-					//需要调用$(data),将xml转换成一个jQuery对象                       
-				},
-
-				error: function() {
-					//失败调用该函数
-					alert('系统出错');
-				}
-			});
 		}
 
 		$scope.scanCode = function() {
@@ -5587,13 +5574,12 @@
 		//				}
 		//			}, "json")
 		//			//#endregion
-		
-		
-		$scope.word_search= function(){
-		   var t= $("#word_search_in").val();
-		   if(t){
-		   		$rootScope.wordSearch(trim(t));
-		   }
+
+		$scope.word_search = function() {
+			var t = $("#word_search_in").val();
+			if(t) {
+				$rootScope.wordSearch(trim(t));
+			}
 		}
 
 		//#region 获取单词计划
@@ -6158,11 +6144,13 @@
 		if($scope.voc.example) {
 			setTimeout(function() {
 				for(var m = 0; m < $scope.voc.example.length; m++) {
-					$('#' + $scope.voc.word + '_example').append("<div class='row'><div class='col-80'><div class='col'><p style='color:#ffffff'>" + $scope.voc.example[m].en + "</p><p style='color:#222222'>" + $scope.voc.example[m].zh + "</p></div></div><div class='col-20 text-center col-center'><img src='img/dc/lian.png' width=25 id='" + $scope.voc.word + "_eimg_" + m + "')' ></div></div>");
+					$('#' + $scope.voc.word + '_example').append("<div class='row'><div class='col-80'><div class='col'><p class='liju' style='color:#ffffff'>" + $scope.voc.example[m].en + "</p><p style='color:#222222'>" + $scope.voc.example[m].zh + "</p></div></div><div class='col-20 text-center col-center'><img src='img/dc/lian.png' width=25 id='" + $scope.voc.word + "_eimg_" + m + "')' ></div></div>");
 					$('#' + $scope.voc.word + '_eimg_' + m).click(function() {
 						$scope.sentence(this.id.toString().substring(this.id.toString().length - 1, this.id.toString().length));
 					});
 				}
+				var huaci = new UyuHuaCi();
+				huaci.Init('.liju');
 			}, 1000);
 		}
 
@@ -6239,6 +6227,7 @@
 			setTimeout(function() {
 				$scope.voc.question_show = false;
 				$scope.$apply();
+				$scope.play();
 			}, 1000);
 		}
 
@@ -6662,7 +6651,7 @@
 					$scope.record_state = "Stop";
 					if($scope.seconds == $scope.time_long) {
 						$scope.recorded = true;
-						$scope.clicked = true; 
+						$scope.clicked = true;
 						$("#read_record").attr("src", "img/dc/fayin.png")
 						mediaRec.stopRecord();
 						$scope.uploadAudio($scope.word);
@@ -6725,7 +6714,7 @@
 
 		$scope.playRecordAudio = function() {
 
-			if(!$scope.playing&&!$scope.recorded) {
+			if(!$scope.playing && !$scope.recorded) {
 				$scope.seconds = 0;
 				$scope.playing = true;
 				mediaRec.play();
@@ -6744,7 +6733,7 @@
 		$scope.playReadWord1 = function(audio) {
 			$rootScope.playWord(audio, $("#read_paly_1"));
 		}
-		
+
 		$scope.playReadWord0 = function(audio) {
 			$rootScope.playWord(audio, $("#read_paly_0"));
 		}
@@ -6838,26 +6827,26 @@
 				}
 			}, 1000);
 		}
-		
-		
-		$scope.challenge = function(){
+
+		$scope.challenge = function() {
 			$rootScope.LoadingShow();
-				var url = $rootScope.wordRootUrl + "exercise_list";
-				var data = {
-					"unionid": $rootScope.userinfo.unionid,
-					"level": $rootScope.userinfo.level,
-					"word_list": $rootScope.rootvoc.id //由于获取联系词汇api有误，暂时硬编码
-				};
-				$.post(url, data, function(response) {
-					$rootScope.LoadingHide();
-					if(!response.error) {
-						$rootScope.ExerciseList = response;
-						$state.go("kc_challenge", {
-							id: 0,type:2
-						});
-					} else {
-						$rootScope.Alert("没找到相关真题");
-					}
+			var url = $rootScope.wordRootUrl + "exercise_list";
+			var data = {
+				"unionid": $rootScope.userinfo.unionid,
+				"level": $rootScope.userinfo.level,
+				"word_list": $rootScope.rootvoc.id //由于获取联系词汇api有误，暂时硬编码
+			};
+			$.post(url, data, function(response) {
+				$rootScope.LoadingHide();
+				if(!response.error) {
+					$rootScope.ExerciseList = response;
+					$state.go("kc_challenge", {
+						id: 0,
+						type: 2
+					});
+				} else {
+					$rootScope.Alert("没找到相关真题");
+				}
 			}, "json");
 		}
 
@@ -6985,7 +6974,8 @@
 					if(!response.error) {
 						$rootScope.ExerciseList = response;
 						$state.go("kc_challenge", {
-							id: 0,type:1
+							id: 0,
+							type: 1
 						});
 					} else {
 						$rootScope.Alert("获取真题失败");
@@ -7049,8 +7039,8 @@
 	.controller('kc_challengeCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
 
 		$scope.id = parseInt($stateParams.id);
-		$scope.type=parseInt($stateParams.type);
-		
+		$scope.type = parseInt($stateParams.type);
+
 		$scope.exercise = $rootScope.ExerciseList[$scope.id];
 		if($scope.exercise.option_list) {
 			if($scope.exercise.option_list instanceof Array) {} else {
@@ -7168,10 +7158,11 @@
 		$scope.slideLeft = function() {
 			if($scope.id < $rootScope.ExerciseList.length - 1) {
 				$state.go("kc_challenge", {
-					id: $scope.id + 1,type:$scope.type
+					id: $scope.id + 1,
+					type: $scope.type
 				});
 			} else {
-				if($scope.type==1){
+				if($scope.type == 1) {
 					$scope.is_end = true;
 				}
 			}
@@ -7179,7 +7170,8 @@
 		$scope.slideRight = function() {
 			if($scope.id > 0) {
 				$state.go("kc_challenge", {
-					id: $scope.id - 1,type:$scope.type
+					id: $scope.id - 1,
+					type: $scope.type
 				});
 				$scope.is_end = false;
 			}
@@ -7217,7 +7209,8 @@
 				setTimeout(function() {
 					if($scope.id < $rootScope.ExerciseList.length - 1) {
 						$state.go("kc_challenge", {
-							id: $scope.id + 1,type:$scope.type
+							id: $scope.id + 1,
+							type: $scope.type
 						});
 					}
 				}, 1000)
@@ -7366,9 +7359,9 @@
 			$scope.voc.exercise.submitted = true;
 			$scope.voc.exercise.myanswer = option;
 
-			//			setTimeout(function() {
-			$scope.slideLeft();
-			//			}, 500)
+			setTimeout(function() {
+				$scope.slideLeft();
+			}, 500)
 		}
 
 		$scope.learn = function() {
@@ -7418,6 +7411,13 @@
 			$state.go("kcg_list", {
 				id: index
 			});
+		}
+
+		$scope.word_search = function() {
+			var t = $("#word_search_in").val();
+			if(t) {
+				$rootScope.wordSearch(trim(t));
+			}
 		}
 
 		$scope.kcg_exercise = function(index) {
