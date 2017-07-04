@@ -1405,7 +1405,6 @@
 			//#endregion
 		}
 		$scope.getBizProd();
-
 		$scope.addOrder = function() {
 			//#region 重新获取地址
 			var url = "http://222.128.6.94:8090/bizProd.php";
@@ -1451,8 +1450,6 @@
 			});
 			//#endregion		
 		}
-
-
 		$scope.activeVcode = function(code) {
 			if(code) {
 				//#region 激活
