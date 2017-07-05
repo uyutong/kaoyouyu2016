@@ -795,7 +795,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 					$rootScope.Alert("获取词汇失败");
 				}
 			}, "json")
-
+			
 		}
 		//		//#region 获取十个要学习的词汇
 		//		$rootScope.getVocabulary = function() {
