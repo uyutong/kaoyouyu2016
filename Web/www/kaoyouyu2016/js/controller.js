@@ -6087,10 +6087,8 @@
 
 		//#region 炼句
 		$scope.sentence = function(index) {
-
 			var sentence_en = $scope.voc.example[index].en.replace("<u>", "").replace("</u>", "");
 			var sentence_zh = $scope.voc.example[index].zh;
-
 			$state.go("kc_sentence", {
 				"word": $scope.voc.word,
 				"sentence_en": sentence_en,
