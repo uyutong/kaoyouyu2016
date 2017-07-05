@@ -545,52 +545,52 @@
 
 	//#region 我的
 	.controller('me_homeCtrl', function($rootScope, $scope, $state, $http) {
-		$rootScope.KB = getStorage("KB");
-		if(!$rootScope.KB || !$rootScope.KB.type) {
-			$rootScope.KB = {
-				"type": 0,
-				"level": "0",
-				tl: false,
-				yd: false,
-				fy: false,
-				xz: false,
-				date: formatDate(new Date())
-			};
-		}
+		//		$rootScope.KB = getStorage("KB");
+		//		if(!$rootScope.KB || !$rootScope.KB.type) {
+		//			$rootScope.KB = {
+		//				"type": 0,
+		//				"level": "0",
+		//				tl: false,
+		//				yd: false,
+		//				fy: false,
+		//				xz: false,
+		//				date: formatDate(new Date())
+		//			};
+		//		}
 
 		//如果存储的日期不是当天，所有状态数据清零
-		if($rootScope.KB.date != formatDate(new Date())) {
-			$rootScope.KB.tl = false;
-			$rootScope.KB.yd = false;
-			$rootScope.KB.fy = false;
-			$rootScope.KB.xz = false;
-		}
+		//		if($rootScope.KB.date != formatDate(new Date())) {
+		//			$rootScope.KB.tl = false;
+		//			$rootScope.KB.yd = false;
+		//			$rootScope.KB.fy = false;
+		//			$rootScope.KB.xz = false;
+		//		}
 
-		//#region 获取考保信息
-		var transform = function(data) {
-			return $.param(data);
-		}
-		//测试 ocffVt6ZE2o_Ybzs1_NbVTVsn5v4
-		$http.post("http://wx.kaouyu.com/wxadmin/index.php?g=Home&m=BaseApi&a=index", {
-			"unionid": $rootScope.userinfo.unionid
-		}, {
-			// $http.post("http://wx.kaouyu.com/wxadmin/index.php?g=Home&m=BaseApi&a=index", { "unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4" }, {
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-			},
-			transformRequest: transform
-		}).success(function(response) {
-			if(response && response.flag && response.flag == 1) {
-				$rootScope.KB.type = response.data.type;
-				$rootScope.KB.level = response.data.level;
-			} else {
-				$rootScope.KB.type = 0
-				$rootScope.KB.level = "0";
-			}
-			setStorage("KB", angular.copy($rootScope.KB));
-		});
-
-		//#endregion
+		//		//#region 获取考保信息
+		//		var transform = function(data) {
+		//			return $.param(data);
+		//		}
+		//		//测试 ocffVt6ZE2o_Ybzs1_NbVTVsn5v4
+		//		$http.post("http://wx.kaouyu.com/wxadmin/index.php?g=Home&m=BaseApi&a=index", {
+		//			"unionid": $rootScope.userinfo.unionid
+		//		}, {
+		//			// $http.post("http://wx.kaouyu.com/wxadmin/index.php?g=Home&m=BaseApi&a=index", { "unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4" }, {
+		//			headers: {
+		//				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+		//			},
+		//			transformRequest: transform
+		//		}).success(function(response) {
+		//			if(response && response.flag && response.flag == 1) {
+		//				$rootScope.KB.type = response.data.type;
+		//				$rootScope.KB.level = response.data.level;
+		//			} else {
+		//				$rootScope.KB.type = 0
+		//				$rootScope.KB.level = "0";
+		//			}
+		//			setStorage("KB", angular.copy($rootScope.KB));
+		//		});
+		//
+		//		//#endregion
 
 		$scope.meUpdate = function() {
 			$rootScope.redirect = "tab.me_home";
@@ -1373,8 +1373,8 @@
 
 		$scope.getBizProd = function() {
 			//#region 重新获取地址
-			//			var url = $rootScope.bizUrl;
-			var url = "http://222.128.6.94:8090/bizProd.php"
+			var url = $rootScope.bizUrl;
+			//			var url = "http://222.128.6.94:8090/bizProd.php"
 			var data = {
 				"func": "getBizProd",
 				"unionid": $rootScope.userinfo.unionid
@@ -1406,7 +1406,11 @@
 		}
 		$scope.getBizProd();
 
-		$scope.orderPay = function(out_trade_no, pay_orderid, prodid,validity) {
+		$scope.codeBack = function(){
+			history.go(-1);
+		}
+		
+		$scope.orderPay = function(out_trade_no, pay_orderid, prodid, validity) {
 			//#region 激活
 			var url = $rootScope.bizUrl;
 			var data = {
@@ -1477,7 +1481,7 @@
 				$rootScope.LoadingHide();
 				if(response.data) {
 					var outTradeNo = response.data;
-					var url =  $rootScope.rootUrl+"/wxpay.php?func=unifiedorder&product_name=" + $scope.bizProduct.product_name + "&total_fee=" + parseFloat($scope.bizProduct.price) * 100 + "&out_trade_no=" + outTradeNo + "&sking=__&fr=1";
+					var url = $rootScope.rootUrl + "/wxpay.php?func=unifiedorder&product_name=" + $scope.bizProduct.product_name + "&total_fee=" + parseFloat($scope.bizProduct.price) * 100 + "&out_trade_no=" + outTradeNo + "&sking=__&fr=1";
 					$http.get(url).success(function(response) {
 						if(response.flag == 0) {
 							var params = {
@@ -1488,7 +1492,7 @@
 								sign: response.data.sign, // signed string
 							};
 							Wechat.sendPaymentRequest(params, function() {
-								var url2 = $rootScope.rootUrl+"/wxpay.php?func=orderquery&out_trade_no=" + outTradeNo + "&sking=__&fr=1";;
+								var url2 = $rootScope.rootUrl + "/wxpay.php?func=orderquery&out_trade_no=" + outTradeNo + "&sking=__&fr=1";;
 								$http.get(url2).success(function(response) {
 									//{"flag":0,"err":"","data":{"return_code":"SUCCESS","return_msg":"OK","trade_state":"SUCCESS","transaction_id":"4009342001201707048870474679","out_trade_no":"170000007120170704164906","total_fee":"1","time_end":"20170704165154"}}
 									if(response.flag == 0 && response.data.return_code == "SUCCESS") {
@@ -5667,7 +5671,9 @@
 			$.post(url, data, function(response) {
 				$rootScope.LoadingHide();
 				if(response.error) {
-					$rootScope.Alert("获取计划失败");
+					$rootScope.word_plan=null;
+					$rootScope.Alert("计划已失效，请重新设定");
+					$state.go("jh_setting");
 				} else {
 					$rootScope.word_plan = response;
 					$rootScope.word_plan.end_date = $rootScope.word_plan.end_date.substring(0, 10);
@@ -5973,36 +5979,6 @@
 		//注意如果接口那边返回的 amount 是字符串，需要转换成 int型。
 		// $scope.tempData = [{ label: "高频词0", amount: 1500, checked: true }, { label: "高频词2", amount: 1600, checked: false }, { label: "高频词3", amount: 1700, checked: false }];
 
-		//仅用做测试数据，以后可以删除
-		//		if(!$rootScope.myCat) {
-		//			$rootScope.myCat = {
-		//				"id": "4",
-		//				"pid": "1",
-		//				"label": "四级",
-		//				"amount": "4600",
-		//				"modified": "2016-07-01 14:43:47",
-		//				"subcatlist": [{
-		//					"id": "5",
-		//					"pid": "4",
-		//					"label": "必备词",
-		//					"amount": "2000",
-		//					"modified": "2016-07-01 14:43:47"
-		//				}, {
-		//					"id": "6",
-		//					"pid": "4",
-		//					"label": "高频词",
-		//					"amount": "1600",
-		//					"modified": "2016-07-01 14:43:47"
-		//				}, {
-		//					"id": "7",
-		//					"pid": "4",
-		//					"label": "低频词",
-		//					"amount": "100",
-		//					"modified": "2016-07-01 14:43:47"
-		//				}]
-		//			};
-		//		}
-
 		//#region 获取词汇类别
 		$scope.wordCategory = function() {
 			$rootScope.LoadingShow();
@@ -6015,11 +5991,13 @@
 				$rootScope.LoadingHide();
 				if(response) {
 					$rootScope.word_category = response;
-					var soncats = $rootScope.word_plan.select_detail;
-					for(var i = 0; i < $rootScope.word_category.length; i++) {
-						for(var j = 0; j < soncats.length; j++) {
-							if($rootScope.word_category[i].id == soncats[j].id) {
-								$rootScope.word_category[i].checked = true;
+					if($rootScope.word_plan) {
+						var soncats = $rootScope.word_plan.select_detail;
+						for(var i = 0; i < $rootScope.word_category.length; i++) {
+							for(var j = 0; j < soncats.length; j++) {
+								if($rootScope.word_category[i].id == soncats[j].id) {
+									$rootScope.word_category[i].checked = true;
+								}
 							}
 						}
 					}
@@ -6030,22 +6008,19 @@
 			}, "json")
 		}
 		//#endregion
-		$scope.initData = function() {
 
+		$scope.initData = function() {
 			//#region 计算单词总量
 			$scope.catid_list = [];
 			var amount = 0;
-
 			angular.forEach($rootScope.word_category, function(data) {
 				if(data.checked) {
 					$scope.catid_list.push(parseInt(data.id));
 					amount += parseInt(data.amount) - data.throw_away;
 				}
 			});
-
 			$scope.amount_date.amount = amount;
 			//#endregion
-
 			//#region 计算背诵天数和每天单词量
 			var day_word = [];
 			for(i = 5; i <= 180; i = i + 5) {
@@ -6055,20 +6030,16 @@
 					amount: everyday_word
 				});
 			}
-
 			$scope.day_word = day_word;
 			$scope.plan = $scope.day_word[0];
 			$scope.amount_date.date = (new Date()).getTime() + $scope.day_word[0].day * 24 * 60 * 60 * 1000; //day => ms
 			//#endregion
-
 		}
 
 		$scope.wordCategory();
-
 		//		angular.forEach($scope.soncats, function(item) {
 		//			item.checked = true;
 		//		});
-
 		$scope.day_word = []; //用于存储背诵天数和每天单词量(数组类型) exp：{ day: 10, amount: 100 }
 
 		$scope.amount_date = {
