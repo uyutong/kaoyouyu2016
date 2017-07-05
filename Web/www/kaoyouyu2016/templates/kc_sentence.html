@@ -15,11 +15,12 @@
     <div class="padding" style="margin: 10px;padding-top: 0px;margin-top: 0px;">
         <img src="img/dc/bg-setence-t.png" style="width:100%; position:relative; bottom:-10px;" />
         <div class="bg-setence text-center">
-            <div class="headline ">
+            <div class="headline text-left" style="margin: 0 15px;">
 <!--                <img src="img/dc/play.png" ng-src="img/dc/{{playButton}}" ng-click="play();" />
 -->                {{sentence_zh}}
 <!--                <img src="img/dc/correct.png" ng-if="keys==result" />
 -->         </div>
+            <div class="padding text-left" style="color: grey;font-size:16px;" ng-show="completed">{{sentence_en}}</div>
             <div class="setence-box">
                 <span class="sentence-fill" id="{{word}}_se_{{$index}}" ng-click="kongClick($index)" ng-repeat="voc in vocs  track by $index">&#12288;</span>
             </div>
