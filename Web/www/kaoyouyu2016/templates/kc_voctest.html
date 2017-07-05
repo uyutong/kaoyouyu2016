@@ -17,8 +17,11 @@
 
 		<div class="kc_main" ng-show="!is_end">
          
-			<div class="padding text-center word" style="padding-right: 10px;"><img src="img/dc/play.png" width="26" id="kc_main_word" ng-click="play();" />{{voc.word}}<span ng-repeat="zh in voc.zhs | limitTo:1" style="color: gainsboro;font-size: 14px;padding-left: 3px;">{{zh.property}}</span></div>
-
+			<div class="padding text-center word" style="margin-right: 15px;">
+				<img src="img/dc/play.png" width="30" id="kc_main_word" style="margin-bottom: -3px;" ng-click="play();" />
+				{{voc.word}}
+				<span ng-repeat="zh in voc.zhs | limitTo:1" style="color: gainsboro;font-size: 14px;">{{zh.property}}</span>
+			</div>
 			<div class="padding gray text-center" style="font-size: 16px;position: relative">
 				[{{voc.pron_us}}]
 			</div>
