@@ -8,7 +8,7 @@
 		</div>
 		<div class="col text-right" style="position:relative;">
 			<a style="position:absolute; right:60px;" ng-click="fav()"><img src="img/dc/collected.png" ng-if="exercise.is_favorite=='1'" width="26" /><img src="img/dc/star.png" ng-if="exercise.is_favorite=='0'" width="26" /></a>
-			<a class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
+			<a ng-if="type==1" class="dc-title" style="border:2px solid #FFF; padding:2px; display:inline-block; border-radius:4px;" ng-click="throw()">烤</a>
 		</div>
 	</div>
 </div>
@@ -36,7 +36,7 @@
 			<div ng-if="exercise.item_subtype=='2'">
 
 				<div class="padding white font16  challenge_question_edit" id="challenge_subtype2_{{exercise.keys}}"></div>
-				<div ng-show="answer_if_show">
+				<div ng-show="if_subtype2_finished">
 					<div class="padding text-center" style="font-size: 18px;color: white;">{{exercise.keys}}</div>
 					<div class="row-headline">
 						<div class="col">译文</div>
@@ -46,8 +46,8 @@
 					</div>
 				</div>
 
-				<div ng-show="if_subtype2_finished" class="padding text-center" ng-click="answer_if_show=!answer_if_show" style="font-size: 16px;color: white;">查看答案</div>
-
+<!--				<div ng-show="if_subtype2_finished" class="padding text-center" ng-click="answer_if_show=!answer_if_show" style="font-size: 16px;color: white;">查看答案</div>
+-->
 			</div>
 
 			<div class="padding white font16" ng-if="exercise.item_subtype=='1' || exercise.item_subtype=='4'">{{exercise.stem_text}}</div>
