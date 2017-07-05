@@ -8,8 +8,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			AppID: "wx63489880614d923b",
 			AppSecret: "32ef6430ca95d2b706e6596cbe75a138"
 		};
-//		$rootScope.rootUrl = "http://222.128.6.94:8090/";
-	    $rootScope.rootUrl = "http://api.kaouyu.com";
+		//		$rootScope.rootUrl = "http://222.128.6.94:8090/";
+		$rootScope.rootUrl = "http://api.kaouyu.com";
 		$rootScope.wordRootUrl = "http://cet.kaouyu.com/index.php/api/";
 		$rootScope.wordAudioUrl = "http://cet.kaouyu.com/upload/word/mp3/";
 		$rootScope.speakSubmitUrl = "http://xx.kaouyu.com/index.php/api";
@@ -764,6 +764,20 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 		//#region 获取要学习的单词
 		$rootScope.wordGet = function() {
+
+			//暂定为非激活用户扔烤箱数大于3个提示去购买验证码 
+			if($rootScope.word_plan.throw_away && parseInt($rootScope.word_plan.throw_away) > 3) {
+				if($rootScope.userinfo.level == 1 && $rootScope.userinfo.level4 == 0) {
+					$state.go("me_qrcode");
+					return;
+				} 
+				if($rootScope.userinfo.level == 2 && $rootScope.userinfo.level6 == 0) {
+					$state.go("me_qrcode");
+					return;
+
+				}
+			}
+
 			$rootScope.LoadingShow();
 			var url = $rootScope.wordRootUrl + "word_get";
 			var data = {
@@ -781,8 +795,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 					$rootScope.Alert("获取词汇失败");
 				}
 			}, "json")
-		}
 
+		}
 		//		//#region 获取十个要学习的词汇
 		//		$rootScope.getVocabulary = function() {
 		//			$rootScope.LoadingShow();
@@ -866,8 +880,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			}, "json")
 		}
 
-        $rootScope.wordSearch= function(word_spell){
-        	$rootScope.LoadingShow();
+		$rootScope.wordSearch = function(word_spell) {
+			$rootScope.LoadingShow();
 			var url = $rootScope.wordRootUrl + "word_item";
 			var data = {
 				"unionid": $rootScope.userinfo.unionid,
@@ -877,13 +891,12 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			$.post(url, data, function(response) {
 				$rootScope.LoadingHide();
 				//记录每天扔烤箱单词多少个
-				if(response.error) {
-				}else{
+				if(response.error) {} else {
 					$rootScope.rootvoc = response;
-			        $state.go("kc_word_detail");
+					$state.go("kc_word_detail");
 				}
 			}, "json")
-        }
+		}
 
 		document.addEventListener("resume", function() {
 			$rootScope.updateUserInfo();

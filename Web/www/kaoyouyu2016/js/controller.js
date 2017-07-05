@@ -1406,10 +1406,10 @@
 		}
 		$scope.getBizProd();
 
-		$scope.codeBack = function(){
+		$scope.codeBack = function() {
 			history.go(-1);
 		}
-		
+
 		$scope.orderPay = function(out_trade_no, pay_orderid, prodid, validity) {
 			//#region 激活
 			var url = $rootScope.bizUrl;
@@ -5571,87 +5571,6 @@
 			setStorage("" + formatDate2(date), 0, false);
 		}
 		$rootScope.throwed_num = parseInt(getStorage("" + formatDate2(date), true));
-		//		//#region 获取学习计划
-		//		$rootScope.LoadingShow();
-		//		var url = $rootScope.rootUrl + "/learn/getsetting";
-		//		var data = {
-		//			"uid": $rootScope.userinfo.uid,
-		//		};
-		//		$.post(url, data, function(response) {
-		//				$rootScope.LoadingHide();
-		//				if(response && response.status == 200) {
-		//					$rootScope.plan_data = response.data;
-		//					$rootScope.remain = "";
-		//					$scope.plan = response.data.plan;
-		//					$scope.records = response.data.last_record;
-		//					$scope.plan.leftday = leftDay($scope.plan.end_date);
-		//					if($scope.records) {
-		//						//线状图 - 所有参数都已经条好，只需要从服务端取回数据替换 x,y数组即可。
-		//						var x = []; //x轴数据
-		//						var y = []; //y轴数据
-		//						angular.forEach($scope.records, function(data) {
-		//							x.push(data.date);
-		//							y.push(data.finish);
-		//						});
-		//						var ichart = new Highcharts.Chart({
-		//							chart: {
-		//								renderTo: 'report_chart',
-		//								type: 'line',
-		//								backgroundColor: 'rgba(0,0,0,0)'
-		//							},
-		//							title: {
-		//								text: '',
-		//								x: 0 //center
-		//							},
-		//							subtitle: {
-		//								text: '',
-		//								x: 0
-		//							},
-		//							xAxis: {
-		//								categories: x,
-		//								tickWidth: 0,
-		//								gridLineWidth: 0,
-		//								labels: {
-		//									style: {
-		//										color: '#FFC013',
-		//										fontFamily: 'HuakangWawa'
-		//									}
-		//								}
-		//							},
-		//							yAxis: {
-		//								title: {
-		//									text: ''
-		//								},
-		//								labels: {
-		//									style: {
-		//										color: '#FFC013',
-		//										fontFamily: 'HuakangWawa'
-		//									}
-		//								},
-		//								tickPositions: [10, 20, 30, 40, 50, 60, 70, 80]
-		//							},
-		//							tooltip: {
-		//								valueSuffix: ''
-		//							},
-		//							legend: {
-		//								enabled: false
-		//							},
-		//							colors: ['#FFC013', '#FFC013', '#FFC013', '#FFC013', '#FFC013', '#FFC013', '#FFC013', '#FFC013', '#FFC013'],
-		//							series: [{
-		//								name: '词汇量',
-		//								data: y
-		//							}]
-		//						});
-		//					}
-		//				} else if(response.status == 1) {
-		//					$state.go("cs_category", {
-		//						"type": "2"
-		//					});
-		//				} else {
-		//					$rootScope.Alert("获取计划失败");
-		//				}
-		//			}, "json")
-		//			//#endregion
 
 		$scope.word_search = function() {
 			var t = $("#word_search_in").val();
@@ -5671,7 +5590,7 @@
 			$.post(url, data, function(response) {
 				$rootScope.LoadingHide();
 				if(response.error) {
-					$rootScope.word_plan=null;
+					$rootScope.word_plan = null;
 					$rootScope.Alert("计划已失效，请重新设定");
 					$state.go("jh_setting");
 				} else {
@@ -5712,6 +5631,7 @@
 
 		//#region pk
 		$scope.startPk = function(type) {
+          
 			$state.go('pk_home');
 		}
 		//#endregion
@@ -5729,6 +5649,8 @@
 		//#endregion
 
 		$scope.getWordPlan();
+		
+		
 
 	})
 	//#endregion
@@ -5978,7 +5900,6 @@
 	.controller('jh_settingCtrl', function($rootScope, $scope, $state, $http, $ionicHistory) {
 		//注意如果接口那边返回的 amount 是字符串，需要转换成 int型。
 		// $scope.tempData = [{ label: "高频词0", amount: 1500, checked: true }, { label: "高频词2", amount: 1600, checked: false }, { label: "高频词3", amount: 1700, checked: false }];
-
 		//#region 获取词汇类别
 		$scope.wordCategory = function() {
 			$rootScope.LoadingShow();
