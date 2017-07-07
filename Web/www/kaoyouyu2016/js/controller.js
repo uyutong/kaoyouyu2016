@@ -6073,7 +6073,7 @@
 	//#endregion
 
 	//#region 单词学习
-	.controller('kc_mainCtrl', function($rootScope, $scope, $state, $stateParams, $http, $cordovaNativeAudio) {
+	.controller('kc_mainCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
 
 		$scope.id = parseInt($stateParams.id);
 		if($rootScope.vocabularys) {
@@ -6157,35 +6157,37 @@
 		}
 
 		$scope.play = function() {
-			$cordovaNativeAudio
-				.preloadSimple('click', $rootScope.wordAudioUrl + $scope.voc.audio_us+'')
-				.then(function(msg) {
-					console.log(msg);
-				}, function(error) {
-					alert(error);
-				});
+			if(window.plugins && window.plugins.NativeAudio) {
+				window.plugins.NativeAudio.preloadSimple('click', $rootScope.wordAudioUrl + $scope.voc.audio_us + '')
+					.then(function(msg) {
+						console.log(msg);
+					}, function(error) {
+						alert(error);
+					});
 
-//			$cordovaNativeAudio
-//				.preloadComplex('music', 'audio/music.mp3', 1, 1)
-//				.then(function(msg) {
-//					console.log(msg);
-//				}, function(error) {
-//					console.error(error);
-//				});
+				//			$cordovaNativeAudio
+				//				.preloadComplex('music', 'audio/music.mp3', 1, 1)
+				//				.then(function(msg) {
+				//					console.log(msg);
+				//				}, function(error) {
+				//					console.error(error);
+				//				});
 
-			$scope.play = function() {
-				$cordovaNativeAudio.play('click');
-//				$cordovaNativeAudio.loop('music');
+				$scope.play2 = function() {
+					window.plugins.NativeAudio.play('click');
+					//				$cordovaNativeAudio.loop('music');
 
-				// stop 'music' loop and unload
-				$timeout(function() {
-					$cordovaNativeAudio.stop('click');
-//					$cordovaNativeAudio.unload('click');
-//					$cordovaNativeAudio.unload('music');
-				}, 1000 * 6);
-			};
-            $scope.play();
-//			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
+					// stop 'music' loop and unload
+					$timeout(function() {
+						window.plugins.NativeAudio.stop('click');
+						//					$cordovaNativeAudio.unload('click');
+						//					$cordovaNativeAudio.unload('music');
+					}, 1000 * 6);
+				};
+				$scope.play2();
+			}
+
+			//			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
 		}
 
 		//#region 加入学习记录
