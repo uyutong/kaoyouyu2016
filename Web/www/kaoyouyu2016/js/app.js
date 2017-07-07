@@ -188,7 +188,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			$rootScope.LoadingShow();
 
 			$http.post(url, data).success(function(response) {
-				$rootScope.LoadingHide();
+			
+			$rootScope.LoadingHide();
 
 				if(response && response.data.id) {
 					$rootScope.TL_Report = response.data;
@@ -310,7 +311,6 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 						$http.post(url, data).success(function(response) {
 							$rootScope.LoadingHide();
-
 							$rootScope.yd();
 
 						}).error(function(response, status) {
@@ -318,7 +318,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 							$rootScope.Alert('连接失败！[' + response + status + ']');
 							return;
 						});
-
+						
 					}, function() {});
 					//#endregion
 				}
@@ -340,7 +340,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				"fr": 1
 			};
 			encode(data);
-
+			
 			$rootScope.LoadingShow();
 
 			$http.post(url, data).success(function(response) {
