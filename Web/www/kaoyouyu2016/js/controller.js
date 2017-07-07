@@ -6184,7 +6184,7 @@
 //					$cordovaNativeAudio.unload('music');
 				}, 1000 * 6);
 			};
-
+            $scope.play();
 //			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
 		}
 
