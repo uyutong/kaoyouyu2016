@@ -24,6 +24,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			if($rootScope.isIOS) {
 				document.addEventListener('deviceready', function() {
 					iniFileSystem();
+
 				}, false);
 			}
 
@@ -38,62 +39,62 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 		});
 
 		//#region 初始化数据
-		$rootScope.userinfo = getStorage("userinfo");
-//		$rootScope.userinfo = {
-//			"userId": "22781",
-//			"mobile": "13263266381",
-//			"point": "1910",
-//			"email": null,
-//			"nickName": "\u6d77\u9614\u5929\u7a7a",
-//			"fullName": null,
-//			"number": "110",
-//			"photo": "22781.png",
-//			"phone": null,
-//			"major": null,
-//			"classes": "",
-//			"descr": null,
-//			"regIp": "192.168.1.110",
-//			"clientId": "\u6682\u65e0\u4fe1\u606f",
-//			"token": null,
-//			"tokenTime": "0000-00-00 00:00:00",
-//			"tokenStatus": "0",
-//			"model": "\u6682\u65e0\u4fe1\u606f",
-//			"status": "0",
-//			"userName": null,
-//			"password": null,
-//			"gender": "Female",
-//			"schoolId": "191",
-//			"level": "1",
-//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//			"comeFrom": "0",
-//			"isConversion": "0",
-//			"regTime": "2016-04-18 12:03:38",
-//			"modifTime": "2017-06-07 11:06:39",
-//			"tiyanTime": "0000-00-00 00:00:00",
-//			"mobiletype": "1",
-//			"openid": "",
-//			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
-//			"level4": 1,
-//			"level6": 0
-//		}
+		//		$rootScope.userinfo = getStorage("userinfo");
+		$rootScope.userinfo = {
+			"userId": "22781",
+			"mobile": "13263266381",
+			"point": "1910",
+			"email": null,
+			"nickName": "\u6d77\u9614\u5929\u7a7a",
+			"fullName": null,
+			"number": "110",
+			"photo": "22781.png",
+			"phone": null,
+			"major": null,
+			"classes": "",
+			"descr": null,
+			"regIp": "192.168.1.110",
+			"clientId": "\u6682\u65e0\u4fe1\u606f",
+			"token": null,
+			"tokenTime": "0000-00-00 00:00:00",
+			"tokenStatus": "0",
+			"model": "\u6682\u65e0\u4fe1\u606f",
+			"status": "0",
+			"userName": null,
+			"password": null,
+			"gender": "Female",
+			"schoolId": "191",
+			"level": "1",
+			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+			"comeFrom": "0",
+			"isConversion": "0",
+			"regTime": "2016-04-18 12:03:38",
+			"modifTime": "2017-06-07 11:06:39",
+			"tiyanTime": "0000-00-00 00:00:00",
+			"mobiletype": "1",
+			"openid": "",
+			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
+			"level4": 1,
+			"level6": 0
+		}
 
 		if(!$rootScope.userinfo) {
 			$rootScope.userinfo = {};
 		};
 
-//		$rootScope.KB = getStorage("KB");
-//		if(!$rootScope.KB || !$rootScope.KB.type) {
-//			$rootScope.KB = {
-//				"type": 0,
-//				"level": "0",
-//				tl: false,
-//				yd: false,
-//				fy: false,
-//				xz: false,
-//				date: formatDate(new Date())
-//			};
-//		};
-//		//#endregion
+		//		$rootScope.KB = getStorage("KB");
+		//		if(!$rootScope.KB || !$rootScope.KB.type) {
+		//			$rootScope.KB = {
+		//				"type": 0,
+		//				"level": "0",
+		//				tl: false,
+		//				yd: false,
+		//				fy: false,
+		//				xz: false,
+		//				date: formatDate(new Date())
+		//			};
+		//		};
+		//		//#endregion
 
 		//#region 通用方法
 
@@ -188,8 +189,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			$rootScope.LoadingShow();
 
 			$http.post(url, data).success(function(response) {
-			
-			$rootScope.LoadingHide();
+
+				$rootScope.LoadingHide();
 
 				if(response && response.data.id) {
 					$rootScope.TL_Report = response.data;
@@ -318,7 +319,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 							$rootScope.Alert('连接失败！[' + response + status + ']');
 							return;
 						});
-						
+
 					}, function() {});
 					//#endregion
 				}
@@ -340,7 +341,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				"fr": 1
 			};
 			encode(data);
-			
+
 			$rootScope.LoadingShow();
 
 			$http.post(url, data).success(function(response) {
@@ -770,7 +771,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				if($rootScope.userinfo.level == 1 && $rootScope.userinfo.level4 == 0) {
 					$state.go("me_qrcode");
 					return;
-				} 
+				}
 				if($rootScope.userinfo.level == 2 && $rootScope.userinfo.level6 == 0) {
 					$state.go("me_qrcode");
 					return;
@@ -795,7 +796,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 					$rootScope.Alert("获取词汇失败");
 				}
 			}, "json")
-			
+
 		}
 		//		//#region 获取十个要学习的词汇
 		//		$rootScope.getVocabulary = function() {
@@ -896,6 +897,38 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 					$state.go("kc_word_detail");
 				}
 			}, "json")
+		}
+
+		$rootScope.playAudio= function() {
+		    function onSuccess(){  
+                console.log("playAudio():Audio Success");  
+            }  
+              
+            //错误的回调   
+            function onError(error) {  
+                alert('code:'+error.code+'\n'+'message:'+error.message+'\n');  
+            }  
+			
+			my_media = new Media(src, onSuccess, onError);
+			my_media.play();
+
+//			if(mediaTimer == null) {
+//				mediaTimer = setInterval(function() {
+//					my_media.getCurrentPosition(
+//						//成功回调  
+//						function(position) {
+//							if(position > -1) {
+//								setAudioPosition((position / 1000) + "sec");
+//							}
+//						},
+//						//错误回调  
+//						function(e) {
+//							console.log("Error getting pos=" + e);
+//							setAudioPosition("Error: " + e);
+//						}
+//					);
+//				}, 1000);
+//			}
 		}
 
 		document.addEventListener("resume", function() {
@@ -1466,45 +1499,45 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				controller: 'kcg_exerciseCtrl'
 			})
 
-	    var userinfo = getStorage("userinfo");
+		//	    var userinfo = getStorage("userinfo");
 
-//		var userinfo = {
-//			"userId": "22781",
-//			"mobile": "13263266381",
-//			"point": "1910",
-//			"email": null,
-//			"nickName": "\u6d77\u9614\u5929\u7a7a",
-//			"fullName": null,
-//			"number": "110",
-//			"photo": "22781.png",
-//			"phone": null,
-//			"major": null,
-//			"classes": "",
-//			"descr": null,
-//			"regIp": "192.168.1.110",
-//			"clientId": "\u6682\u65e0\u4fe1\u606f",
-//			"token": null,
-//			"tokenTime": "0000-00-00 00:00:00",
-//			"tokenStatus": "0",
-//			"model": "\u6682\u65e0\u4fe1\u606f",
-//			"status": "0",
-//			"userName": null,
-//			"password": null,
-//			"gender": "Female",
-//			"schoolId": "191",
-//			"level": "2",
-//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//			"comeFrom": "0",
-//			"isConversion": "0",
-//			"regTime": "2016-04-18 12:03:38",
-//			"modifTime": "2017-06-07 11:06:39",
-//			"tiyanTime": "0000-00-00 00:00:00",
-//			"mobiletype": "1",
-//			"openid": "",
-//			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
-//			"level4": 1,
-//			"level6": 0
-//		}
+		var userinfo = {
+			"userId": "22781",
+			"mobile": "13263266381",
+			"point": "1910",
+			"email": null,
+			"nickName": "\u6d77\u9614\u5929\u7a7a",
+			"fullName": null,
+			"number": "110",
+			"photo": "22781.png",
+			"phone": null,
+			"major": null,
+			"classes": "",
+			"descr": null,
+			"regIp": "192.168.1.110",
+			"clientId": "\u6682\u65e0\u4fe1\u606f",
+			"token": null,
+			"tokenTime": "0000-00-00 00:00:00",
+			"tokenStatus": "0",
+			"model": "\u6682\u65e0\u4fe1\u606f",
+			"status": "0",
+			"userName": null,
+			"password": null,
+			"gender": "Female",
+			"schoolId": "191",
+			"level": "2",
+			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+			"comeFrom": "0",
+			"isConversion": "0",
+			"regTime": "2016-04-18 12:03:38",
+			"modifTime": "2017-06-07 11:06:39",
+			"tiyanTime": "0000-00-00 00:00:00",
+			"mobiletype": "1",
+			"openid": "",
+			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
+			"level4": 1,
+			"level6": 0
+		}
 
 		if(userinfo && userinfo.userId) {
 			$urlRouterProvider.otherwise('/tab/tf_home');
