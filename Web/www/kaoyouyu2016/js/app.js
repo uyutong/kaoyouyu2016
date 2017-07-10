@@ -899,6 +899,11 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				}
 			}, "json")
 		}
+		
+		$rootScope.goDcKcHome = function(){
+			$state.go("dc_tab.kc_home");
+		}
+		
 		$rootScope.playAudio = function(src,obj) {
 
 			var my_media = new Media(src, function() {

@@ -7381,7 +7381,7 @@
 
 	//#region 烤词根
 	.controller('kcg_homeCtrl', function($rootScope, $scope, $state, $http) {
-
+		
 		$scope.kcgGame = function() {
 			$state.go("kcg_game");
 		}
