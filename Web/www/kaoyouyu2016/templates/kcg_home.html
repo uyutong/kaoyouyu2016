@@ -1,33 +1,31 @@
 ﻿<div class="bar bar-dark bar-header item-input-inset">
-    <label class="item-input-wrapper">
+	<a href="javascrpt:void(0)" ng-click="back()" class="dc-title" style="margin-right: 10px;font-size: 14px;">返回</a>
+
+	<label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
         <input type="search" placeholder="请输入要查找的单词" class="wawa-font" id="word_search_in">
     </label>
-    <button class="button button-small button-outline button-energized" ng-click="word_search()">搜索</button>
+	<button class="button button-small button-outline button-energized" ng-click="word_search()">搜索</button>
 </div>
 
 <ion-content class="has-header background-black">
 
+	<div class="padding">
+		<div>
+			<div class="dc-item3" ng-click="kcg_list(0);">
+				常用前缀
+			</div>
+			<div class="dc-item3" ng-click="kcg_list(1);">
+				常用后缀
+			</div>
+			<div class="dc-item3" ng-click="kcg_list(2);">
+				基本词根
+			</div>
+			<div class="dc-item3" ng-click="kcg_exercise()">
+				词根助记
+			</div>
+		</div>
 
-    <div class="padding">
-        <div>
-            <div class="dc-item3" ng-click="kcg_list(0);">
-                                                常用前缀
-            </div>
-            <div class="dc-item3" ng-click="kcg_list(1);">
-                                                 常用后缀
-            </div>
-            <div class="dc-item3" ng-click="kcg_list(2);">
-                                                基本词根
-            </div>
-            <div class="dc-item3" ng-click="kcg_exercise()">
-                                                词根助记
-            </div>
-        </div>
-
-    </div>
-
-
-   
+	</div>
 
 </ion-content>
