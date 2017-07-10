@@ -50,7 +50,7 @@
 -->
 			</div>
 
-			<div class="padding white font16" ng-if="exercise.item_subtype=='1' || exercise.item_subtype=='4'">{{exercise.stem_text}}</div>
+			<div class="padding white font18" ng-if="exercise.item_subtype=='1' || exercise.item_subtype=='4'">{{exercise.stem_text}}</div>
 
 			<div class="padding-horizontal">
 				<div ng-class="{'dc-item dc-item-2 normal-font dc-item-round':true, 'dc-item-correct':exercise.submited==true && question.substr(0,1)==exercise.keys,'dc-item-error':exercise.submited==true && question.substr(0,1)==exercise.myanswer && exercise.myanswer!=exercise.keys}" ng-click="chooseAnswer(question);" ng-repeat="question in exercise.option_list">
