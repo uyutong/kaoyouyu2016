@@ -19,7 +19,7 @@
             </div>-->
             <div class="row">
             	<div class="col-10 col-center">
-            		<img src="img/dc/play.png" height="40"  ng-click="play();" />
+            		<img src="img/dc/play.png" id="kc_spell_word" height="40"  ng-click="play();" />
             	</div>
             	<div class="col-90 text-center col-center">
             		<span style="font-size: 20px;border-bottom: 2px #7B5F15 solid;margin-left: 3px;display: inline-block;vertical-align: middle;" ng-repeat="answer in answers  track by $index" id="{{word}}_{{$index}}" ng-click="kongClick($index)">&#12288;</span> <img src="img/dc/correct.png" style="margin-left: 20px;" ng-if="right && completed" />

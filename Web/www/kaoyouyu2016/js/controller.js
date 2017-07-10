@@ -6274,9 +6274,7 @@
 		// $scope.items = [{ submitted: 0, value: 'fa' }, { submitted: 0, value: 'ble' }, { submitted: 0, value: 'bao' }, { submitted: 0, value: 'fe' }];     //选项,sumibit用来标记用户是否答过提了，答过的就不能再点击，并且变灰
 		$scope.result = ""; //最终结果
 		$scope.play = function() {
-			var v = document.getElementById("audio");
-			v.src = "audio/error.mp3";
-			v.play();
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.audio, $("#kc_spell_word"))	
 		}
 		/*
 		 * 点击字母 
