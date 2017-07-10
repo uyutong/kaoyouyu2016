@@ -6809,7 +6809,7 @@
 			};
 			$.post(url, data, function(response) {
 				$rootScope.LoadingHide();
-				if(!response.error) {
+				if(!response.error&&response.length>0) {
 					$rootScope.ExerciseList = response;
 					$state.go("kc_challenge", {
 						id: 0,

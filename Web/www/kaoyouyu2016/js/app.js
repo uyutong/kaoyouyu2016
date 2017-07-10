@@ -892,7 +892,9 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			$.post(url, data, function(response) {
 				$rootScope.LoadingHide();
 				//记录每天扔烤箱单词多少个
-				if(response.error) {} else {
+				if(response.error) {
+					return;
+				} else {
 					$rootScope.rootvoc = response;
 					$state.go("kc_word_detail");
 				}
