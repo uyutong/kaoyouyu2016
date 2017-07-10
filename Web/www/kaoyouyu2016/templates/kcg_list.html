@@ -21,7 +21,7 @@
 
 <ion-content class="has-header background-black">
 
-	<div class="record_row" style="color:white;border-bottom:1px #EEEEEE solid;" ng-repeat="affix in affixs track by $index">
+	<div class="record_row" style="color:white;border-bottom:thin #999999 solid;" ng-repeat="affix in affixs track by $index" >
 		<div class="row row-center">
 			<div class="col col-40 yellow" style="font-size:18px;">{{affix.en}}</div>
 			<div class="col col-60 yellow" style="font-size:16px;" ng-if="affix.show" ng-click="recordSelect($index)"><span>{{affix.zh}}</span></div>

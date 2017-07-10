@@ -236,7 +236,7 @@
 .dc-item.dc-item-round.dc-item-correct {
 	background-color: #A3FB80;
 	border-color: #62D765;
-	background-image: url(../img/correct.png);
+	background-image: url(../img/dc/correct.png);
 	background-repeat: no-repeat;
 	background-position: right center;
 	background-size: 30px auto;
@@ -245,7 +245,7 @@
 .dc-item.dc-item-round.dc-item-error {
 	background-color: #FF8584;
 	border-color: #F9574A;
-	background-image: url(../img/error.png);
+	background-image: url(../img/dc/error.png);
 	background-repeat: no-repeat;
 	background-position: right center;
 	background-size: 26px auto;

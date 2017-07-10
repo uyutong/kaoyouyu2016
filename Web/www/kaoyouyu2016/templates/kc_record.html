@@ -39,7 +39,7 @@
 		</div>
 	</div>
 
-	<div class="record_row" style="color:white;border-bottom:1px #BEBEBE solid;" ng-repeat="word in words">
+	<div class="record_row" style="color:white;border-bottom:thin #999999 solid;" ng-repeat="word in words">
 		<div class="row row-center">
 			<div class="col col-40" style="font-size:16px;"  ng-click="wordDetail($index)"  >{{word.word}}</div>
 			<div class="col col-60" ng-if="word.show"ng-click="recordSelect($index)"><span ng-repeat="zw in word.zhs">{{zw.property}} {{zw.zh}}</span></div>

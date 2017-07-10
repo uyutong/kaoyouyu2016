@@ -16,7 +16,7 @@
 
 <ion-content class="has-header background-black">
 	
-	<div class="record_row" style="color:white;border-bottom:1px #EEEEEE solid;" ng-repeat="phrase in phrases"  >
+	<div class="record_row" style="color:white;border-bottom:thin #999999 solid;" ng-repeat="phrase in phrases"  >
 		<div class="padding yellow" style="font-size: 18px;">{{phrase.phrase}}</div>
 		<div class="text-center"><img ng-if="!phrase.show" height="30px" ng-click="phrase_show($index)" class="zhezhao" src="img/dc/zhegai.png"/></div>
 		<div class="yellow" ng-if="phrase.show"style="font-size: 16px;padding-left: 10px;padding-right: 10px;">{{phrase.def_zh}}</div>

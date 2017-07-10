@@ -7461,7 +7461,6 @@
 					$scope.affixs = response.affixs;
 					$scope.page = response.page;
 					$scope.total = response.total;
-					//page_size=20
 					if(parseInt($scope.page) * 20 < parseInt($scope.total)) {
 						$scope.hasmore = true;
 					} else {
