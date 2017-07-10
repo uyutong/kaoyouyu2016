@@ -6157,7 +6157,7 @@
 		}
 
 		$scope.play = function() {
-            $rooscope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us);
+            $rootScope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_main_word"));
 //			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
 		}
 

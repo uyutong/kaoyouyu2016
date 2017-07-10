@@ -898,37 +898,36 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				}
 			}, "json")
 		}
+		$rootScope.playAudio = function(src,obj) {
 
-		$rootScope.playAudio= function() {
-		    function onSuccess(){  
-                console.log("playAudio():Audio Success");  
-            }  
-              
-            //错误的回调   
-            function onError(error) {  
-                alert('code:'+error.code+'\n'+'message:'+error.message+'\n');  
-            }  
-			
-			my_media = new Media(src, onSuccess, onError);
-			my_media.play();
+			var my_media = new Media(src, function() {
+				console.log("playAudio():Audio Success");
+			    obj.attr("src", "img/dc/icon-play-false.png");
+			},
+			// error callback
+			function(err) {
+				alert('code:' + error.code + '\n' + 'message:' + error.message + '\n');
+			});
+			my_media.play({playAudioWhenScreenIsLocked:true});
+		    obj.attr("src", "img/dc/playing.gif");
 
-//			if(mediaTimer == null) {
-//				mediaTimer = setInterval(function() {
-//					my_media.getCurrentPosition(
-//						//成功回调  
-//						function(position) {
-//							if(position > -1) {
-//								setAudioPosition((position / 1000) + "sec");
-//							}
-//						},
-//						//错误回调  
-//						function(e) {
-//							console.log("Error getting pos=" + e);
-//							setAudioPosition("Error: " + e);
-//						}
-//					);
-//				}, 1000);
-//			}
+			//			if(mediaTimer == null) {
+			//				mediaTimer = setInterval(function() {
+			//					my_media.getCurrentPosition(
+			//						//成功回调  
+			//						function(position) {
+			//							if(position > -1) {
+			//								setAudioPosition((position / 1000) + "sec");
+			//							}
+			//						},
+			//						//错误回调  
+			//						function(e) {
+			//							console.log("Error getting pos=" + e);
+			//							setAudioPosition("Error: " + e);
+			//						}
+			//					);
+			//				}, 1000);
+			//			}
 		}
 
 		document.addEventListener("resume", function() {
