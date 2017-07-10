@@ -6157,8 +6157,8 @@
 		}
 
 		$scope.play = function() {
-            $rootScope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_main_word"));
-//			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
+//          $rootScope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_main_word"));
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
 		}
 
 		//#region 加入学习记录
@@ -6756,10 +6756,9 @@
 			$state.go("kc_speak", {
 				"word": $rootScope.rootvoc.word,
 				"audio": $rootScope.rootvoc.audio_us,
-				"audio": $rootScope.rootvoc.pron_us
+				"yb": $rootScope.rootvoc.pron_us
 			});
 		}
-
 		//#region 拼写
 		$scope.spell = function() {
 			var letters = [];
@@ -6823,6 +6822,12 @@
 				}
 			}, "json");
 		}
+		
+			
+		$scope.play= function(){
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.rootvoc.audio_us,$("#kc_word_detail"));
+		}
+		
 
 	})
 	//#endregion
@@ -7366,6 +7371,12 @@
 				}
 			}, "json");
 		}
+		
+		$scope.play= function(){
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_voctest_word"));
+		}
+	
+		
 
 	})
 	//#endregion

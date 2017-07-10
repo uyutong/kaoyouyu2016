@@ -100,7 +100,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 		//#region 返回
 		$rootScope.back = function() {
-			$ionicHistory.goBack();
+//			$ionicHistory.goBack();
+            history.go(-1);
 		}
 		//#endregion
 
