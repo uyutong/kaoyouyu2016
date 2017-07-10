@@ -24,7 +24,6 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			if($rootScope.isIOS) {
 				document.addEventListener('deviceready', function() {
 					iniFileSystem();
-
 				}, false);
 			}
 

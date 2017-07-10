@@ -18,8 +18,8 @@
 		<div class="kc_main" ng-show="!is_end">
          
 			<div class="padding text-center word" style="margin-right: 15px;">
-				<img src="img/dc/play.png" width="30" id="kc_voctest_word" style="margin-bottom: -3px;" ng-click="play();" />
-				{{voc.word}}
+				<img src="img/dc/play.png" width="30" id="kc_voctest_word"  style="display: inline-block;vertical-align: middle;" ng-click="play();" />
+				<span style="display: inline-block;vertical-align: middle;">{{voc.word}}</span>
 				<span ng-repeat="zh in voc.zhs | limitTo:1" style="color: gainsboro;font-size: 14px;">{{zh.property}}</span>
 			</div>
 			<div class="padding gray text-center" style="font-size: 16px;position: relative">
