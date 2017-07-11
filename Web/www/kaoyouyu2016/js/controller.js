@@ -6157,8 +6157,8 @@
 		}
 
 		$scope.play = function() {
-			$rootScope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_main_word"));
-			//$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
+			//          $rootScope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_main_word"));
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
 		}
 
 		//#region 加入学习记录
