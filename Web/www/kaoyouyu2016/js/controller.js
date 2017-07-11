@@ -6157,7 +6157,7 @@
 		}
 
 		$scope.play = function() {
-//          $rootScope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_main_word"));
+			//          $rootScope.playAudio($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_main_word"));
 			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_main_word"))
 		}
 
@@ -6233,21 +6233,28 @@
 
 		//#region 扔烤箱
 		$scope.throw = function() {
-			if($rootScope.vocabularys.length < 2) {
-				$rootScope.Alert("不能再扔了哦 确定都会吗？");
-				return;
-			}
-			$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
-				if(response.error == 0) {
-					$rootScope.vocabularys.splice($scope.id, 1);
-					if($scope.id > $rootScope.vocabularys.length - 1) {
-						$scope.id = $rootScope.vocabularys.length - 1;
+			$rootScope.Confirm("扔烤箱的单词将不会出现在后面的学习中", "", "",
+				function() {
+					if($rootScope.vocabularys.length < 2) {
+						$rootScope.Alert("不能再扔了哦 确定都会吗？");
+						return;
 					}
-					$scope.voc = $rootScope.vocabularys[$scope.id];
-				} else {
-					$rootScope.Alert("扔烤箱失败");
-				}
-			})
+					$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
+						if(response.error == 0) {
+							$rootScope.vocabularys.splice($scope.id, 1);
+							if($scope.id > $rootScope.vocabularys.length - 1) {
+								$scope.id = $rootScope.vocabularys.length - 1;
+							}
+							$scope.voc = $rootScope.vocabularys[$scope.id];
+						} else {
+							$rootScope.Alert("扔烤箱失败");
+						}
+					})
+				},
+				function() {
+
+				});
+
 		}
 		//#endregion
 
@@ -6274,7 +6281,7 @@
 		// $scope.items = [{ submitted: 0, value: 'fa' }, { submitted: 0, value: 'ble' }, { submitted: 0, value: 'bao' }, { submitted: 0, value: 'fe' }];     //选项,sumibit用来标记用户是否答过提了，答过的就不能再点击，并且变灰
 		$scope.result = ""; //最终结果
 		$scope.play = function() {
-			$rootScope.playWord($rootScope.wordAudioUrl + $scope.audio, $("#kc_spell_word"))	
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.audio, $("#kc_spell_word"))
 		}
 		/*
 		 * 点击字母 
@@ -6798,7 +6805,7 @@
 				}
 			}, 1000);
 		}
-		
+
 		$scope.challenge = function() {
 			$rootScope.LoadingShow();
 			var url = $rootScope.wordRootUrl + "exercise_list";
@@ -6809,7 +6816,7 @@
 			};
 			$.post(url, data, function(response) {
 				$rootScope.LoadingHide();
-				if(!response.error&&response.length>0) {
+				if(!response.error && response.length > 0) {
 					$rootScope.ExerciseList = response;
 					$state.go("kc_challenge", {
 						id: 0,
@@ -6820,12 +6827,10 @@
 				}
 			}, "json");
 		}
-		
-			
-		$scope.play= function(){
-			$rootScope.playWord($rootScope.wordAudioUrl + $scope.rootvoc.audio_us,$("#kc_word_detail"));
+
+		$scope.play = function() {
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.rootvoc.audio_us, $("#kc_word_detail"));
 		}
-		
 
 	})
 	//#endregion
@@ -6987,21 +6992,27 @@
 
 		//#region 扔烤箱
 		$scope.throw = function() {
-			if($rootScope.voc_list.length < 2) {
-				$rootScope.Alert("不能再扔了哦 确定都会吗？");
-				return;
-			}
-			$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
-				if(response.error == 0) {
-					$rootScope.voc_list.splice($scope.id, 1);
-					if($scope.id > $rootScope.voc_list.length - 1) {
-						$scope.id = $rootScope.voc_list.length - 1;
+
+			$rootScope.Confirm("扔烤箱的单词将不会出现在后面的学习中", "", "",
+				function() {
+
+					if($rootScope.voc_list.length < 2) {
+						$rootScope.Alert("不能再扔了哦 确定都会吗？");
+						return;
 					}
-					$scope.voc = $rootScope.voc_list[$scope.id];
-				} else {
-					$rootScope.Alert("扔烤箱失败");
-				}
-			})
+					$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
+						if(response.error == 0) {
+							$rootScope.voc_list.splice($scope.id, 1);
+							if($scope.id > $rootScope.voc_list.length - 1) {
+								$scope.id = $rootScope.voc_list.length - 1;
+							}
+							$scope.voc = $rootScope.voc_list[$scope.id];
+						} else {
+							$rootScope.Alert("扔烤箱失败");
+						}
+					})
+				},
+				function() {})
 		}
 		//#endregion
 
@@ -7217,21 +7228,27 @@
 
 		//#region 扔烤箱
 		$scope.throw = function() {
-			if($rootScope.voc_list.length < 2) {
-				$rootScope.Alert("不能再扔了哦 确定都会吗？");
-				return;
-			}
-			$rootScope.root_throw($scope.exercise.word_id, $scope.exercise.category_id, function(response) {
-				if(response.error == 0) {
-					$rootScope.ExerciseList.splice($scope.id, 1);
-					if($scope.id > $rootScope.ExerciseList.length - 1) {
-						$scope.id = $rootScope.ExerciseList.length - 1;
+
+			$rootScope.Confirm("扔烤箱的单词将不会出现在后面的学习中", "", "",
+				function() {
+
+					if($rootScope.voc_list.length < 2) {
+						$rootScope.Alert("不能再扔了哦 确定都会吗？");
+						return;
 					}
-					$scope.exercise = $rootScope.ExerciseList[$scope.id];
-				} else {
-					$rootScope.Alert("扔烤箱失败");
-				}
-			})
+					$rootScope.root_throw($scope.exercise.word_id, $scope.exercise.category_id, function(response) {
+						if(response.error == 0) {
+							$rootScope.ExerciseList.splice($scope.id, 1);
+							if($scope.id > $rootScope.ExerciseList.length - 1) {
+								$scope.id = $rootScope.ExerciseList.length - 1;
+							}
+							$scope.exercise = $rootScope.ExerciseList[$scope.id];
+						} else {
+							$rootScope.Alert("扔烤箱失败");
+						}
+					})
+				},
+				function() {})
 		}
 		//#endregion
 
@@ -7369,19 +7386,17 @@
 				}
 			}, "json");
 		}
-		
-		$scope.play= function(){
-			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us,$("#kc_voctest_word"));
+
+		$scope.play = function() {
+			$rootScope.playWord($rootScope.wordAudioUrl + $scope.voc.audio_us, $("#kc_voctest_word"));
 		}
-	
-		
 
 	})
 	//#endregion
 
 	//#region 烤词根
 	.controller('kcg_homeCtrl', function($rootScope, $scope, $state, $http) {
-		
+
 		$scope.kcgGame = function() {
 			$state.go("kcg_game");
 		}
