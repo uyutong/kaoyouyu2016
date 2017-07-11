@@ -6111,8 +6111,8 @@
 						$scope.sentence(this.id.toString().substring(this.id.toString().length - 1, this.id.toString().length));
 					});
 				}
-				var huaci = new UyuHuaCi();
-				huaci.Init('.liju');
+//				var huaci = new UyuHuaCi();
+//				huaci.Init('.liju');
 			}, 1000);
 		}
 

@@ -776,7 +776,6 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				if($rootScope.userinfo.level == 2 && $rootScope.userinfo.level6 == 0) {
 					$state.go("me_qrcode");
 					return;
-
 				}
 			}
 
