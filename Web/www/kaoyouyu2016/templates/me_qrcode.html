@@ -8,7 +8,7 @@
 	<div class="padding text-center grown" ng-if="$root.userinfo.level==2">抱歉您的试用已结束，请扫描烤鱿鱼英语六级验证码(二维码)激活app！验证码是区分四六级的哦！</div>
 
 	<div style="background: white;margin-top: 10px;padding: 10px;border-top: 1px solid gainsboro;border-bottom: 1px solid gainsboro">
-		<div class="text-left padding">{{bizProduct.product_name}}</div>
+		<div class="text-left padding font16">{{bizProduct.product_name}}</div>
 		<div class="text-left padding" style="color:burlywood;">{{bizProduct.usage}}</div>
 		<div class="row">
 			<div class="col col-30 col-center" style="color: gray;text-decoration:line-through;">原价：¥{{bizProduct.discount}}</div>
@@ -27,9 +27,11 @@
 	</div>
 
 	<div class="padding text-center">
+		<div class="padding text-center" style="font-size: 18px;">已有验证码</div>
+		<div class="text-left" style="font-size: 14px;">方式一:</div>
 		<button class="button button-balanced button-block button-round " ng-click='scanCode();'>扫描二维码</button>
 	</div>
-	<div class="text-left padding">输入或粘贴{{bizProduct.product_name}}(文本)</div>
+	<div class="text-left padding">方式二：输入或粘贴{{bizProduct.product_name}}(文本)</div>
 	<label class="item item-input" style="margin-left: 30px;margin-right: 30px;">
 	<input type="text" id="vcode_text" placeholder="输入或粘贴APP验证码 ">
     </label>
