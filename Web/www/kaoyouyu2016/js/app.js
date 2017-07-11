@@ -10,6 +10,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 		};
 		//		$rootScope.rootUrl = "http://222.128.6.94:8090/";
 		$rootScope.rootUrl = "http://api.kaouyu.com";
+		$rootScope.headerUrl = "http://img.kaouyu.com/header/";
 		$rootScope.wordRootUrl = "http://cet.kaouyu.com/index.php/api/";
 		$rootScope.wordAudioUrl = "http://cet.kaouyu.com/upload/word/mp3/";
 		$rootScope.speakSubmitUrl = "http://xx.kaouyu.com/index.php/api";

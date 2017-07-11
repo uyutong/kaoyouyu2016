@@ -8,8 +8,9 @@
 <ion-content class="has-header">
     <div class="list">
         <div class="text-center padding">
-            <img src="{{$root.userinfo.photo}}"  height="90" ng-click="changeHeadImg();" />
-            <p class="gray">头像很重要当别人崇拜你的时候</p>
+	        <img ng-if="!userinfo.photo" src="img/status-3.png"  height="90" ng-click="changeHeadImg();" />
+	        <img ng-if="userinfo.photo" src="{{$root.headerUrl}}{{$root.userinfo.photo}}"  height="90 " ng-click="changeHeadImg(); " />
+	        <p class="gray">头像很重要当别人崇拜你的时候</p>
         </div>
 
         <div class="text-center">
