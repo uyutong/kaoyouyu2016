@@ -915,7 +915,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			function(err) {
 				alert('code:' + error.code + '\n' + 'message:' + error.message + '\n');
 			});
-			my_media.play({playAudioWhenScreenIsLocked:true});
+			my_media.play();
 		    obj.attr("src", "img/dc/playing.gif");
 
 			//			if(mediaTimer == null) {
