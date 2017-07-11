@@ -6791,14 +6791,14 @@
 		if($rootScope.rootvoc.example) {
 			setTimeout(function() {
 				for(var m = 0; m < $rootScope.rootvoc.example.length; m++) {
-					$('#' + $rootScope.rootvoc.word + '_example').append("<div class='row'><div class='col-80'><div class='col'><p style='color:#ffffff'>" + $rootScope.rootvoc.example[m].en + "</p><p style='color:#222222'>" + $rootScope.rootvoc.example[m].zh + "</p></div></div><div class='col-20 text-center col-center'><img src='img/dc/lian.png' width=25 id='" + $rootScope.rootvoc.word + "_eimg_" + m + "')' ></div></div>");
+					$('#' + $rootScope.rootvoc.word + '_example').append("<div class='row'><div class='col-80'><div class='col'><p style='color:#ffffff'>" + $rootScope.rootvoc.example[m].en + "</p><p style='color:#222222;font-size:16px'>" + $rootScope.rootvoc.example[m].zh + "</p></div></div><div class='col-20 text-center col-center'><img src='img/dc/lian.png' width=25 id='" + $rootScope.rootvoc.word + "_eimg_" + m + "')' ></div></div>");
 					$('#' + $rootScope.rootvoc.word + '_eimg_' + m).click(function() {
 						$scope.sentence(this.id.toString().substring(this.id.toString().length - 1, this.id.toString().length));
 					});
 				}
 			}, 1000);
 		}
-
+		
 		$scope.challenge = function() {
 			$rootScope.LoadingShow();
 			var url = $rootScope.wordRootUrl + "exercise_list";
