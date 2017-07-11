@@ -20,7 +20,7 @@
 -->                {{sentence_zh}}
 <!--                <img src="img/dc/correct.png" ng-if="keys==result" />
 -->         </div>
-            <div class="padding text-left" style="color: grey;font-size:16px;" ng-show="completed">{{sentence_en}}</div>
+            <div class="padding text-left" style="color: #333333;font-size:16px;" ng-show="completed">{{sentence_en}}</div>
             <div class="setence-box">
                 <span class="sentence-fill" id="{{word}}_se_{{$index}}" ng-click="kongClick($index)" ng-repeat="voc in vocs  track by $index">&#12288;</span>
             </div>
@@ -32,7 +32,7 @@
         <button ng-class="{'button button-small button-energized':true,'button-disable':item.submitted,'button-error':item.submitted==-1}" ng-click="chooseAnswer($index)" ng-repeat="item in items" style="font-size:14px;">{{item.value}}</button>
     </div>-->
 
-    <div class="padding text-center" >
+    <div class="padding">
         <button class="word_select_bt" ng-click="chooseAnswer(option)" ng-repeat="option in options track by $index">{{option}}</button>
     </div>
 
