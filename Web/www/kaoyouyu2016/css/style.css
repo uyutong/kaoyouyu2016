@@ -393,10 +393,10 @@
 .setence-box {
 	position: relative;
 	text-align: left;
-	margin: 0 22px;
-	font-size: 22px;
-	line-height: 36px;
-	margin-top: 10px;
+	margin: 0 18px;
+	font-size: 18px;
+	line-height: 32px;
+	margin-top: 6px;
 }
 
 .sentence-fill {
@@ -404,8 +404,8 @@
 	color: #508E2D;
 	padding: 0 3px;
 	margin: 0 2px;
-	min-width: 40px;
-	display: inline-block;
+/*	min-width: 40px;
+*/	display: inline-block;
 	text-align: center;
 }
 

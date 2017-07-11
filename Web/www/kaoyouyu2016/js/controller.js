@@ -6363,7 +6363,7 @@
 	.controller('kc_sentenceCtrl', function($rootScope, $scope, $state, $stateParams, $http) {
 
 		//		$rootScope.Tip('提示', '听录音<br>选出正确的单词组成句子');
-		var Regx = /^[A-Za-z\.\']*$/;
+		var Regx = /^[A-Za-z\.\'\,]*$/;
 		$scope.word = $stateParams.word;
 		$scope.sentence_en = $stateParams.sentence_en;
 		$scope.sentence_zh = $stateParams.sentence_zh;
@@ -6992,27 +6992,26 @@
 
 		//#region 扔烤箱
 		$scope.throw = function() {
-
-			$rootScope.Confirm("扔烤箱的单词将不会出现在后面的学习中", "", "",
-				function() {
-
-					if($rootScope.voc_list.length < 2) {
-						$rootScope.Alert("不能再扔了哦 确定都会吗？");
-						return;
+			
+				$rootScope.Confirm("扔烤箱的单词将不会出现在后面的学习中", "", "",
+			function() {
+			
+			if($rootScope.voc_list.length < 2) {
+				$rootScope.Alert("不能再扔了哦 确定都会吗？");
+				return;
+			}
+			$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
+				if(response.error == 0) {
+					$rootScope.voc_list.splice($scope.id, 1);
+					if($scope.id > $rootScope.voc_list.length - 1) {
+						$scope.id = $rootScope.voc_list.length - 1;
 					}
-					$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
-						if(response.error == 0) {
-							$rootScope.voc_list.splice($scope.id, 1);
-							if($scope.id > $rootScope.voc_list.length - 1) {
-								$scope.id = $rootScope.voc_list.length - 1;
-							}
-							$scope.voc = $rootScope.voc_list[$scope.id];
-						} else {
-							$rootScope.Alert("扔烤箱失败");
-						}
-					})
-				},
-				function() {})
+					$scope.voc = $rootScope.voc_list[$scope.id];
+				} else {
+					$rootScope.Alert("扔烤箱失败");
+				}
+			})
+			},function(){})
 		}
 		//#endregion
 
