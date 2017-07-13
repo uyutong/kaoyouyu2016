@@ -941,7 +941,7 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 			$rootScope.updateUserInfo();
 
 			$http.get("http://xx.kaouyu.com/index.php/api/version?platform=ios&book_id=48").success(function(response) {
-				if(response == "1" && $rootScope.userinfo.userId == "22781") {
+				if(response.status == "1" && $rootScope.userinfo.userId == "22781") {
 					setStorage("userinfo", null);
 					setStorage("KB", null);
 					$state.go("login");
