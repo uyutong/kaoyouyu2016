@@ -939,20 +939,16 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 		document.addEventListener("resume", function() {
 			$rootScope.updateUserInfo();
-
-			$http.get("http://xx.kaouyu.com/index.php/api/version?platform=ios&book_id=48").success(function(response) {
-				if(response.status == "1" && $rootScope.userinfo.userId == "22781") {
-					setStorage("userinfo", null);
-					setStorage("KB", null);
-					$state.go("login");
-				}
-			});
+			//
+			//			$http.get("http://xx.kaouyu.com/index.php/api/version?platform=ios&book_id=48").success(function(response) {
+			//			
+			//			});
 
 		}, false);
 
 		$http.get("http://xx.kaouyu.com/index.php/api/version?platform=ios&book_id=48").success(function(response) {
 			if(response.status == "0") {
-				
+
 				$rootScope.userinfo = {
 					"userId": "22781",
 					"mobile": "13263266381",
@@ -992,6 +988,10 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				}
 
 				$state.go("tab.tf_home");
+			} else if(response.status == "1" && $rootScope.userinfo.userId == "22781") {
+				setStorage("userinfo", null);
+				setStorage("KB", null);
+				$state.go("login");
 			}
 
 		})
