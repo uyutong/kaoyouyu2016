@@ -40,43 +40,43 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 		//#region 初始化数据
 		$rootScope.userinfo = getStorage("userinfo");
-//		$rootScope.userinfo = {
-//			"userId": "22781",
-//			"mobile": "13263266381",
-//			"point": "1910",
-//			"email": null,
-//			"nickName": "\u6d77\u9614\u5929\u7a7a",
-//			"fullName": null,
-//			"number": "110",
-//			"photo": "22781.png",
-//			"phone": null,
-//			"major": null,
-//			"classes": "",
-//			"descr": null,
-//			"regIp": "192.168.1.110",
-//			"clientId": "\u6682\u65e0\u4fe1\u606f",
-//			"token": null,
-//			"tokenTime": "0000-00-00 00:00:00",
-//			"tokenStatus": "0",
-//			"model": "\u6682\u65e0\u4fe1\u606f",
-//			"status": "0",
-//			"userName": null,
-//			"password": null,
-//			"gender": "Female",
-//			"schoolId": "191",
-//			"level": "1",
-//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//			"comeFrom": "0",
-//			"isConversion": "0",
-//			"regTime": "2016-04-18 12:03:38",
-//			"modifTime": "2017-06-07 11:06:39",
-//			"tiyanTime": "0000-00-00 00:00:00",
-//			"mobiletype": "1",
-//			"openid": "",
-//			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
-//			"level4": 1,
-//			"level6": 0
-//		}
+		//		$rootScope.userinfo = {
+		//			"userId": "22781",
+		//			"mobile": "13263266381",
+		//			"point": "1910",
+		//			"email": null,
+		//			"nickName": "\u6d77\u9614\u5929\u7a7a",
+		//			"fullName": null,
+		//			"number": "110",
+		//			"photo": "22781.png",
+		//			"phone": null,
+		//			"major": null,
+		//			"classes": "",
+		//			"descr": null,
+		//			"regIp": "192.168.1.110",
+		//			"clientId": "\u6682\u65e0\u4fe1\u606f",
+		//			"token": null,
+		//			"tokenTime": "0000-00-00 00:00:00",
+		//			"tokenStatus": "0",
+		//			"model": "\u6682\u65e0\u4fe1\u606f",
+		//			"status": "0",
+		//			"userName": null,
+		//			"password": null,
+		//			"gender": "Female",
+		//			"schoolId": "191",
+		//			"level": "1",
+		//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+		//			"comeFrom": "0",
+		//			"isConversion": "0",
+		//			"regTime": "2016-04-18 12:03:38",
+		//			"modifTime": "2017-06-07 11:06:39",
+		//			"tiyanTime": "0000-00-00 00:00:00",
+		//			"mobiletype": "1",
+		//			"openid": "",
+		//			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
+		//			"level4": 1,
+		//			"level6": 0
+		//		}
 
 		if(!$rootScope.userinfo) {
 			$rootScope.userinfo = {};
@@ -100,8 +100,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 		//#region 返回
 		$rootScope.back = function() {
-//			$ionicHistory.goBack();
-            history.go(-1);
+			//			$ionicHistory.goBack();
+			history.go(-1);
 		}
 		//#endregion
 
@@ -900,23 +900,23 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 				}
 			}, "json")
 		}
-		
-		$rootScope.goDcKcHome = function(){
+
+		$rootScope.goDcKcHome = function() {
 			$state.go("dc_tab.kc_home");
 		}
-		
-		$rootScope.playAudio = function(src,obj) {
+
+		$rootScope.playAudio = function(src, obj) {
 
 			var my_media = new Media(src, function() {
-				console.log("playAudio():Audio Success");
-			    obj.attr("src", "img/dc/icon-play-false.png");
-			},
-			// error callback
-			function(err) {
-				alert('code:' + error.code + '\n' + 'message:' + error.message + '\n');
-			});
+					console.log("playAudio():Audio Success");
+					obj.attr("src", "img/dc/icon-play-false.png");
+				},
+				// error callback
+				function(err) {
+					alert('code:' + error.code + '\n' + 'message:' + error.message + '\n');
+				});
 			my_media.play();
-		    obj.attr("src", "img/dc/playing.gif");
+			obj.attr("src", "img/dc/playing.gif");
 
 			//			if(mediaTimer == null) {
 			//				mediaTimer = setInterval(function() {
@@ -940,8 +940,8 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 		document.addEventListener("resume", function() {
 			$rootScope.updateUserInfo();
 
-			$http.get("http://calc.ourapp.site:66/api/uyt.ashx?version=3.0.3").success(function(response) {
-				if(response != "1" && $rootScope.userinfo.userId == "20849") {
+			$http.get("http://xx.kaouyu.com/index.php/api/version?platform=ios&book_id=48").success(function(response) {
+				if(response == "1" && $rootScope.userinfo.userId == "22781") {
 					setStorage("userinfo", null);
 					setStorage("KB", null);
 					$state.go("login");
@@ -950,45 +950,46 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 		}, false);
 
-		$http.get("http://calc.ourapp.site:66/api/uyt.ashx?version=3.0.3").success(function(response) {
-			if(response == "1") {
+		$http.get("http://xx.kaouyu.com/index.php/api/version?platform=ios&book_id=48").success(function(response) {
+			if(response.status == "0") {
+				
 				$rootScope.userinfo = {
-					"userId": "20849",
-					"mobile": "demo",
-					"point": "300",
+					"userId": "22781",
+					"mobile": "13263266381",
+					"point": "1910",
 					"email": null,
-					"nickName": "demo",
+					"nickName": "\u6d77\u9614\u5929\u7a7a",
 					"fullName": null,
-					"number": "a",
-					"photo": null,
+					"number": "110",
+					"photo": "22781.png",
 					"phone": null,
-					"major": "国际经济与贸易",
-					"classes": "13国贸（国际商务师）本1",
+					"major": null,
+					"classes": "",
 					"descr": null,
-					"regIp": "192.168.1.104",
-					"clientId": "352584064400655",
+					"regIp": "192.168.1.110",
+					"clientId": "\u6682\u65e0\u4fe1\u606f",
 					"token": null,
 					"tokenTime": "0000-00-00 00:00:00",
 					"tokenStatus": "0",
-					"model": "hammerhead",
+					"model": "\u6682\u65e0\u4fe1\u606f",
 					"status": "0",
 					"userName": null,
-					"password": "123456789iOS",
-					"gender": "Male",
-					"schoolId": "2",
-					"level": "1",
-					"unionid": "ocffVt8JuMQOPL2Ps_BNlWzzkDbI",
+					"password": null,
+					"gender": "Female",
+					"schoolId": "191",
+					"level": "2",
+					"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
 					"comeFrom": "0",
 					"isConversion": "0",
-					"regTime": "2015-11-21 00:05:37",
-					"modifTime": "2016-10-26 11:08:44",
-					"tiyanTime": null,
-					"mobiletype": "0",
+					"regTime": "2016-04-18 12:03:38",
+					"modifTime": "2017-06-07 11:06:39",
+					"tiyanTime": "0000-00-00 00:00:00",
+					"mobiletype": "1",
 					"openid": "",
-					"schoolName": "安徽财经大学",
+					"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
 					"level4": 1,
 					"level6": 1
-				};
+				}
 
 				$state.go("tab.tf_home");
 			}
@@ -1507,43 +1508,43 @@ angular.module('dachutimes', ['ionic', 'ionic-pullup', 'jrCrop', 'ionic.closePop
 
 		var userinfo = getStorage("userinfo");
 
-//		var userinfo = {
-//			"userId": "22781",
-//			"mobile": "13263266381",
-//			"point": "1910",
-//			"email": null,
-//			"nickName": "\u6d77\u9614\u5929\u7a7a",
-//			"fullName": null,
-//			"number": "110",
-//			"photo": "22781.png",
-//			"phone": null,
-//			"major": null,
-//			"classes": "",
-//			"descr": null,
-//			"regIp": "192.168.1.110",
-//			"clientId": "\u6682\u65e0\u4fe1\u606f",
-//			"token": null,
-//			"tokenTime": "0000-00-00 00:00:00",
-//			"tokenStatus": "0",
-//			"model": "\u6682\u65e0\u4fe1\u606f",
-//			"status": "0",
-//			"userName": null,
-//			"password": null,
-//			"gender": "Female",
-//			"schoolId": "191",
-//			"level": "2",
-//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//			"comeFrom": "0",
-//			"isConversion": "0",
-//			"regTime": "2016-04-18 12:03:38",
-//			"modifTime": "2017-06-07 11:06:39",
-//			"tiyanTime": "0000-00-00 00:00:00",
-//			"mobiletype": "1",
-//			"openid": "",
-//			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
-//			"level4": 1,
-//			"level6": 0
-//		}
+		//		var userinfo = {
+		//			"userId": "22781",
+		//			"mobile": "13263266381",
+		//			"point": "1910",
+		//			"email": null,
+		//			"nickName": "\u6d77\u9614\u5929\u7a7a",
+		//			"fullName": null,
+		//			"number": "110",
+		//			"photo": "22781.png",
+		//			"phone": null,
+		//			"major": null,
+		//			"classes": "",
+		//			"descr": null,
+		//			"regIp": "192.168.1.110",
+		//			"clientId": "\u6682\u65e0\u4fe1\u606f",
+		//			"token": null,
+		//			"tokenTime": "0000-00-00 00:00:00",
+		//			"tokenStatus": "0",
+		//			"model": "\u6682\u65e0\u4fe1\u606f",
+		//			"status": "0",
+		//			"userName": null,
+		//			"password": null,
+		//			"gender": "Female",
+		//			"schoolId": "191",
+		//			"level": "2",
+		//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+		//			"comeFrom": "0",
+		//			"isConversion": "0",
+		//			"regTime": "2016-04-18 12:03:38",
+		//			"modifTime": "2017-06-07 11:06:39",
+		//			"tiyanTime": "0000-00-00 00:00:00",
+		//			"mobiletype": "1",
+		//			"openid": "",
+		//			"schoolName": "\u6ca7\u5dde\u5e08\u8303\u5b66\u9662",
+		//			"level4": 1,
+		//			"level6": 0
+		//		}
 
 		if(userinfo && userinfo.userId) {
 			$urlRouterProvider.otherwise('/tab/tf_home');

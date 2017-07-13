@@ -8,7 +8,7 @@
 	        <img ng-if="!userinfo.photo" src="img/status-3.png"/>
 	        <img ng-if="userinfo.photo" src="{{$root.headerUrl}}{{$root.userinfo.photo}}"/>            	
             <p style="height:8px;"></p>
-            <h2>{{$root.userinfo.userId=="20849"?"demo":$root.userinfo.nickName}}</h2>
+            <h2>{{$root.userinfo.userId=="22781"?"demo":$root.userinfo.nickName}}</h2>
             <p>您要考：{{$root.userinfo.level==1?'四':'六'}}级</p>
             <h2>{{$root.userinfo.schoolName}}</h2>
             <i class="icon ion-ios-arrow-right gray"></i>
@@ -17,13 +17,13 @@
         <div class="me-item">
             <div class="" style="height: 20px;background-color: #f5f5f5"></div>
            
-            <a class="item item-icon-right" href="#/me_qrcode" ng-if="($root.userinfo.level==1&&$root.userinfo.level4==0)||($root.userinfo.level==2&&$root.userinfo.level6==0)">
+            <a ng-if="$root.userinfo.userId!='22781'" class="item item-icon-right" href="#/me_qrcode" ng-if="($root.userinfo.level==1&&$root.userinfo.level4==0)||($root.userinfo.level==2&&$root.userinfo.level6==0)">
                 <img src="img/ME_HOME/me_yzm_jh.png" />
                 &nbsp;APP验证码激活
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
 
-            <div ng-if="$root.userinfo.userId!='20849'">
+            <div ng-if="$root.userinfo.userId!='22781'">
                 <a class="item item-icon-right" ng-click="Alert('验证码已经激活过了，无需再次激活。')" ng-if="($root.userinfo.level==1&&$root.userinfo.level4==1)||($root.userinfo.level==2&&$root.userinfo.level6==1)">
                     <img src="img/ME_HOME/me_yzm_jh.png" />
                     &nbsp;APP验证码激活
