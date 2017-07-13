@@ -300,16 +300,9 @@ var UyuHuaCi = function (config)
 
         var rinfo = GetRecommendADInfo();
 
-        var html = "<div class=\"tipBox\" ><div class=\"title\">"
-            + "<span class=\"word\">" + searchword + "</span><br/>" + buildSpeech(content)
-            + "<a href=\"###\" class=\"close HuaCiClose\" title=\"点击关闭\"><img src=\"http://learn.efenji.com/plugs/img/close.png\" /></a>"
-            + "</div>"
+        var html = "<div class=\"tipBox\" >"
             + "<div class=\"content\">" + content + "</div>"
-            + "<div class=\"morearea\"><a onclick=\"ga_track_event('huaci', 'click_more', 'more', 0);\" href=\"###\" title=\"查看参考例句\" class=\"more huaciAction\">参考例句»</a>"
-            + "<span id=\"addmywordarea\"><a href=\"###\"  class=\"addmyword huaciAction UyuHuaCiAddMyWord\"><img class='huaciAction' style='display:inline' src=\"http://dict.hjenglish.com/images/btn_myword_add.gif\" alt=\"添加到我的生词本\" /><a class='UyuHuaCiAddMyWord huaciAction addmyword'>加入生词本</a><span>"
             + "</div>"
-
-        + "<div class=\"hc_AdInfo\"><a onclick=\"ga_track_event('huaci', 'click_ad', 'ad', " + rinfo.id + ");\" href=\"" + rinfo.link + "\" target=\"_blank\" title=\"用户反馈\" class=\"more huaciAction\">" + rinfo.des + "</a></div></div>";
 
         var tipDiv = document.createElement("div");
         tipDiv.id = "tip";
@@ -319,10 +312,10 @@ var UyuHuaCi = function (config)
 
         //Adjust the huaci position.
         var cwoff = $(currentWord).offset();
-        if ((cwoff.top + $(tipDiv).height() + 50) > document.body.clientHeight)
+        if ((cwoff.top + $(tipDiv).height()) > document.body.clientHeight)
         {
             t = (cwoff.top + Math.abs(parentContainer.scrollTop())) - ($(tipDiv).height() + 10);
-            $(tipDiv).html(html).css({ "top": t + 10 });
+            $(tipDiv).html(html).css({ "top": t + 100 });
         }
 
         $(tipDiv).click(function (e)

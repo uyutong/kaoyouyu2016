@@ -6113,7 +6113,7 @@
 				}
 //				var huaci = new UyuHuaCi();
 //				huaci.Init('.liju');
-			}, 1000);
+			}, 500);
 		}
 
 		$scope.is_end = false;
@@ -6992,26 +6992,27 @@
 
 		//#region 扔烤箱
 		$scope.throw = function() {
-			
-				$rootScope.Confirm("扔烤箱的单词将不会出现在后面的学习中", "", "",
-			function() {
-			
-			if($rootScope.voc_list.length < 2) {
-				$rootScope.Alert("不能再扔了哦 确定都会吗？");
-				return;
-			}
-			$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
-				if(response.error == 0) {
-					$rootScope.voc_list.splice($scope.id, 1);
-					if($scope.id > $rootScope.voc_list.length - 1) {
-						$scope.id = $rootScope.voc_list.length - 1;
+
+			$rootScope.Confirm("扔烤箱的单词将不会出现在后面的学习中", "", "",
+				function() {
+
+					if($rootScope.voc_list.length < 2) {
+						$rootScope.Alert("不能再扔了哦 确定都会吗？");
+						return;
 					}
-					$scope.voc = $rootScope.voc_list[$scope.id];
-				} else {
-					$rootScope.Alert("扔烤箱失败");
-				}
-			})
-			},function(){})
+					$rootScope.root_throw($scope.voc.id, $scope.voc.category_id, function(response) {
+						if(response.error == 0) {
+							$rootScope.voc_list.splice($scope.id, 1);
+							if($scope.id > $rootScope.voc_list.length - 1) {
+								$scope.id = $rootScope.voc_list.length - 1;
+							}
+							$scope.voc = $rootScope.voc_list[$scope.id];
+						} else {
+							$rootScope.Alert("扔烤箱失败");
+						}
+					})
+				},
+				function() {})
 		}
 		//#endregion
 

@@ -10,22 +10,19 @@
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
     background-clip: padding-box;
-    border:2px solid rgba(105,190,60,0.75);
     font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
     /*font-size: 1.4rem;*/
     font-size: 14px;
 }
 
 .tipBox {
+	color: white;
     width: 260px;
-    border: 2px solid #69be41;
-    padding: 8px 8px 8px 8px;
-    background-color: #FFF;
-    line-height: 150%;
-    padding-bottom: 0px;
+    border-radius: 5px;
+    padding: 2px 2px 2px 2px;
+    background-color: #666666;
 }
 #tip .content {
-    margin-top: 8px;
 }
 #tip .title .word {
     font-size: 18px;
